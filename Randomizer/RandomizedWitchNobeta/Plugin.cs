@@ -2,8 +2,6 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
@@ -11,6 +9,7 @@ using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
 using RandomizedWitchNobeta.Config;
+using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Timer;
 using RandomizedWitchNobeta.Utils;
@@ -24,7 +23,7 @@ public class Plugin : BasePlugin
 {
     internal new static ManualLogSource Log;
 
-    public static NobetaRandomizerOverlay NobetaRandomizerOverlay;
+    public static NobetaRandomizerOverlay NobetaRandomizerOverlay = null;
     public static DirectoryInfo ConfigDirectory;
     public static ConfigFile ConfigFile;
 
@@ -38,7 +37,7 @@ public class Plugin : BasePlugin
         // Fix ImGUI task preventing the game from closing
         Application.quitting += (Action) (() =>
         {
-            NobetaRandomizerOverlay.Close();
+            NobetaRandomizerOverlay?.Close();
             Unload();
         });
 
@@ -96,5 +95,7 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(Singletons));
         Harmony.CreateAndPatchAll(typeof(TimersPatches));
         Harmony.CreateAndPatchAll(typeof(SceneUtils));
+
+        Harmony.CreateAndPatchAll(typeof(StartPatches));
     }
 }
