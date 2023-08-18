@@ -11,6 +11,7 @@ using RandomizedWitchNobeta.Behaviours;
 using RandomizedWitchNobeta.Config;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
+using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Timer;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
@@ -93,9 +94,13 @@ public class Plugin : BasePlugin
     public static void ApplyPatches()
     {
         Harmony.CreateAndPatchAll(typeof(Singletons));
-        Harmony.CreateAndPatchAll(typeof(TimersPatches));
         Harmony.CreateAndPatchAll(typeof(SceneUtils));
 
         Harmony.CreateAndPatchAll(typeof(StartPatches));
+        Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));
+
+        #if !DEBUG
+        Harmony.CreateAndPatchAll(typeof(TimersPatches));
+        #endif
     }
 }
