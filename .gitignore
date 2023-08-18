@@ -1,0 +1,14 @@
+bin/
+obj/
+/packages/
+riderModule.iml
+/_ReSharper.Caches/
+.idea/.idea.NobetaTrainer/.idea
+Game files.lnk
+NobetaTrainer.sln.DotSettings.user
+InstallFiles
+.vscode
+.vs
+Randomizer/.idea
+Randomizer/RandomizedWitchNobeta/.idea/.idea.RandomizedWitchNobeta.dir/.idea
+Randomizer/RandomizedWitchNobeta.sln.DotSettings.user
