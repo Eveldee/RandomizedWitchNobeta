@@ -98,6 +98,7 @@ public class Plugin : BasePlugin
 
         Harmony.CreateAndPatchAll(typeof(StartPatches));
         Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));
+        Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
 
         #if !DEBUG
         Harmony.CreateAndPatchAll(typeof(TimersPatches));
