@@ -217,27 +217,27 @@
 
 ### Chests
 
-| Name                           | Content        | Required                        |
-| ------------------------------ | -------------- | ------------------------------- |
-| TreasureBox_Act02Room04        | BagMaxAdd      |                                 |
-| TreasureBox_Act02Room05        | MagicNull      |                                 |
-| Act04Room05To06_TreasureBox    | MagicIce       | Arcane 1 OR Fire 1 OR Thunder 1 |
-| Act05_TreasureBox02_Room09To10 | MagicLightning | Arcane 1 OR Fire 1 OR Thunder 1 |
-| Act03TreasureBox_Room05_02     | MagicFire      | Arcane 1 OR Fire 1 OR Thunder 1 |
+| Name                           | Content        | Required            |
+| ------------------------------ | -------------- | ------------------- |
+| TreasureBox_Act02Room04        | BagMaxAdd      |                     |
+| TreasureBox_Act02Room05        | MagicNull      |                     |
+| Act04Room05To06_TreasureBox    | MagicIce       | Fire 1 OR Thunder 1 |
+| Act05_TreasureBox02_Room09To10 | MagicLightning | Fire 1 OR Thunder 1 |
+| Act03TreasureBox_Room05_02     | MagicFire      | Fire 1 OR Thunder 1 |
 
 ### Special Loot
 
 ### Save Points
 
-| Location       | Teleport Index | Real Index | Required                        |
-| -------------- | -------------- | ---------- | ------------------------------- |
-| Load           | N/A            | -1         |                                 |
-| Path to Prison | 0              | 0          |                                 |
-| Trials         | 1              | 1          | Arcane 1 OR Fire 1 OR Thunder 1 |
-| Nonota         | 2              | 2          | Ice 1 AND (Fire 1 OR Thunder 1) |
+| Location       | Teleport Index | Real Index | Required            |
+| -------------- | -------------- | ---------- | ------------------- |
+| Load           | N/A            | -1         |                     |
+| Path to Prison | 0              | 0          |                     |
+| Trials         | 1              | 1          | Fire 1 OR Thunder 1 |
+| Nonota         | 2              | 2          | Fire 1 OR Thunder 1 |
 
 ### Exits
 
-| Location    | Next Area | Required                        |
-| ----------- | --------- | ------------------------------- |
-| Kill Nonota | **END**   | Ice 1 AND (Fire 1 OR Thunder 1) |
+| Location    | Next Area | Required            |
+| ----------- | --------- | ------------------- |
+| Kill Nonota | **END**   | Fire 1 OR Thunder 1 |
