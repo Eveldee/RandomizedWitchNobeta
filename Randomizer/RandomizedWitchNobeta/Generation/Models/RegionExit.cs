@@ -1,3 +1,3 @@
 ﻿namespace RandomizedWitchNobeta.Generation.Models;
 
-public record RegionExit(int NextSceneNumber, int NextSavePointNumber);
+public record RegionExit(int SourceScene, int NextSceneNumber, int NextSavePointNumber);

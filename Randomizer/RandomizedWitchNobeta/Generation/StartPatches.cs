@@ -52,6 +52,8 @@ public static class StartPatches
         Game.FadeInBlackScreen(5f);
 
         // TODO Start generation then generate and load save
+        var generator = new SeedGenerator(new GeneratorSettings { Seed = 42 });
+        generator.Generate();
 
         return false;
     }
