@@ -1,6 +1,7 @@
 ﻿using System;
 using HarmonyLib;
 using MarsSDK;
+using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
@@ -10,6 +11,8 @@ namespace RandomizedWitchNobeta.Generation;
 
 public static class StartPatches
 {
+    public const int GameSaveIndex = 9;
+
     [HarmonyPatch(typeof(UIOpeningMenu), nameof(UIOpeningMenu.Init))]
     [HarmonyPostfix]
     private static void OpeningMenuInitPostfix(UIOpeningMenu __instance)
@@ -51,9 +54,48 @@ public static class StartPatches
         __instance.gameObject.SetActive(false);
         Game.FadeInBlackScreen(5f);
 
-        // TODO Start generation then generate and load save
+        // Generate a seed
         var generator = new SeedGenerator(new GeneratorSettings { Seed = 42 });
         generator.Generate();
+
+        var runtimeVariables = Singletons.RuntimeVariables;
+
+        Plugin.Log.LogMessage("Creating save...");
+
+        // Generate the save and apply flag modifications
+        var gameSave = new GameSave(GameSaveIndex, GameDifficulty.Advanced)
+        {
+            basic =
+            {
+                showTeleportMenu = true,
+                // Set save point to avoid "Return to Statue" early
+                stage = SceneUtils.SceneNumberToGameStage(runtimeVariables.StartScene),
+                savePoint = SceneUtils.SceneStartSavePoint(runtimeVariables.StartScene)
+            },
+            flags =
+            {
+                stage01OpenDoor01 = true,
+                stage01Room08Door = true,
+                stage02L03BackDoor = true
+            },
+            stats =
+            {
+                // Give absorb and wind 1, remove Arcane
+                secretMagicLevel = 0,
+                windMagicLevel = 1,
+                manaAbsorbLevel = 1
+            }
+        };
+
+        Game.WriteGameSave(gameSave);
+
+        Plugin.Log.LogMessage("Save created, loading the game...");
+
+        // Load save
+        var switchData = new SceneSwitchData(runtimeVariables.StartScene, SceneUtils.SceneStartSavePoint(runtimeVariables.StartScene), true);
+
+        Game.SwitchGameSave(gameSave);
+        Game.SwitchScene(switchData);
 
         return false;
     }

@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using LibCpp2IL;
 using RandomizedWitchNobeta.Generation.Models;
-using RandomizedWitchNobeta.Generation.Models.Requirements;
+using RandomizedWitchNobeta.Runtime;
+using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Generation;
 
@@ -39,7 +40,10 @@ public class SeedGenerator
             RandomFillItems(random);
         } while (!CheckCompletable());
 
-        Plugin.Log.LogMessage($"A completable seed has been successfully generated in {tries} tries in {DateTime.Now - startTime}!");
+        Plugin.Log.LogMessage($"A completable seed has been successfully generated in {tries} tries in {(DateTime.Now - startTime).TotalSeconds} seconds!");
+
+        // Generate runtime variables and store them
+        Singletons.RuntimeVariables = new RuntimeVariables(_startRegion, _exitsOverrides, _itemLocations);
     }
 
     private void GenerateExits(Random random)

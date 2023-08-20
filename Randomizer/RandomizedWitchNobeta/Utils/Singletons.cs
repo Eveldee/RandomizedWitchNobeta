@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
+using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Timer;
 using UnityEngine;
 
@@ -25,6 +26,8 @@ public static class Singletons
     public static GameUIManager GameUIManager { get; private set; }
 
     public static bool SaveLoaded => GameSave is not null;
+
+    public static RuntimeVariables RuntimeVariables { get; set; }
 
     [HarmonyPatch(typeof(Game), nameof(Game.Awake))]
     [HarmonyPostfix]

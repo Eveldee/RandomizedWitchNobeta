@@ -97,8 +97,16 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(SceneUtils));
 
         Harmony.CreateAndPatchAll(typeof(StartPatches));
+
+        // Gameplay patches
         Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));
         Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
+        Harmony.CreateAndPatchAll(typeof(LockedDoorPatches));
+        Harmony.CreateAndPatchAll(typeof(ArcaneDisabledPatches));
+
+        // Randomizer patches
+        Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));
+        Harmony.CreateAndPatchAll(typeof(ExitShufflePatches));
 
         #if !DEBUG
         Harmony.CreateAndPatchAll(typeof(TimersPatches));
