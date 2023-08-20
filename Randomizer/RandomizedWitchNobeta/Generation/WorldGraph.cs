@@ -348,10 +348,12 @@ public static class WorldGraph
 
                 NextRegion = new RegionTransition
                 {
-                    Requirement = new RequirementBuilder()
-                        .Magic(MagicType.Fire, 1)
-                        .Magic(MagicType.Thunder, 1)
-                        .Build(),
+                    Requirement = new RequirementBuilder(CombineMethod.All)
+                        .Token(3)
+                        .OneOf(builder => builder
+                            .Magic(MagicType.Fire, 1)
+                            .Magic(MagicType.Thunder, 1)
+                        ).Build(),
 
                     Destination = new Region
                     {

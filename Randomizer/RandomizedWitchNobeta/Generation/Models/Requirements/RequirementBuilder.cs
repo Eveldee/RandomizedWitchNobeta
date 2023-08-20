@@ -47,6 +47,13 @@ public class RequirementBuilder
         return this;
     }
 
+    public RequirementBuilder Token(int amount)
+    {
+        _requirements.Add(new TokenRequirement(amount));
+
+        return this;
+    }
+
     public RequirementBuilder All(Action<RequirementBuilder> action)
     {
         var builder = new RequirementBuilder(CombineMethod.All);

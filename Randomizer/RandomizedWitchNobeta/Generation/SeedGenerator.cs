@@ -128,6 +128,9 @@ public class SeedGenerator
                         case ItemSystem.ItemType.MagicLightning:
                             inventory.ThunderLevel++;
                             break;
+                        case ItemSystem.ItemType.SPMaxAdd: // Token
+                            inventory.TokenAmount++;
+                            break;
                     }
                 }
             }
