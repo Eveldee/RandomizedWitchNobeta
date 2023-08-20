@@ -55,7 +55,7 @@ public static class StartPatches
         Game.FadeInBlackScreen(5f);
 
         // Generate a seed
-        var generator = new SeedGenerator(new GeneratorSettings { Seed = 42 });
+        var generator = new SeedGenerator(new SeedSettings { Seed = 3 });
         generator.Generate();
 
         var runtimeVariables = Singletons.RuntimeVariables;

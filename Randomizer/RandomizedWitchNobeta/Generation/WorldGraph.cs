@@ -13,39 +13,12 @@ public static class WorldGraph
     {
         // Magic - Key items
         ItemSystem.ItemType.MagicNull,
-        ItemSystem.ItemType.MagicNull,
-        ItemSystem.ItemType.MagicNull,
-        ItemSystem.ItemType.MagicNull,
-        ItemSystem.ItemType.MagicNull,
 
-        ItemSystem.ItemType.MagicIce,
-        ItemSystem.ItemType.MagicIce,
-        ItemSystem.ItemType.MagicIce,
-        ItemSystem.ItemType.MagicIce,
         ItemSystem.ItemType.MagicIce,
 
         ItemSystem.ItemType.MagicFire,
-        ItemSystem.ItemType.MagicFire,
-        ItemSystem.ItemType.MagicFire,
-        ItemSystem.ItemType.MagicFire,
-        ItemSystem.ItemType.MagicFire,
 
         ItemSystem.ItemType.MagicLightning,
-        ItemSystem.ItemType.MagicLightning,
-        ItemSystem.ItemType.MagicLightning,
-        ItemSystem.ItemType.MagicLightning,
-        ItemSystem.ItemType.MagicLightning,
-
-        // Magic - Others
-        ItemSystem.ItemType.Absorb,
-        ItemSystem.ItemType.Absorb,
-        ItemSystem.ItemType.Absorb,
-        ItemSystem.ItemType.Absorb,
-
-        ItemSystem.ItemType.SkyJump,
-        ItemSystem.ItemType.SkyJump,
-        ItemSystem.ItemType.SkyJump,
-        ItemSystem.ItemType.SkyJump,
 
         // Bag upgrades
         ItemSystem.ItemType.BagMaxAdd,
@@ -53,15 +26,46 @@ public static class WorldGraph
         ItemSystem.ItemType.BagMaxAdd,
         ItemSystem.ItemType.BagMaxAdd,
 
-        // Fill with purples (TODO: add more items)
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
-        ItemSystem.ItemType.MysteriousB,
+        // Tokens needed to end the game
+        ItemSystem.ItemType.SPMaxAdd,
+        ItemSystem.ItemType.SPMaxAdd,
+        ItemSystem.ItemType.SPMaxAdd,
+        ItemSystem.ItemType.SPMaxAdd,
+        ItemSystem.ItemType.SPMaxAdd,
+        ItemSystem.ItemType.SPMaxAdd,
+
+        // Fill with other items (Null is souls)
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+        ItemSystem.ItemType.Null,
+
+        ItemSystem.ItemType.DefenseB,
+        ItemSystem.ItemType.DefenseB,
+        ItemSystem.ItemType.DefenseB,
+        ItemSystem.ItemType.DefenseB,
+
+        ItemSystem.ItemType.HPCureBig,
+        ItemSystem.ItemType.HPCureBig,
+        ItemSystem.ItemType.HPCureBig,
+        ItemSystem.ItemType.HPCureBig,
+
+        ItemSystem.ItemType.HolyB,
+        ItemSystem.ItemType.HolyB,
+        ItemSystem.ItemType.HolyB,
+        ItemSystem.ItemType.HolyB,
+
+        ItemSystem.ItemType.MPCureBig,
+        ItemSystem.ItemType.MPCureBig,
+        ItemSystem.ItemType.MPCureBig,
+        ItemSystem.ItemType.MPCureBig,
+
         ItemSystem.ItemType.MysteriousB,
         ItemSystem.ItemType.MysteriousB,
         ItemSystem.ItemType.MysteriousB,

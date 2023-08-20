@@ -10,13 +10,13 @@ namespace RandomizedWitchNobeta.Generation;
 
 public class SeedGenerator
 {
-    private readonly GeneratorSettings _settings;
+    private readonly SeedSettings _settings;
 
     private int _startRegion;
     private Dictionary<RegionExit, int> _exitsOverrides;
     private readonly List<ItemLocation> _itemLocations;
 
-    public SeedGenerator(GeneratorSettings settings)
+    public SeedGenerator(SeedSettings settings)
     {
         _settings = settings;
 
@@ -43,7 +43,7 @@ public class SeedGenerator
         Plugin.Log.LogMessage($"A completable seed has been successfully generated in {tries} tries in {(DateTime.Now - startTime).TotalSeconds} seconds!");
 
         // Generate runtime variables and store them
-        Singletons.RuntimeVariables = new RuntimeVariables(_startRegion, _exitsOverrides, _itemLocations);
+        Singletons.RuntimeVariables = new RuntimeVariables(_settings, _startRegion, _exitsOverrides, _itemLocations);
     }
 
     private void GenerateExits(Random random)
