@@ -24,6 +24,12 @@ public static class ExitShufflePatches
 
         if (runtimeVariables.ExitsOverrides.TryGetValue(source, out var destination))
         {
+            // Do nothing if the overriden destination is the exact same as the original destination (avoid infinite loop)
+            if (source.nextScene == destination.sceneNumberOverride && source.nextSavePoint == destination.savePointOverride)
+            {
+                return true;
+            }
+
             Game.SwitchScene(new SceneSwitchData(destination.sceneNumberOverride, destination.savePointOverride, true), fadeInDuration);
 
             return false;
