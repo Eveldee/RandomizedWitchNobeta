@@ -19,6 +19,7 @@ public class RuntimeVariables
     public int StartScene { get; }
     public Dictionary<(int sourceScene, int nextSceneNumber, int nextSavePoint), (int sceneNumberOverride, int savePointOverride)> ExitsOverrides { get; } = new();
     public Dictionary<string, ItemSystem.ItemType> ChestOverrides { get; } = new();
+    public ItemSystem.ItemType CatOverride { get; }
 
     public RuntimeVariables(SeedSettings settings, int startScene, Dictionary<RegionExit, int> exitsOverrides, List<ItemLocation> itemLocations)
     {
@@ -37,5 +38,8 @@ public class RuntimeVariables
         {
             ChestOverrides[chestItemLocation.ChestName] = chestItemLocation.ItemType;
         }
+
+        // Get cat item override
+        CatOverride = itemLocations.OfType<CatItemLocation>().Single().ItemType;
     }
 }

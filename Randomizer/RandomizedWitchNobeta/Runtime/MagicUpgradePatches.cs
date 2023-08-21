@@ -20,26 +20,34 @@ public static class MagicUpgradePatches
     [HarmonyPostfix]
     private static void GetMagicLevelSuffixPostfix(WizardGirlManage __instance)
     {
-        // Update all unlocked magic levels according to global level
-        UpdateMagicLevels(__instance.GameSave.stats);
+        if (Singletons.RuntimeVariables is not null)
+        {
+            // Update all unlocked magic levels according to global level
+            UpdateMagicLevels(__instance.GameSave.stats);
+        }
     }
 
     [HarmonyPatch(typeof(NPCManage), nameof(NPCManage.Hit))]
     [HarmonyPostfix]
     private static void NpcHitPostfix(NPCManage __instance)
     {
+        if (Singletons.RuntimeVariables is not { } runtimeVariables)
+        {
+            return;
+        }
+
         // A boss has been killed, increase global magic level if it's the first time it got killed
         if (ValidBosses.Contains(__instance.name) && __instance.GetIsDeath())
         {
-            var killedBosses = Singletons.RuntimeVariables.KilledBosses;
+            var killedBosses = runtimeVariables.KilledBosses;
 
             if (!killedBosses.ContainsKey(__instance.name))
             {
                 killedBosses[__instance.name] = true;
 
-                if (Singletons.RuntimeVariables.GlobalMagicLevel < 5)
+                if (runtimeVariables.GlobalMagicLevel < 5)
                 {
-                    Singletons.RuntimeVariables.GlobalMagicLevel++;
+                    runtimeVariables.GlobalMagicLevel++;
 
                     UpdateMagicLevels(Game.GameSave.stats);
 

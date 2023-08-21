@@ -25,6 +25,13 @@ public class SeedGenerator
 
     public void Generate()
     {
+        // Check Item Pool
+        if (WorldGraph.ItemPool.Count != WorldGraph.ItemPoolSize)
+        {
+            Plugin.Log.LogError($"Invalid item pool size, expected '{WorldGraph.ItemPoolSize}' and found '{WorldGraph.ItemPool.Count}'. Aborting...");
+            throw new Exception();
+        }
+
         var random = new Random(_settings.Seed);
 
         Plugin.Log.LogMessage("Generating a seed...");

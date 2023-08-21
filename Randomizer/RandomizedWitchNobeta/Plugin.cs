@@ -104,11 +104,13 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(LockedDoorPatches));
         Harmony.CreateAndPatchAll(typeof(ArcaneDisabledPatches));
         Harmony.CreateAndPatchAll(typeof(MagicUpgradePatches));
+        Harmony.CreateAndPatchAll(typeof(ItemPoolSizePatches));
 
         // Randomizer patches
         Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));
         Harmony.CreateAndPatchAll(typeof(ExitShufflePatches));
         Harmony.CreateAndPatchAll(typeof(ChestExtraLootPatches));
+        Harmony.CreateAndPatchAll(typeof(SpecialLootPatches));
 
         #if !DEBUG
         Harmony.CreateAndPatchAll(typeof(TimersPatches));

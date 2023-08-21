@@ -9,6 +9,8 @@ public static class WorldGraph
     public const int LowestRegionNumber = 2;
     public const int HighestRegionNumber = 7;
 
+    public const int ItemPoolSize = 45 + 1; // 45 Chest + 1 Cat check
+
     public static List<ItemSystem.ItemType> ItemPool => new()
     {
         // Magic - Key items
@@ -66,6 +68,7 @@ public static class WorldGraph
         ItemSystem.ItemType.MPCureBig,
         ItemSystem.ItemType.MPCureBig,
 
+        ItemSystem.ItemType.MysteriousB,
         ItemSystem.ItemType.MysteriousB,
         ItemSystem.ItemType.MysteriousB,
         ItemSystem.ItemType.MysteriousB,
@@ -157,7 +160,8 @@ public static class WorldGraph
                     ChestItem("TreasureBox_Room03"),
                     ChestItem("TreasureBox_Room04"),
                     ChestItem("TreasureBox_Room05_01"),
-                    ChestItem("TreasureBox_Room05_02")
+                    ChestItem("TreasureBox_Room05_02"),
+                    CatItem()
                 },
 
                 NextRegion = new RegionTransition
@@ -389,6 +393,15 @@ public static class WorldGraph
     private static ItemLocation ChestItem(string chestName)
     {
         var itemLocation = new ChestItemLocation(chestName);
+
+        ItemLocations.Add(itemLocation);
+
+        return itemLocation;
+    }
+
+    private static ItemLocation CatItem()
+    {
+        var itemLocation = new CatItemLocation();
 
         ItemLocations.Add(itemLocation);
 
