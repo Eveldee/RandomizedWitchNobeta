@@ -39,4 +39,26 @@ public static class ExitShufflePatches
 
         return true;
     }
+
+    // Fix text display on doors
+    [HarmonyPatch(typeof(StageUIManager), nameof(StageUIManager.AppearExitLevelMsgBox))]
+    [HarmonyPostfix]
+    private static void AppearExitLevelPostfix(StageUIManager __instance, SavePoint savePointData)
+    {
+        // Display override destination if it exists
+        if (Singletons.RuntimeVariables is not { } runtimeVariables)
+        {
+            return;
+        }
+
+        Plugin.Log.LogDebug($"{Singletons.GameUIManager.messageBoxMap[MessageBoxStyle.Universal].title.text}");
+
+        if (runtimeVariables.ExitsOverrides.TryGetValue(
+                (Game.sceneManager.stageId, savePointData.TransferLevelNumber, savePointData.TransferSavePointNumber),
+                out var destination))
+        {
+            Singletons.GameUIManager.messageBoxMap[MessageBoxStyle.Universal].title.text =
+                $"Leave for {SceneUtils.FriendlySceneName(destination.sceneNumberOverride)}?";
+        }
+    }
 }

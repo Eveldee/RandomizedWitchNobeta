@@ -93,4 +93,15 @@ public static class SceneUtils
         7 => GameStage.Act07,
         _ => throw new ArgumentOutOfRangeException(nameof(sceneNumber), sceneNumber, null)
     };
+
+    public static string FriendlySceneName(int sceneNumber) => sceneNumber switch
+    {
+        2 => "Okun Shrine - Entrance Hall",
+        3 => "Okun Shrine - Underground Cave",
+        4 => "Lava Ruins - Lobby",
+        5 => "Dark Tunnel - Entrance",
+        6 => "Spirit Realm - Garden",
+        7 => "Abyss - Sky Walk",
+        _ => throw new ArgumentOutOfRangeException(nameof(sceneNumber), sceneNumber, null)
+    };
 }
