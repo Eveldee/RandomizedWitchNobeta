@@ -9,7 +9,7 @@ public static class ChestContentShufflePatches
     [HarmonyPostfix]
     private static void InitPostfix(ref TreasureBox __instance)
     {
-        if (Singletons.RuntimeVariables is { } runtimeVariables && runtimeVariables.ChestOverrides.TryGetValue(__instance.name, out var itemOverride))
+        if (Singletons.RuntimeVariables is { } runtimeVariables && runtimeVariables.ChestOverrides.TryGetValue((__instance.name, Game.sceneManager.stageId), out var itemOverride))
         {
             __instance.ItemType = itemOverride;
         }

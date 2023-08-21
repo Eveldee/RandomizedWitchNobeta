@@ -90,8 +90,8 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("TreasureBox_Room03"),
-                    ChestItem("TreasureBox02_Room03")
+                    ChestItem("TreasureBox_Room03", 2),
+                    ChestItem("TreasureBox02_Room03", 2)
                 },
 
                 NextRegion = new RegionTransition
@@ -113,7 +113,7 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("TreasureBox_Room05")
+                            ChestItem("TreasureBox_Room05", 2)
                         },
 
                         NextRegion = new RegionTransition
@@ -134,11 +134,11 @@ public static class WorldGraph
 
                                 ItemLocations = new []
                                 {
-                                    ChestItem("TreasureBox07"),
-                                    ChestItem("TreasureBox07To08"),
-                                    ChestItem("TreasureBox08"),
-                                    ChestItem("TreasureBox09"),
-                                    ChestItem("TreasureBox10")
+                                    ChestItem("TreasureBox07", 2),
+                                    ChestItem("TreasureBox07To08", 2),
+                                    ChestItem("TreasureBox08", 2),
+                                    ChestItem("TreasureBox09", 2),
+                                    ChestItem("TreasureBox10", 2)
                                 },
 
                                 NextRegion = null
@@ -156,11 +156,11 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("TreasureBox_Room01"),
-                    ChestItem("TreasureBox_Room03"),
-                    ChestItem("TreasureBox_Room04"),
-                    ChestItem("TreasureBox_Room05_01"),
-                    ChestItem("TreasureBox_Room05_02"),
+                    ChestItem("TreasureBox_Room01", 3),
+                    ChestItem("TreasureBox_Room03", 3),
+                    ChestItem("TreasureBox_Room04", 3),
+                    ChestItem("TreasureBox_Room05_01", 3),
+                    ChestItem("TreasureBox_Room05_02", 3),
                     CatItem()
                 },
 
@@ -181,7 +181,7 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("TreasureBox_Room08")
+                            ChestItem("TreasureBox_Room08", 3)
                         },
 
                         NextRegion = null
@@ -197,13 +197,13 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("Room02_TreasureBox01"),
-                    ChestItem("Room02_TreasureBox02"),
-                    ChestItem("Room03_TreasureBox01"),
-                    ChestItem("Room03_TreasureBox02"),
-                    ChestItem("Room02To04_TreasureBox02"),
-                    ChestItem("Room05To06_TreasureBox"),
-                    ChestItem("Room06_TreasureBox")
+                    ChestItem("Room02_TreasureBox01", 4),
+                    ChestItem("Room02_TreasureBox02", 4),
+                    ChestItem("Room03_TreasureBox01", 4),
+                    ChestItem("Room03_TreasureBox02", 4),
+                    ChestItem("Room02To04_TreasureBox02", 4),
+                    ChestItem("Room05To06_TreasureBox", 4),
+                    ChestItem("Room06_TreasureBox", 4)
                 },
 
                 NextRegion = new RegionTransition
@@ -225,9 +225,9 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("Room07_TreasureBox"),
-                            ChestItem("Room08_TreasureBox"),
-                            ChestItem("Room01_TreasureBox")
+                            ChestItem("Room07_TreasureBox", 4),
+                            ChestItem("Room08_TreasureBox", 4),
+                            ChestItem("Room01_TreasureBox", 4)
                         },
 
                         NextRegion = null
@@ -244,11 +244,11 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("TreasureBox02_Room02_03"),
-                    ChestItem("TreasureBox02_Room03_02"),
-                    ChestItem("TreasureBox02_Room03_01"),
-                    ChestItem("TreasureBox02_Room04"),
-                    ChestItem("TreasureBox02_Room05")
+                    ChestItem("TreasureBox02_Room02_03", 5),
+                    ChestItem("TreasureBox02_Room03_02", 5),
+                    ChestItem("TreasureBox02_Room03_01", 5),
+                    ChestItem("TreasureBox02_Room04", 5),
+                    ChestItem("TreasureBox02_Room05", 5)
                 },
 
                 NextRegion = new RegionTransition
@@ -267,10 +267,10 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("TreasureBox02_Room06To07"),
-                            ChestItem("TreasureBox02_Room07"),
-                            ChestItem("TreasureBox02_Room08"),
-                            ChestItem("TreasureBox02_Room09To10")
+                            ChestItem("TreasureBox02_Room06To07", 5),
+                            ChestItem("TreasureBox02_Room07", 5),
+                            ChestItem("TreasureBox02_Room08", 5),
+                            ChestItem("TreasureBox02_Room09To10", 5)
                         },
 
                         NextRegion = null
@@ -287,9 +287,9 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("TreasureBox02_R02"),
-                    ChestItem("TreasureBox02_R03"),
-                    ChestItem("TreasureBox02_R0401")
+                    ChestItem("TreasureBox02_R02", 6),
+                    ChestItem("TreasureBox02_R03", 6),
+                    ChestItem("TreasureBox02_R0401", 6)
                 },
 
                 NextRegion = new RegionTransition
@@ -304,9 +304,9 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("TreasureBox02_R0402"),
-                            ChestItem("TreasureBox02_R06"),
-                            ChestItem("TreasureBox02_R07")
+                            ChestItem("TreasureBox02_R0402", 6),
+                            ChestItem("TreasureBox02_R06", 6),
+                            ChestItem("TreasureBox02_R07", 6)
                         },
 
                         NextRegion = new RegionTransition
@@ -327,7 +327,7 @@ public static class WorldGraph
 
                                 ItemLocations = new []
                                 {
-                                    ChestItem("TreasureBox02_R08")
+                                    ChestItem("TreasureBox02_R08", 6)
                                 },
 
                                 NextRegion = null
@@ -346,8 +346,8 @@ public static class WorldGraph
 
                 ItemLocations = new []
                 {
-                    ChestItem("TreasureBox_Act02Room04"),
-                    ChestItem("TreasureBox_Act02Room05")
+                    ChestItem("TreasureBox_Act02Room04", 7),
+                    ChestItem("TreasureBox_Act02Room05", 7)
                 },
 
                 NextRegion = new RegionTransition
@@ -367,9 +367,9 @@ public static class WorldGraph
 
                         ItemLocations = new []
                         {
-                            ChestItem("Act04Room05To06_TreasureBox"),
-                            ChestItem("Act05_TreasureBox02_Room09To10"),
-                            ChestItem("Act03TreasureBox_Room05_02")
+                            ChestItem("Act04Room05To06_TreasureBox", 7),
+                            ChestItem("Act05_TreasureBox02_Room09To10", 7),
+                            ChestItem("Act03TreasureBox_Room05_02", 7)
                         },
 
                         NextRegion = null,
@@ -390,9 +390,9 @@ public static class WorldGraph
         return exit;
     }
 
-    private static ItemLocation ChestItem(string chestName)
+    private static ItemLocation ChestItem(string chestName, int sceneNumber)
     {
-        var itemLocation = new ChestItemLocation(chestName);
+        var itemLocation = new ChestItemLocation(chestName, sceneNumber);
 
         ItemLocations.Add(itemLocation);
 
