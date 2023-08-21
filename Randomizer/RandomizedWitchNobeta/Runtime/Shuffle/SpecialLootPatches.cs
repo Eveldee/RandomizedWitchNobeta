@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using Cpp2IL.Core;
 using HarmonyLib;
+using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -63,6 +66,21 @@ public static class SpecialLootPatches
                     Object.Destroy(item.gameObject);
                 }
             }
+        }
+    }
+
+    // Disable thunder from Vanessa
+    [HarmonyPatch(typeof(SceneEvent), nameof(SceneEvent.InitData))]
+    [HarmonyPostfix]
+    private static void LoadScriptInitPostfix(SceneEvent __instance, SceneEventManager SEM)
+    {
+        if (__instance.name is "LoadScriptRoomBossEnd")
+        {
+            var loadScript = __instance.Cast<LoadScript>();
+            Plugin.Log.LogDebug(loadScript.Event.Count);
+
+            var newEvents = loadScript.Event.SkipLast(1).ToArray();
+            loadScript.Event = newEvents;
         }
     }
 }

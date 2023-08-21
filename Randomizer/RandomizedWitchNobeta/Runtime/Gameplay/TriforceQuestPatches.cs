@@ -16,7 +16,7 @@ public static class TriforceQuestPatches
     private static void MultipleEventOpenInitPostfix(MultipleEventOpen __instance)
     {
         // Only check in last stage
-        if (Game.sceneManager.stageId != 7)
+        if (Game.sceneManager.stageId != 7 || Singletons.RuntimeVariables is not { } runtimeVariables)
         {
             return;
         }
@@ -24,7 +24,7 @@ public static class TriforceQuestPatches
         if (__instance.name is "OpenLightRoomStart01" or "OpenLightRoomStart02" or "OpenLightRoomStart03")
         {
             // Reopen it if it has already been opened
-            if (Singletons.RuntimeVariables.OpenedTrials.Contains(__instance.name))
+            if (runtimeVariables.OpenedTrials.Contains(__instance.name))
             {
                 __instance.OpenEvent();
 
@@ -53,7 +53,7 @@ public static class TriforceQuestPatches
     [HarmonyPostfix]
     private static void DiscardItemPostfix(IItemController __instance)
     {
-        if (Game.sceneManager.stageId != 7)
+        if (Game.sceneManager.stageId != 7 || Singletons.RuntimeVariables is not { } runtimeVariables)
         {
             return;
         }
@@ -70,7 +70,7 @@ public static class TriforceQuestPatches
                     if (!eventOpen.g_AllOpen && eventOpen.g_BC.Contains(item.transform.position))
                     {
                         eventOpen.OpenEvent();
-                        Singletons.RuntimeVariables.OpenedTrials.Add(eventOpen.name);
+                        runtimeVariables.OpenedTrials.Add(eventOpen.name);
 
                         Object.Destroy(item.gameObject);
 
