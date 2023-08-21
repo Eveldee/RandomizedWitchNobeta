@@ -2,7 +2,7 @@
 using HarmonyLib;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Runtime.Gameplay;
 
 public static class MagicUpgradePatches
 {

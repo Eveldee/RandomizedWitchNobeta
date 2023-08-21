@@ -4,7 +4,7 @@ using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Runtime.Shuffle;
 
 public static class SpecialLootPatches
 {

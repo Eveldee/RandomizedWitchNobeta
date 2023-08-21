@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Runtime.Shuffle;
 
 // Increase maximum amount of item of same type present
 public static class ItemPoolSizePatches

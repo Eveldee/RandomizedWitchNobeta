@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using HarmonyLib;
 using RandomizedWitchNobeta.Utils;
-using RandomizedWitchNobeta.Utils.Extensions;
 using UnityEngine;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Runtime.Gameplay;
 
 public static class StatueUnlockPatches
 {

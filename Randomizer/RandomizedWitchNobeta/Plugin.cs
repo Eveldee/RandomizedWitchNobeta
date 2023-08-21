@@ -12,6 +12,8 @@ using RandomizedWitchNobeta.Config;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Runtime;
+using RandomizedWitchNobeta.Runtime.Gameplay;
+using RandomizedWitchNobeta.Runtime.Shuffle;
 using RandomizedWitchNobeta.Timer;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
