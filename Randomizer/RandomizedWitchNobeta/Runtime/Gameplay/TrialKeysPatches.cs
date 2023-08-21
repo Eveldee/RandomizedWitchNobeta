@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace RandomizedWitchNobeta.Runtime.Gameplay;
 
-public static class TriforceQuestPatches
+public static class TrialKeysPatches
 {
     private static readonly List<MultipleEventOpen> _openers = new();
 
@@ -100,7 +100,36 @@ public static class TriforceQuestPatches
     {
         if (itemType == ItemSystem.ItemType.SPMaxAdd)
         {
-            Game.AppearEventPrompt("Tokens can only be dropped, not used.");
+            Game.AppearEventPrompt("Trial keys can only be dropped, not used.");
+
+            return false;
+        }
+
+        return true;
+    }
+
+    // Patch display of token item name and description
+    [HarmonyPatch(typeof(ItemSystem), nameof(ItemSystem.GetItemHelp))]
+    [HarmonyPrefix]
+    private static bool GetItemHelpPrefix(ref string __result, ItemSystem.ItemType Type)
+    {
+        if (Type == ItemSystem.ItemType.SPMaxAdd)
+        {
+            __result = "Drop on a trial path to unlock it";
+
+            return false;
+        }
+
+        return true;
+    }
+
+    [HarmonyPatch(typeof(ItemSystem), nameof(ItemSystem.GetItemName))]
+    [HarmonyPrefix]
+    private static bool GetItemNamePrefix(ref string __result, ItemSystem.ItemType Type)
+    {
+        if (Type == ItemSystem.ItemType.SPMaxAdd)
+        {
+            __result = "Trial Magic Key";
 
             return false;
         }

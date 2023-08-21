@@ -107,7 +107,7 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(ArcaneDisabledPatches));
         Harmony.CreateAndPatchAll(typeof(MagicUpgradePatches));
         Harmony.CreateAndPatchAll(typeof(ItemPoolSizePatches));
-        Harmony.CreateAndPatchAll(typeof(TriforceQuestPatches));
+        Harmony.CreateAndPatchAll(typeof(TrialKeysPatches));
 
         // Randomizer patches
         Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));
