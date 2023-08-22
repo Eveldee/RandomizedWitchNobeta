@@ -78,7 +78,9 @@ public static class StartPatches
     private static void StartRandomizer()
     {
         // Generate a seed
-        var generator = new SeedGenerator(new SeedSettings { Seed = 3 });
+        var settings = new SeedSettings { Seed = 455789545 };
+
+        var generator = new SeedGenerator(settings);
         generator.Generate();
 
         var runtimeVariables = Singletons.RuntimeVariables;
@@ -106,7 +108,9 @@ public static class StartPatches
                 // Give absorb and wind 1, remove Arcane
                 secretMagicLevel = 0,
                 windMagicLevel = 1,
-                manaAbsorbLevel = 1
+                manaAbsorbLevel = 1,
+                // Give souls scaling on start level
+                currentMoney = settings.StartSouls[runtimeVariables.StartScene]
             }
         };
 
