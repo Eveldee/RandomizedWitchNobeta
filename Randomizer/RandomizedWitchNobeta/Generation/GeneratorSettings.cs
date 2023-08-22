@@ -6,7 +6,7 @@ public class SeedSettings
 {
     public int Seed { get; set; }
 
-    public int ChestSoulCount { get; set; } = 500;
+    public int ChestSoulCount { get; set; } = 250;
 
     public Dictionary<int, int> StartSouls { get; set; } = new()
     {
