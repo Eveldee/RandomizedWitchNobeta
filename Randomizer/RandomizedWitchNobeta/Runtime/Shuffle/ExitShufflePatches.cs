@@ -6,10 +6,19 @@ namespace RandomizedWitchNobeta.Runtime.Shuffle;
 
 public static class ExitShufflePatches
 {
+    private static bool _switchInProgress = false;
+
     [HarmonyPatch(typeof(Game), nameof(Game.SwitchScene))]
     [HarmonyPrefix]
     private static bool SwitchScenePrefix(SceneSwitchData sceneData, float fadeInDuration)
     {
+        if (_switchInProgress)
+        {
+            return true;
+        }
+
+        _switchInProgress = true;
+
         if (Game.sceneManager is null)
         {
             return true;
@@ -33,12 +42,23 @@ public static class ExitShufflePatches
 
             Game.SwitchScene(new SceneSwitchData(destination.sceneNumberOverride, destination.savePointOverride, true), fadeInDuration);
 
+            // Also update save point to avoid wrong "return to statue"
+            Game.GameSave.basic.stage = SceneUtils.SceneNumberToGameStage(destination.sceneNumberOverride);
+            Game.GameSave.basic.savePoint = destination.savePointOverride;
+
             return false;
         }
 
         Plugin.Log.LogInfo($"Skipping unlisted scene transition: {source}");
 
         return true;
+    }
+
+    [HarmonyPatch(typeof(Game), nameof(Game.SwitchScene))]
+    [HarmonyPostfix]
+    private static void SwitchScenePost(SceneSwitchData sceneData, float fadeInDuration)
+    {
+        _switchInProgress = false;
     }
 
     // Fix text display on doors
@@ -51,8 +71,6 @@ public static class ExitShufflePatches
         {
             return;
         }
-
-        Plugin.Log.LogDebug($"{Singletons.GameUIManager.messageBoxMap[MessageBoxStyle.Universal].title.text}");
 
         if (runtimeVariables.ExitsOverrides.TryGetValue(
                 new RegionExit(Game.sceneManager.stageId, savePointData.TransferLevelNumber, savePointData.TransferSavePointNumber),
