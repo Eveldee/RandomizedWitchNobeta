@@ -17,6 +17,8 @@ public class RuntimeVariables
     // Data used to resume a randomized game
     public int GlobalMagicLevel { get; set; } = 1;
 
+    public bool CatLootObtained { get; set; } = false;
+
     public Dictionary<string, bool> KilledBosses { get; } = new();
     public HashSet<string> OpenedTrials { get; } = new();
 
@@ -53,6 +55,8 @@ public class RuntimeVariables
         Settings = serializable.Settings;
 
         GlobalMagicLevel = serializable.GlobalMagicLevel;
+
+        CatLootObtained = serializable.CatLootObtained;
 
         KilledBosses = serializable.KilledBosses;
         OpenedTrials = serializable.OpenedTrials;

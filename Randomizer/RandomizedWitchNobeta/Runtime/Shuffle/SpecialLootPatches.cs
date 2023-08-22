@@ -21,7 +21,7 @@ public static class SpecialLootPatches
         }
 
         // Generate a random item
-        if (__instance.name is "04_CatAbsorbSkill" or "04_SkillBookAgain")
+        if (__instance.name is "04_CatAbsorbSkill" or "04_SkillBookAgain" && !runtimeVariables.CatLootObtained)
         {
             var spawnPosition = __instance.name switch
             {
@@ -38,8 +38,10 @@ public static class SpecialLootPatches
             // Give souls
             else
             {
-                Game.CreateSoul(SoulSystem.SoulType.Money, __instance.transform.position, Singletons.RuntimeVariables.Settings.ChestSoulCount);
+                Game.CreateSoul(SoulSystem.SoulType.Money, spawnPosition, Singletons.RuntimeVariables.Settings.ChestSoulCount);
             }
+
+            runtimeVariables.CatLootObtained = true;
         }
     }
 

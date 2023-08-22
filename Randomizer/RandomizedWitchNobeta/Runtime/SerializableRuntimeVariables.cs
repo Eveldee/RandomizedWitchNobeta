@@ -10,6 +10,8 @@ public class SerializableRuntimeVariables
 
     public int GlobalMagicLevel { get; set; }
 
+    public bool CatLootObtained { get; set; } = false;
+
     public Dictionary<string, bool> KilledBosses { get; set; }
     public HashSet<string> OpenedTrials { get; set; }
 
