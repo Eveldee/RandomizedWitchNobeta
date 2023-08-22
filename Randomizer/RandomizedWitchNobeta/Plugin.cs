@@ -90,6 +90,9 @@ public class Plugin : BasePlugin
         AutoConfigManager.FetchValuesFromFields();
         ConfigFile.Save();
 
+        // Save current run
+        Singletons.RuntimeVariables?.Save();
+
         Log.LogInfo("Configs saved");
     }
 
@@ -97,8 +100,10 @@ public class Plugin : BasePlugin
     {
         Harmony.CreateAndPatchAll(typeof(Singletons));
         Harmony.CreateAndPatchAll(typeof(SceneUtils));
+        Harmony.CreateAndPatchAll(typeof(ConfigPatches));
 
         Harmony.CreateAndPatchAll(typeof(StartPatches));
+        Harmony.CreateAndPatchAll(typeof(RunCompletePatches));
 
         // Gameplay patches
         Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));

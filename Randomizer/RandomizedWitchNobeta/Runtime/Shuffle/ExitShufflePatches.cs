@@ -1,4 +1,5 @@
 ﻿using HarmonyLib;
+using RandomizedWitchNobeta.Generation.Models;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Runtime.Shuffle;
@@ -14,10 +15,10 @@ public static class ExitShufflePatches
             return true;
         }
 
-        (int sourceScene, int nextScene, int nextSavePoint) source = (Game.sceneManager.stageId, SceneUtils.SceneNumberFromName(sceneData.nextSceneName), sceneData.savePointNumber);
+        var source = new RegionExit(Game.sceneManager.stageId, SceneUtils.SceneNumberFromName(sceneData.nextSceneName), sceneData.savePointNumber);
 
         // Do not patch unknown scenes (title screen, last cutscene, ...)
-        if (source.nextScene == -1 || Singletons.RuntimeVariables is not { } runtimeVariables)
+        if (source.NextSceneNumber == -1 || Singletons.RuntimeVariables is not { } runtimeVariables)
         {
             return true;
         }
@@ -25,7 +26,7 @@ public static class ExitShufflePatches
         if (runtimeVariables.ExitsOverrides.TryGetValue(source, out var destination))
         {
             // Do nothing if the overriden destination is the exact same as the original destination (avoid infinite loop)
-            if (source.nextScene == destination.sceneNumberOverride && source.nextSavePoint == destination.savePointOverride)
+            if (source.NextSceneNumber == destination.sceneNumberOverride && source.NextSavePointNumber == destination.savePointOverride)
             {
                 return true;
             }
@@ -54,7 +55,7 @@ public static class ExitShufflePatches
         Plugin.Log.LogDebug($"{Singletons.GameUIManager.messageBoxMap[MessageBoxStyle.Universal].title.text}");
 
         if (runtimeVariables.ExitsOverrides.TryGetValue(
-                (Game.sceneManager.stageId, savePointData.TransferLevelNumber, savePointData.TransferSavePointNumber),
+                new RegionExit(Game.sceneManager.stageId, savePointData.TransferLevelNumber, savePointData.TransferSavePointNumber),
                 out var destination))
         {
             Singletons.GameUIManager.messageBoxMap[MessageBoxStyle.Universal].title.text =

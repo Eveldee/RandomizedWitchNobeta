@@ -51,6 +51,7 @@ public static class MagicUpgradePatches
 
                     UpdateMagicLevels(Game.GameSave.stats);
 
+                    Game.AppearEventPrompt($"All magic levels increased to {runtimeVariables.GlobalMagicLevel}.");
                     Plugin.Log.LogDebug($"Global magic level increased after killing '{__instance.name}'");
                 }
             }

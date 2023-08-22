@@ -1,6 +1,7 @@
 ﻿using System;
 using HarmonyLib;
 using MarsSDK;
+using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,14 +30,22 @@ public static class StartPatches
 
             Plugin.Log.LogDebug("Found 'New Game' button");
 
-            newGameLabel.text = "Start Randomizer";
+            newGameLabel.text = "New Randomizer";
 
-            // Remove Load button
-            Object.Destroy(loadGameObject);
+            if (RuntimeVariables.TryLoad(out var runtimeVariables))
+            {
+                loadGameObject.GetComponentInChildren<Text>().text = "Resume Run";
+                Singletons.RuntimeVariables = runtimeVariables;
+            }
+            // Remove Load button if no run is resume-able
+            else
+            {
+                Object.Destroy(loadGameObject);
 
-            // Reorder UI elements
-            newGameUIHandler.selectDown = optionsUIHandler;
-            optionsUIHandler.selectUp = newGameUIHandler;
+                // Reorder UI elements
+                newGameUIHandler.selectDown = optionsUIHandler;
+                optionsUIHandler.selectUp = newGameUIHandler;
+            }
         }
         else
         {
@@ -54,6 +63,20 @@ public static class StartPatches
         __instance.gameObject.SetActive(false);
         Game.FadeInBlackScreen(5f);
 
+        if (__instance.pageMode == GameSavePageMode.NewGame)
+        {
+            StartRandomizer();
+        }
+        else
+        {
+            ResumeRandomizer();
+        }
+
+        return false;
+    }
+
+    private static void StartRandomizer()
+    {
         // Generate a seed
         var generator = new SeedGenerator(new SeedSettings { Seed = 3 });
         generator.Generate();
@@ -96,7 +119,19 @@ public static class StartPatches
 
         Game.SwitchGameSave(gameSave);
         Game.SwitchScene(switchData);
+    }
 
-        return false;
+    private static void ResumeRandomizer()
+    {
+        if (Game.ReadGameSave(GameSaveIndex, out var gameSave) == ReadFileResult.Succeed)
+        {
+            Game.SwitchGameSave(gameSave);
+            Game.SwitchScene(new SceneSwitchData(gameSave.basic.stage, gameSave.basic.savePoint, false));
+        }
+        else
+        {
+            Plugin.Log.LogFatal($"Couldn't load save slot {GameSaveIndex}, quitting...");
+            Application.Quit();
+        }
     }
 }
