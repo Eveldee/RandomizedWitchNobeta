@@ -42,6 +42,9 @@ public partial class NobetaRandomizerOverlay
                         {
                             // Apply settings to keep references
                             settings.Apply(imported);
+
+                            // Also reflect changes to ui
+                            _upgradeModeIndex = (int) settings.MagicUpgrade;
                         }
                     }
 
