@@ -12,7 +12,7 @@
             https://nuget.samboy.dev/v3/index.json
         </RestoreAdditionalProjectSources>
         <RootNamespace>RandomizedWitchNobeta</RootNamespace>
-        <Configurations>Debug;Release</Configurations>
+        <Configurations>Debug;Release;NOUI</Configurations>
         <Platforms>AnyCPU</Platforms>
         <PackageId>RandomizedWitchNobeta</PackageId>
     </PropertyGroup>

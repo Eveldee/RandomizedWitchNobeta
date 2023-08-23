@@ -27,25 +27,9 @@ public partial class NobetaRandomizerOverlay : ClickableTransparentOverlay.Overl
 
     protected override void Render()
     {
-        ImGui.ShowDemoWindow();
-        // // Timers are always visible when activated, even if overlay is hidden
-        // if (Timers.ShowTimers)
-        // {
-        //     ShowTimersWindow();
-        // }
-        //
-        // if (!OverlayState.ShowOverlay)
-        // {
-        //     return;
-        // }
-        //
-        // if (OverlayState.ShowOverlay)
-        // {
-        //     ShowTrainerWindow();
-        // }
-        // if (OverlayState.ShowTimersConfigWindow)
-        // {
-        //     ShowTimersConfigWindow();
-        // }
+        if (OverlayState.ShowOverlay)
+        {
+            ShowRandomizerWindow();
+        }
     }
 }

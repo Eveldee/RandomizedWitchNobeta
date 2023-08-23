@@ -1,6 +1,8 @@
 ﻿using System;
 using HarmonyLib;
 using MarsSDK;
+using RandomizedWitchNobeta.Bonus;
+using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
@@ -118,6 +120,12 @@ public static class StartPatches
         Game.WriteGameSave(gameSave);
 
         Plugin.Log.LogMessage("Save created, loading the game...");
+
+        // Load a random skin if activated
+        if (AppearancePatches.RandomizeSkin == AppearancePatches.RandomizeSkin_Once)
+        {
+            Game.Collection.UpdateSkin((GameSkin)Random.Shared.Next(0, AppearancePatches.AvailableSkins.Length));
+        }
 
         // Load save
         var switchData = new SceneSwitchData(runtimeVariables.StartScene, SceneUtils.SceneStartSavePoint(runtimeVariables.StartScene), true);

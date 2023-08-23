@@ -2,12 +2,14 @@
 using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
+using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
@@ -57,7 +59,7 @@ public class Plugin : BasePlugin
         NobetaProcessUtils.GameWindowHandle = NobetaProcessUtils.FindWindow(null, "Little Witch Nobeta");
 
         // Create and show overlay
-        #if !DEBUG
+        #if !NOUI
         NobetaRandomizerOverlay = new NobetaRandomizerOverlay();
         Task.Run(NobetaRandomizerOverlay.Run);
         #endif
@@ -102,6 +104,8 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(SceneUtils));
         Harmony.CreateAndPatchAll(typeof(ConfigPatches));
 
+        Harmony.CreateAndPatchAll(typeof(OverlayTogglePatches));
+
         Harmony.CreateAndPatchAll(typeof(StartPatches));
         Harmony.CreateAndPatchAll(typeof(RunCompletePatches));
 
@@ -120,8 +124,11 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(ChestExtraLootPatches));
         Harmony.CreateAndPatchAll(typeof(SpecialLootPatches));
 
-        #if !DEBUG
+        // Bonus patches
+        Harmony.CreateAndPatchAll(typeof(AppearancePatches));
+
+#if !DEBUG
         Harmony.CreateAndPatchAll(typeof(TimersPatches));
-        #endif
+#endif
     }
 }
