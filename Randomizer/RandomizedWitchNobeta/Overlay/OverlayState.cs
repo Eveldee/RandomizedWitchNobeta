@@ -1,4 +1,5 @@
 ﻿using RandomizedWitchNobeta.Config;
+using RandomizedWitchNobeta.Generation;
 
 namespace RandomizedWitchNobeta.Overlay;
 
@@ -7,4 +8,6 @@ public static class OverlayState
 {
     public static bool ShowOverlay = false;
     public static bool ShowTimersConfigWindow;
+
+    public static readonly SeedSettings SeedSettings = new ();
 }

@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RandomizedWitchNobeta.Generation;
 
+// Need to use fields here for ImGui
 public class SeedSettings
 {
-    public int Seed { get; set; }
+    public int Seed = Random.Shared.Next();
 
-    public int ChestSoulCount { get; set; } = 250;
+    public int ChestSoulCount = 250;
 
     public Dictionary<int, int> StartSouls { get; set; } = new()
     {

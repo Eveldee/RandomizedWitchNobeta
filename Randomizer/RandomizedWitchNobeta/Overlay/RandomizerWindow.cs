@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Numerics;
 using Humanizer;
 using ImGuiNET;
 using RandomizedWitchNobeta.Bonus;
+using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Utils;
+using TextCopy;
 
 namespace RandomizedWitchNobeta.Overlay;
 
@@ -19,7 +22,50 @@ public partial class NobetaRandomizerOverlay
         {
             TabItem("Randomizer", () =>
             {
+                var settings = OverlayState.SeedSettings;
 
+                if (ImGui.CollapsingHeader("Import/Export", ImGuiTreeNodeFlags.DefaultOpen))
+                {
+                    ImGui.SeparatorText("");
+
+                    if (ButtonColored(InfoColor, "Export to Clipboard"))
+                    {
+                        SettingsExporter.ExportSettings(settings);
+                    }
+
+                    ImGui.SameLine();
+                    if (ButtonColored(ValueColor, "Import from Clipboard"))
+                    {
+                        if (SettingsExporter.TryImportSettings(out var imported))
+                        {
+                            // Apply settings to keep references
+                            settings.Seed = imported.Seed;
+                            settings.ChestSoulCount = imported.ChestSoulCount;
+                            settings.StartSouls = imported.StartSouls;
+                        }
+                    }
+
+                    ImGui.SeparatorText("");
+                }
+
+                if (ImGui.CollapsingHeader("Seed Settings", ImGuiTreeNodeFlags.DefaultOpen))
+                {
+                    ImGui.SeparatorText("General");
+
+                    if (ImGui.Button(" Random ##Seed"))
+                    {
+                        settings.Seed = Random.Shared.Next();
+                    }
+
+                    ImGui.SameLine();
+                    ImGui.InputInt("Seed", ref settings.Seed);
+
+                    ImGui.SeparatorText("Balance");
+
+                    ImGui.InputInt("Souls in checks", ref settings.ChestSoulCount, 50);
+
+                    ImGui.SeparatorText("Item Pool");
+                }
             });
 
             TabItem("Bonus", () =>
