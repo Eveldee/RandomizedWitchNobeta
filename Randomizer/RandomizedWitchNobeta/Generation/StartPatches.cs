@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
+using Random = System.Random;
 
 namespace RandomizedWitchNobeta.Generation;
 
@@ -78,7 +79,7 @@ public static class StartPatches
     private static void StartRandomizer()
     {
         // Generate a seed
-        var settings = new SeedSettings { Seed = 455789545 };
+        var settings = new SeedSettings { Seed = Random.Shared.Next() };
 
         var generator = new SeedGenerator(settings);
         generator.Generate();

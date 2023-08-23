@@ -54,6 +54,8 @@ public static class StatueUnlockPatches
                 Plugin.Log.LogDebug($"Statue '{statue.name}#{statue.TransferLevelNumber}#{savePointNumber}' auto-unlocked");
 
                 gameSave.AddNewSavePoint(stageName, savePointNumber);
+                gameSave.stage = gameStage;
+                gameSave.savePoint = savePointNumber;
 
                 Game.AppearEventPrompt($"Nearby statue unlocked: {Game.GetLocationText(gameStage, savePointNumber)}");
             }
