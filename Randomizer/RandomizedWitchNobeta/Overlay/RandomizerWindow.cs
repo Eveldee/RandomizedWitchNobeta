@@ -95,6 +95,7 @@ public partial class NobetaRandomizerOverlay
                     ImGui.SeparatorText("Balance");
 
                     ImGui.InputInt("Souls in checks", ref settings.ChestSoulCount, 50);
+                    HelpMarker("This is the amount of souls given for checks containing souls (chests, cat, ...). The souls in the item pool for checks can be disabled by setting a weight of 0 in 'Item Pool Weights' below for Souls.");
 
                     ImGui.InputFloat("Start Souls Modifier", ref settings.StartSoulsModifier, 0.1f, 0.2f, "%.2f");
                     HelpMarker("The amount of souls given scaling on start level will be multiplied by this modifier. So for example, if you set 0.5, only half of the souls will be given. 0 means no souls at all at the start.");
