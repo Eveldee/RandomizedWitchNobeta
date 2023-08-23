@@ -21,6 +21,12 @@ public static class TrialKeysPatches
             return;
         }
 
+        // Skip if trial keys are not enabled
+        if (!runtimeVariables.Settings.TrialKeys)
+        {
+            return;
+        }
+
         if (__instance.name is "OpenLightRoomStart01" or "OpenLightRoomStart02" or "OpenLightRoomStart03")
         {
             // Reopen it if it has already been opened
@@ -54,6 +60,12 @@ public static class TrialKeysPatches
     private static void DiscardItemPostfix(IItemController __instance)
     {
         if (Game.sceneManager.stageId != 7 || Singletons.RuntimeVariables is not { } runtimeVariables)
+        {
+            return;
+        }
+
+        // Skip if trial keys are not enabled
+        if (!runtimeVariables.Settings.TrialKeys)
         {
             return;
         }
@@ -129,7 +141,7 @@ public static class TrialKeysPatches
     {
         if (Type == ItemSystem.ItemType.SPMaxAdd)
         {
-            __result = "Trial Magic Key";
+            __result = "Trial Key";
 
             return false;
         }

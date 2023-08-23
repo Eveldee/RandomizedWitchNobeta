@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using HarmonyLib;
 using MarsSDK;
 using RandomizedWitchNobeta.Bonus;
+using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Utils;
@@ -81,7 +83,26 @@ public static class StartPatches
     private static void StartRandomizer()
     {
         // Generate a seed
-        var settings = new SeedSettings { Seed = Random.Shared.Next() };
+        #if NOUI
+
+        SeedSettings settings;
+        var settingsPath = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
+
+        if (!File.Exists(settingsPath))
+        {
+            settings = new SeedSettings();
+            File.WriteAllText(settingsPath, SerializeUtils.SerializeIndented(settings));
+        }
+        else
+        {
+            settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(settingsPath));
+        }
+
+        #else
+
+        var settings = OverlayState.SeedSettings;
+
+        #endif
 
         var generator = new SeedGenerator(settings);
         generator.Generate();
@@ -109,11 +130,11 @@ public static class StartPatches
             stats =
             {
                 // Give absorb and wind 1, remove Arcane
-                secretMagicLevel = 0,
+                secretMagicLevel = settings.NoArcane ? 0 : 1,
                 windMagicLevel = 1,
                 manaAbsorbLevel = 1,
                 // Give souls scaling on start level
-                currentMoney = settings.StartSouls[runtimeVariables.StartScene]
+                currentMoney = settings.StartSouls[runtimeVariables.StartScene] * settings.StartSoulsModifier
             }
         };
 

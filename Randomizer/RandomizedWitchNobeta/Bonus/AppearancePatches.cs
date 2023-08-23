@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using EnumsNET;
 using HarmonyLib;
@@ -9,9 +10,11 @@ using Random = System.Random;
 
 namespace RandomizedWitchNobeta.Bonus;
 
+[Section("Bonus.Appearance")]
 public static class AppearancePatches
 {
-    public static int SelectedSkinIndex = (int)Game.Collection.currentSkin;
+    [Bind]
+    public static int SelectedSkinIndex;
     public static readonly string[] AvailableSkins = Enum.GetNames<GameSkin>();
 
     [Bind]
@@ -43,48 +46,45 @@ public static class AppearancePatches
     // Skin loader, hide bag, staff and hat
     public static void InitAppearance()
     {
-        Singletons.Dispatcher.Enqueue(() =>
+        if (Singletons.NobetaSkin is not { } skin)
         {
-            if (Singletons.NobetaSkin is not { } skin)
-            {
-                return;
-            }
+            return;
+        }
 
-            if (skin.bagMesh is not null)
-            {
-                skin.bagMesh.enabled = !HideBagEnabled;
-            }
+        if (skin.bagMesh is not null)
+        {
+            skin.bagMesh.enabled = !HideBagEnabled;
+        }
 
-            if (skin.weaponMesh is not null)
-            {
-                skin.weaponMesh.enabled = !HideStaffEnabled;
-            }
+        if (skin.weaponMesh is not null)
+        {
+            skin.weaponMesh.enabled = !HideStaffEnabled;
+        }
 
-            if (skin.storyHatMesh is not null)
-            {
-                skin.storyHatMesh.enabled = !HideHatEnabled;
-            }
+        if (skin.storyHatMesh is not null)
+        {
+            skin.storyHatMesh.enabled = !HideHatEnabled;
+        }
 
-            // Second pass to remove from other skins
-            foreach (var meshRenderer in skin.bodyMesh)
+        // Second pass to remove from other skins
+        foreach (var meshRenderer in skin.bodyMesh)
+        {
+            if (HideBagEnabled)
             {
-                if (HideBagEnabled)
+                if (meshRenderer.name.Contains("bag", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (meshRenderer.name.Contains("bag", StringComparison.OrdinalIgnoreCase))
-                    {
-                        meshRenderer.enabled = false;
-                    }
-                }
-
-                if (HideHatEnabled)
-                {
-                    if (meshRenderer.name.Contains("hat", StringComparison.OrdinalIgnoreCase))
-                    {
-                        meshRenderer.enabled = false;
-                    }
+                    meshRenderer.enabled = false;
                 }
             }
-        });
+
+            if (HideHatEnabled)
+            {
+                if (meshRenderer.name.Contains("hat", StringComparison.OrdinalIgnoreCase))
+                {
+                    meshRenderer.enabled = false;
+                }
+            }
+        }
     }
 
     [HarmonyPatch(typeof(Game), nameof(Game.SwitchScene))]
@@ -99,9 +99,9 @@ public static class AppearancePatches
         }
     }
 
-    [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.UpdateSkin))]
+    [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update))]
     [HarmonyPostfix]
-    private static void PlayerControllerUpdateSkinPostfix(PlayerController __instance, NobetaSkin skin)
+    private static void PlayerControllerUpdatePostfix()
     {
         InitAppearance();
     }

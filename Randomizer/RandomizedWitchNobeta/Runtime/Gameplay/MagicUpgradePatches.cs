@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using HarmonyLib;
+using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Runtime.Gameplay;
@@ -20,8 +21,14 @@ public static class MagicUpgradePatches
     [HarmonyPostfix]
     private static void GetMagicLevelSuffixPostfix(WizardGirlManage __instance)
     {
-        if (Singletons.RuntimeVariables is not null)
+        if (Singletons.RuntimeVariables is { } runtimeVariables)
         {
+            // Skip if magic upgrade mode is not Boss Kill
+            if (runtimeVariables.Settings.MagicUpgrade != SeedSettings.MagicUpgradeMode.BossKill)
+            {
+                return;
+            }
+
             // Update all unlocked magic levels according to global level
             UpdateMagicLevels(__instance.GameSave.stats);
         }
@@ -32,6 +39,12 @@ public static class MagicUpgradePatches
     private static void NpcHitPostfix(NPCManage __instance)
     {
         if (Singletons.RuntimeVariables is not { } runtimeVariables)
+        {
+            return;
+        }
+
+        // Skip if magic upgrade mode is not Boss Kill
+        if (runtimeVariables.Settings.MagicUpgrade != SeedSettings.MagicUpgradeMode.BossKill)
         {
             return;
         }

@@ -11,6 +11,6 @@ public class TokenRequirement : ITransitionRequirement
 
     public bool CheckRequirement(InventoryState inventoryState)
     {
-        return inventoryState.TokenAmount >= AmountNeeded;
+        return !inventoryState.SeedSettings.TrialKeys || inventoryState.TokenAmount >= AmountNeeded;
     }
 }

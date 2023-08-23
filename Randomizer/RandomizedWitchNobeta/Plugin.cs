@@ -127,8 +127,8 @@ public class Plugin : BasePlugin
         // Bonus patches
         Harmony.CreateAndPatchAll(typeof(AppearancePatches));
 
-#if !DEBUG
+        #if !NOUI
         Harmony.CreateAndPatchAll(typeof(TimersPatches));
-#endif
+        #endif
     }
 }

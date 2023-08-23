@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using LibCpp2IL;
 using RandomizedWitchNobeta.Generation.Models;
@@ -25,18 +26,14 @@ public class SeedGenerator
 
     public void Generate()
     {
-        // Check Item Pool
-        if (WorldGraph.ItemPool.Count != WorldGraph.ItemPoolSize)
-        {
-            Plugin.Log.LogError($"Invalid item pool size, expected '{WorldGraph.ItemPoolSize}' and found '{WorldGraph.ItemPool.Count}'. Aborting...");
-            throw new Exception();
-        }
-
         var random = new Random(_settings.Seed);
 
         Plugin.Log.LogMessage("Generating a seed...");
         int tries = 0;
-        var startTime = DateTime.Now;
+        var stopWatch = Stopwatch.StartNew();
+
+        // Generate item pool
+        var itemPoolGenerator = new ItemPoolGenerator(_settings, random);
 
         do
         {
@@ -44,10 +41,11 @@ public class SeedGenerator
 
             GenerateExits(random);
 
-            RandomFillItems(random);
+            RandomFillItems(random, itemPoolGenerator);
         } while (!CheckCompletable());
 
-        Plugin.Log.LogMessage($"A completable seed has been successfully generated in {tries} tries in {(DateTime.Now - startTime).TotalSeconds} seconds!");
+        stopWatch.Stop();
+        Plugin.Log.LogMessage($"A completable seed has been successfully generated in {tries} tries in {stopWatch.Elapsed.TotalSeconds} seconds!");
 
         // Generate runtime variables and store them
         Singletons.RuntimeVariables = new RuntimeVariables(_settings, _startRegion, _exitsOverrides, _itemLocations);
@@ -63,7 +61,9 @@ public class SeedGenerator
             int newDestination;
             do
             {
-                newDestination = random.Next(WorldGraph.LowestRegionNumber, WorldGraph.HighestRegionNumber + 1);
+                newDestination = _settings.ShuffleExits
+                    ? random.Next(WorldGraph.LowestRegionNumber, WorldGraph.HighestRegionNumber + 1)
+                    : regionExit.NextSceneNumber;
 
                 _exitsOverrides[regionExit] = newDestination;
             } while (newDestination == regionExit.SourceScene);
@@ -79,13 +79,15 @@ public class SeedGenerator
         }
 
         // Generate start region
-        _startRegion = random.Next(WorldGraph.LowestRegionNumber, WorldGraph.HighestRegionNumber);
+        _startRegion = _settings.RandomStartLevel
+            ? random.Next(WorldGraph.LowestRegionNumber, WorldGraph.HighestRegionNumber)
+            : 2;
     }
 
-    private void RandomFillItems(Random random)
+    private void RandomFillItems(Random random, ItemPoolGenerator itemPoolGenerator)
     {
         // Randomize item locations content
-        var availableItems = WorldGraph.ItemPool;
+        var availableItems = itemPoolGenerator.Retrieve();
 
         foreach (var itemLocation in _itemLocations)
         {
@@ -107,7 +109,7 @@ public class SeedGenerator
         var regionsToExplore = new Queue<Region>();
         regionsToExplore.Enqueue(WorldGraph.Regions[_startRegion]);
 
-        var inventory = new InventoryState();
+        var inventory = new InventoryState(_settings);
 
         // One loop of the verification algorithm consist of:
         // - Explore a new region, take items while updating inventory, add exits as new regions (if not already visited)
