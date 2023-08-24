@@ -65,7 +65,7 @@ public static class SceneUtils
 
     [HarmonyPatch(typeof(Game), nameof(Game.EnterLoaderScene))]
     [HarmonyPrefix]
-    private static void EnterLoaderScenePostfix()
+    private static void EnterLoaderScenePrefix()
     {
         Plugin.Log.LogDebug("Entered loader scene");
 

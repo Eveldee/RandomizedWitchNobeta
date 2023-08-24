@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Generation.Models;
 
@@ -7,6 +8,9 @@ namespace RandomizedWitchNobeta.Runtime;
 public class SerializableRuntimeVariables
 {
     public SeedSettings Settings { get; set; }
+
+    public TimeSpan ElapsedRealTime { get; set; }
+    public TimeSpan ElapsedLoadRemoved { get; set; }
 
     public int GlobalMagicLevel { get; set; }
 

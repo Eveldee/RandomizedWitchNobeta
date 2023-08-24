@@ -6,45 +6,37 @@ namespace RandomizedWitchNobeta.Timer;
 
 public static class TimersPatches
 {
-    [HarmonyPatch(typeof(UIPauseMenu), nameof(UIPauseMenu.Appear))]
+    // [HarmonyPatch(typeof(SceneManager), nameof(SceneManager.OnSceneInitComplete))]
+    // [HarmonyPostfix]
+    // private static void OnSceneInitCompletePostfix()
+    // {
+    //     Singletons.Timers.Resume();
+    // }
+    //
+    // [HarmonyPatch(typeof(Game), nameof(Game.EnterLoaderScene))]
+    // [HarmonyPrefix]
+    // private static void EnterLoaderScenePrefix()
+    // {
+    //     Singletons.Timers.Pause();
+    // }
+
+    [HarmonyPatch(typeof(Game), nameof(Game.SwitchTitleScene))]
     [HarmonyPrefix]
-    private static void UIPauseMenuAppearPrefix()
+    private static void OSwitchTitleScenePrefix()
     {
-        Singletons.Timers.Pause();
-    }
-
-    [HarmonyPatch(typeof(UIPauseMenu), nameof(UIPauseMenu.Hide))]
-    [HarmonyPostfix]
-    private static void UIPauseMenuHidePostfix()
-    {
-        Singletons.Timers.Resume();
-    }
-
-    [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Move))]
-    [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Jump))]
-    [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Dodge))]
-    [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Attack))]
-    [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Shoot))]
-    [HarmonyPostfix]
-    private static void PlayerInputControllerAnyPostfix()
-    {
-        if (Singletons.WizardGirl is { } wizardGirl && wizardGirl.playerController.CharacterControllable)
+        if (Singletons.Timers is { } timers)
         {
-            Singletons.Timers.Resume();
+            timers.Pause();
         }
     }
 
-    [HarmonyPatch(typeof(WizardGirlManage), nameof(WizardGirlManage.Init))]
+    [HarmonyPatch(typeof(SceneManager), nameof(SceneManager.OnSceneInitComplete))]
     [HarmonyPostfix]
-    private static void WizardGirlInitPostfix()
+    private static void OnSceneInitCompletePostfix()
     {
-        Singletons.Timers.ResetLoadTimer();
-    }
-
-    [HarmonyPatch(typeof(Game), nameof(Game.WriteGameSave), new Type[]{ })]
-    [HarmonyPostfix]
-    public static void WriteGameSavePostfix()
-    {
-        Singletons.Timers.ResetSaveTimer();
+        if (Singletons.Timers is { } timers)
+        {
+            timers.Resume();
+        }
     }
 }

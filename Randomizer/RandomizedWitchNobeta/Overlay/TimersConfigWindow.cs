@@ -9,8 +9,6 @@ public partial class NobetaRandomizerOverlay
 {
     private void ShowTimersConfigWindow()
     {
-        ImGui.Begin("Timers Config", ref OverlayState.ShowTimersConfigWindow);
-
         ImGui.TextColored(InfoColor, "Timers");
 
         if (Singletons.Timers is null)
@@ -22,7 +20,6 @@ public partial class NobetaRandomizerOverlay
             ImGui.SeparatorText("General");
 
             ImGui.Checkbox("Show Timers", ref Timers.ShowTimers);
-            ImGui.Checkbox("Pause Timers", ref Timers.PauseTimers);
             HelpMarker("This will pause timers on game pause (when opening the menu). Note that Real Time is unaffected as it shows time since game start");
 
             ImGui.SeparatorText("Style");
@@ -39,11 +36,7 @@ public partial class NobetaRandomizerOverlay
             ImGui.SeparatorText("Timers");
 
             ImGui.Checkbox("Real Time", ref Timers.ShowRealTime);
-            ImGui.Checkbox("Last Load", ref Timers.ShowLastLoad);
-            ImGui.Checkbox("Last Save", ref Timers.ShowLastSave);
-            ImGui.Checkbox("Last Teleport", ref Timers.ShowLastTeleport);
+            ImGui.Checkbox("Load Removed Timer", ref Timers.ShowLoadRemovedTimer);
         }
-
-        ImGui.End();
     }
 }

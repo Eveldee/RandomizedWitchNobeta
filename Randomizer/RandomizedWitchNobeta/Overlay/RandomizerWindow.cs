@@ -115,6 +115,8 @@ public partial class NobetaRandomizerOverlay
                 }
             });
 
+            TabItem("Timers", ShowTimersConfigWindow);
+
             TabItem("Bonus", () =>
             {
                 ImGui.SeparatorText("");

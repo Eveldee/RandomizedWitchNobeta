@@ -27,6 +27,11 @@ public partial class NobetaRandomizerOverlay : ClickableTransparentOverlay.Overl
 
     protected override void Render()
     {
+        if (Timers.ShowTimers)
+        {
+            ShowTimersWindow();
+        }
+
         if (OverlayState.ShowOverlay)
         {
             ShowRandomizerWindow();

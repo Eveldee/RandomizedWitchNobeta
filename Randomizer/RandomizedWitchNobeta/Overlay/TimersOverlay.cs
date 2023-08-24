@@ -38,7 +38,7 @@ public partial class NobetaRandomizerOverlay
         ImGui.SetWindowPos(_timersWindowPosition);
 
 
-        if (Singletons.Timers is not { } timers)
+        if (Singletons.RuntimeVariables is not { } runtimeVariables)
         {
             ImGui.Text("Waiting for timers to be loaded...");
         }
@@ -46,19 +46,11 @@ public partial class NobetaRandomizerOverlay
         {
             if (ShowRealTime)
             {
-                ImGui.TextColored(_timersTextColor, $"Real Time: {timers.RealTime.ToString(FormatUtils.TimeSpanMillisFormat)}");
+                ImGui.TextColored(_timersTextColor, $"Real Time    : {runtimeVariables.ElapsedRealTime.ToString(FormatUtils.TimeSpanMillisFormat)}");
             }
-            if (ShowLastLoad)
+            if (ShowLoadRemovedTimer)
             {
-                ImGui.TextColored(_timersTextColor, $"Last Load: {timers.LastLoad.ToString(FormatUtils.TimeSpanMillisFormat)}");
-            }
-            if (ShowLastSave)
-            {
-                ImGui.TextColored(_timersTextColor, $"Last Save: {timers.LastSave.ToString(FormatUtils.TimeSpanMillisFormat)}");
-            }
-            if (ShowLastTeleport)
-            {
-                ImGui.TextColored(_timersTextColor, $"Last TP  : {timers.LastTeleport.ToString(FormatUtils.TimeSpanMillisFormat)}");
+                ImGui.TextColored(_timersTextColor, $"Load Removed : {runtimeVariables.ElapsedLoadRemoved.ToString(FormatUtils.TimeSpanMillisFormat)}");
             }
         }
 

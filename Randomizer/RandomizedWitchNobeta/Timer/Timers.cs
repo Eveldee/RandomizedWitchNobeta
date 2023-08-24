@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using RandomizedWitchNobeta.Config;
+using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 
 namespace RandomizedWitchNobeta.Timer;
@@ -13,76 +14,32 @@ public class Timers : MonoBehaviour
     [Bind]
     public static bool ShowRealTime;
     [Bind]
-    public static bool ShowLastLoad;
-    [Bind]
-    public static bool ShowLastSave;
-    [Bind]
-    public static bool ShowLastTeleport;
-    [Bind]
-    public static bool PauseTimers;
+    public static bool ShowLoadRemovedTimer;
 
-    public TimeSpan RealTime => _realTimeTimer.Elapsed;
-    public TimeSpan LastLoad => _lastLoadTimer.Elapsed;
-    public TimeSpan LastSave => _lastSaveTimer.Elapsed;
-    public TimeSpan LastTeleport => _lastTeleportTimer.Elapsed;
+    private bool _paused = true;
 
-    private Stopwatch _realTimeTimer;
-    private Stopwatch _lastLoadTimer;
-    private Stopwatch _lastSaveTimer;
-    private Stopwatch _lastTeleportTimer;
-
-    private void Awake()
+    public void Update()
     {
-        Plugin.Log.LogDebug("Timers initialized");
+        if (!_paused && Singletons.RuntimeVariables is { } runtimeVariables)
+        {
+            var elapsed = TimeSpan.FromSeconds(Time.deltaTime);
 
-        _realTimeTimer = new Stopwatch();
-        _realTimeTimer.Start();
-        _lastLoadTimer = new Stopwatch();
-        _lastSaveTimer = new Stopwatch();
-        _lastTeleportTimer = new Stopwatch();
+            runtimeVariables.ElapsedRealTime += elapsed;
+
+            if (!SceneUtils.IsLoading)
+            {
+                runtimeVariables.ElapsedLoadRemoved += elapsed;
+            }
+        }
     }
 
     public void Pause()
     {
-        if (PauseTimers)
-        {
-            _lastLoadTimer.Stop();
-            _lastSaveTimer.Stop();
-            _lastTeleportTimer.Stop();
-        }
+        _paused = true;
     }
 
     public void Resume()
     {
-        _realTimeTimer.Start();
-        _lastLoadTimer.Start();
-        _lastSaveTimer.Start();
-        _lastTeleportTimer.Start();
-    }
-
-    public void ResetLoadTimer()
-    {
-        _lastLoadTimer.Reset();
-        _lastSaveTimer.Reset();
-        _lastTeleportTimer.Reset();
-    }
-
-    public void ResetSaveTimer()
-    {
-        _lastSaveTimer.Reset();
-        _lastTeleportTimer.Reset();
-    }
-
-    public void ResetTeleportTimer()
-    {
-        _lastTeleportTimer.Reset();
-    }
-
-    public void ResetTimers()
-    {
-        _realTimeTimer.Reset();
-        _lastLoadTimer.Reset();
-        _lastSaveTimer.Reset();
-        _lastTeleportTimer.Reset();
+        _paused = false;
     }
 }

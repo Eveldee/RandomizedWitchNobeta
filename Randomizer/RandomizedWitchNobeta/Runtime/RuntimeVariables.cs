@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using RandomizedWitchNobeta.Config.Serialization;
@@ -13,6 +14,10 @@ public class RuntimeVariables
     public static string SavePath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "RuntimeVariables.json");
 
     public SeedSettings Settings { get; }
+
+    // Timers
+    public TimeSpan ElapsedRealTime { get; set; } = TimeSpan.Zero;
+    public TimeSpan ElapsedLoadRemoved { get; set; } = TimeSpan.Zero;
 
     // Data used to resume a randomized game
     public int GlobalMagicLevel { get; set; } = 1;
@@ -54,6 +59,9 @@ public class RuntimeVariables
     {
         Settings = serializable.Settings;
 
+        ElapsedRealTime = serializable.ElapsedRealTime;
+        ElapsedLoadRemoved = serializable.ElapsedLoadRemoved;
+
         GlobalMagicLevel = serializable.GlobalMagicLevel;
 
         CatLootObtained = serializable.CatLootObtained;
@@ -86,6 +94,9 @@ public class RuntimeVariables
         return new SerializableRuntimeVariables
         {
             Settings = Settings,
+
+            ElapsedRealTime = ElapsedRealTime,
+            ElapsedLoadRemoved = ElapsedLoadRemoved,
 
             GlobalMagicLevel = GlobalMagicLevel,
 
