@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using HarmonyLib;
 using MarsSDK;
 using RandomizedWitchNobeta.Bonus;
+using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Utils;
@@ -150,6 +152,8 @@ public static class StartPatches
 
         Game.SwitchGameSave(gameSave);
         Game.SwitchScene(switchData);
+
+        Singletons.Timers.Reset();
     }
 
     private static void ResumeRandomizer()

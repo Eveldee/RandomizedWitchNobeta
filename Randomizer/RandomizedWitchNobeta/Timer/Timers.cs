@@ -17,10 +17,11 @@ public class Timers : MonoBehaviour
     public static bool ShowLoadRemovedTimer;
 
     private bool _paused = true;
+    private bool _ended = false;
 
     public void Update()
     {
-        if (!_paused && Singletons.RuntimeVariables is { } runtimeVariables)
+        if (!_ended && !_paused && Singletons.RuntimeVariables is { } runtimeVariables)
         {
             var elapsed = TimeSpan.FromSeconds(Time.deltaTime);
 
@@ -41,5 +42,15 @@ public class Timers : MonoBehaviour
     public void Resume()
     {
         _paused = false;
+    }
+
+    public void End()
+    {
+        _ended = true;
+    }
+
+    public void Reset()
+    {
+        _ended = false;
     }
 }

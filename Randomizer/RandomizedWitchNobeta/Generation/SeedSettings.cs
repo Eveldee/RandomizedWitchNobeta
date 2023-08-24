@@ -81,4 +81,28 @@ public class SeedSettings
         ItemWeightHoly = other.ItemWeightHoly;
         ItemWeightArcane = other.ItemWeightArcane;
     }
+
+    public int Hash()
+    {
+        var hashCode = new HashCode();
+
+        hashCode.Add(Seed);
+        hashCode.Add(RandomStartLevel);
+        hashCode.Add(ShuffleExits);
+        hashCode.Add(TrialKeys);
+        hashCode.Add(TrialKeysAmount);
+        hashCode.Add(NoArcane);
+        hashCode.Add((int) MagicUpgrade);
+        hashCode.Add(ChestSoulCount);
+        hashCode.Add(StartSoulsModifier);
+        hashCode.Add(ItemWeightSouls);
+        hashCode.Add(ItemWeightHP);
+        hashCode.Add(ItemWeightMP);
+        hashCode.Add(ItemWeightDefense);
+        hashCode.Add(ItemWeightHoly);
+        hashCode.Add(ItemWeightArcane);
+        hashCode.Add(StartSouls);
+
+        return hashCode.ToHashCode();
+    }
 }
