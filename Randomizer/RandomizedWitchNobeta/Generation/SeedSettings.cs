@@ -86,6 +86,9 @@ public class SeedSettings
     {
         var hashCode = new HashCode();
 
+        // Add version to make sure a seed is valid only for a specific version of the same randomizer
+        hashCode.Add(MyPluginInfo.PLUGIN_VERSION);
+
         hashCode.Add(Seed);
         hashCode.Add(RandomStartLevel);
         hashCode.Add(ShuffleExits);

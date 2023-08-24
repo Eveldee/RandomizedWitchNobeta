@@ -10,11 +10,11 @@ namespace RandomizedWitchNobeta.Timer;
 public class Timers : MonoBehaviour
 {
     [Bind]
-    public static bool ShowTimers;
+    public static bool ShowTimers = false;
     [Bind]
-    public static bool ShowRealTime;
+    public static bool ShowRealTime = true;
     [Bind]
-    public static bool ShowLoadRemovedTimer;
+    public static bool ShowLoadRemovedTimer = true;
 
     private bool _paused = true;
     private bool _ended = false;

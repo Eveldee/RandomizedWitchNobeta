@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using HarmonyLib;
 using Humanizer;
 using Humanizer.Localisation;
@@ -47,7 +48,20 @@ public static class RunCompletePatches
             beatingGameMessageBox.title.text = text;
 
             Singletons.RuntimeVariables = null;
-            File.Delete(RuntimeVariables.SavePath);
+
+            ArchiveRun();
         }
+    }
+
+    private static void ArchiveRun()
+    {
+        var filePath = RuntimeVariables.SavePath;
+        var destinationDirectory = Path.Combine(Plugin.ConfigDirectory.FullName, "PastRuns");
+        var destinationFilePath =
+            Path.Combine(destinationDirectory, $"{DateTime.Now.ToString("s").Replace(':', '.')}.json");
+
+        Directory.CreateDirectory(destinationDirectory);
+
+        File.Move(filePath, destinationFilePath);
     }
 }
