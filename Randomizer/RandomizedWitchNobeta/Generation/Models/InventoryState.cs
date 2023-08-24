@@ -14,5 +14,10 @@ public class InventoryState
     public InventoryState(SeedSettings seedSettings)
     {
         SeedSettings = seedSettings;
+
+        if (!seedSettings.NoArcane)
+        {
+            ArcaneLevel++;
+        }
     }
 }
