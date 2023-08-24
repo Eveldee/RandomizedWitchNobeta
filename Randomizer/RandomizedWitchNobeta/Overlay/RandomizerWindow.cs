@@ -143,6 +143,7 @@ public partial class NobetaRandomizerOverlay
                 ImGui.RadioButton("Once", ref AppearancePatches.RandomizeSkin, AppearancePatches.RandomizeSkin_Once);
                 ImGui.SameLine();
                 ImGui.RadioButton("Always", ref AppearancePatches.RandomizeSkin, AppearancePatches.RandomizeSkin_Always);
+                HelpMarker("'Once' will select a random skin at the start of a new run and keep it until the end of the run.\n'Always' will select a new random skin at each loading screen.");
 
                 ImGui.NewLine();
                 ImGui.Checkbox("Hide Bag", ref AppearancePatches.HideBagEnabled);

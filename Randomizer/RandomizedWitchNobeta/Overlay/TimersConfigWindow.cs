@@ -20,7 +20,6 @@ public partial class NobetaRandomizerOverlay
             ImGui.SeparatorText("General");
 
             ImGui.Checkbox("Show Timers", ref Timers.ShowTimers);
-            HelpMarker("This will pause timers on game pause (when opening the menu). Note that Real Time is unaffected as it shows time since game start");
 
             ImGui.SeparatorText("Style");
             ImGui.SliderFloat("X", ref _timersWindowPosition.X, _borderSize, Screen.width - _timersWindowSize.X - _borderSize);
