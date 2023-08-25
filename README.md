@@ -16,6 +16,7 @@
   - [End Screen](#end-screen)
   - [Timer](#timer)
   - [Trial Keys](#trial-keys)
+  - [No Arcane](#no-arcane)
   - [Magic Upgrades](#magic-upgrades)
   - [Extra loots](#extra-loots)
   - [Bonus](#bonus)
@@ -99,7 +100,7 @@ It is possible that some areas are not accessible at all for a specific seed sin
 
 Chest content is randomized according to other settings. Chests will always contain the required items to complete the game, and then other chests are filled with other items like crystals. It is possible to tweak the weights of those fill items in the settings.
 
-The cat in _'Okun Shrine - Underground'_ that usually gives absorb will instead give a random item, don't forget to take it on your way to Tania! _(if you forgot to talk to him, he will always drop the item just before the last statue in this level, down the stairs)_
+The cat in _'Okun Shrine - Underground'_ that usually gives absorb will instead give a random item, don't forget to take it on your way to Tania! _(if you forgot to talk to her, she will always drop the item just before the last statue in this level, down the stairs)_
 
 ### End Screen
 
@@ -123,11 +124,15 @@ It is possible for those who wants it to show the timer during the run and not o
 
 ### Trial Keys
 
-Enabling this setting will add keys that are required to open the teleports to each trial. Opening a trial is done by dropping a key on a trial path. This action will consume the key so it is needed to get at least 3 keys before being able to end the game.
+Enabling this setting will add keys that are required to open the teleports to each trial. Opening a trial is done by dropping a key on a trial path, this action will consume the key so it is needed to get at least 3 keys before being able to end the game.
 
-The number of keys in the item pool can be changed. Putting less keys in the item pool tend to make runs longer and harder by needing to explore more areas and opening more chests.
+The number of keys in the item pool can be changed, putting less keys in the item pool tend to make runs longer and harder by needing to explore more areas and opening more chests.
 
 > A legendary speedrunner of Little Witch Nobeta recommends playing with 5 keys in the item pool as it is a good middle ground between finding them too easily or not finding them at all.
+
+### No Arcane
+
+It is possible to start without Arcane, this means that only melee attacks are possible. When the `No Arcane` setting is enabled, Arcane will still show in the UI but it will be impossible to fire Arcane shots before unlocking it like any other magic.
 
 ### Magic Upgrades
 
