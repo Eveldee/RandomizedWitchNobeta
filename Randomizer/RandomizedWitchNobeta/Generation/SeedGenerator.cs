@@ -99,6 +99,26 @@ public class SeedGenerator
 
     private bool CheckCompletable()
     {
+        // If trial keys are enabled, check that no key is located inside a trial
+        if (_settings.TrialKeys)
+        {
+            foreach (var itemLocation in _itemLocations)
+            {
+                if (itemLocation is ChestItemLocation
+                    {
+                        ChestName: "Act04Room05To06_TreasureBox"
+                                or "Act05_TreasureBox02_Room09To10"
+                                or "Act03TreasureBox_Room05_02"
+                    })
+                {
+                    if (itemLocation.ItemType == ItemSystem.ItemType.SPMaxAdd)
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
+
         // Currently accessible regions, used to check exit requirements after each inventory update
         var accessibleRegions = new HashSet<Region>
         {
