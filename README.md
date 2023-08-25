@@ -72,6 +72,7 @@ Some modifications have been done to the game to allow randomization of the game
 - Statues are auto-unlocked when passing by them, no need to "pray" _(avoids soft-locking by leaving an area prematurely)_
 - Vanessa does not give thunder when killed for the second time _(in Spirit Realm)_
 - Doors at the start of Lava Ruins and Dark Tunnel are locked
+- **All doors can be accessed both ways: all the gates blocking their access are always open** _(so killing the Armor is not the only exit of Okun Shrine)_
 
 ## Features/Settings
 
