@@ -6,9 +6,9 @@
 
 # Documentation
 
+- [What is a randomizer ?](#what-is-a-randomizer-)
 - [Compatibility](#compatibility)
 - [Installation](#installation)
-- [What is a randomizer ?](#what-is-a-randomizer-)
 - [Game modifications](#game-modifications)
 - [Features/Settings](#featuressettings)
   - [Locations Randomization](#locations-randomization)
@@ -25,6 +25,13 @@
 - [Contributing](#contributing)
 - [Used libraries](#used-libraries)
 - [Licence](#licence)
+
+## What is a randomizer ?
+
+A randomizer is a tool that aim to add replayability to games by randomly arranging a game data. it can alter item placement, level locations, enemies, anything that can bring a new interest in the game. A general definition with examples can be found here: [Video Game Randomizer](https://tvtropes.org/pmwiki/pmwiki.php/Main/VideoGameRandomizer).
+
+This randomizer is capable of generating seeds that randomize locations and chest content but also adds a lot of new game mechanics to make each run unique and enjoyable.  
+The game balance was and is heavily considered during the development of this randomizer, it can be enjoyed by casual to experimented players all the same thanks to a lot of balance settings. A run difficulty can be tweaked to match anyone preferences. Furthermore, a run can be resumed at anytime so no need to do everything in one sitting!
 
 ## Compatibility
 
@@ -57,13 +64,6 @@ A correct installation directory content should look like this:
 ├── imgui.ini
 └── winhttp.dll
 ```
-
-## What is a randomizer ?
-
-A randomizer is a tool that aim to add replayability to games by randomly arranging a game data. it can alter item placement, level locations, enemies, anything that can bring a new interest in the game. A general definition with exemples can be found here: [Video Game Randomizer](https://tvtropes.org/pmwiki/pmwiki.php/Main/VideoGameRandomizer).
-
-This randomizer is capable of generating seeds that randomize locations and chest content but also adds a lot of new game mechanics to make each run unique and enjoyable.  
-The game balance was and is heavily considered during the development of this randomizer, it can be enjoyed by casual to experimented players all the same thanks to a lot of balance settings. A run difficulty can be tweaked to match anyone preferences. Furthermore, a run can be resumed at anytime so no need to do everything in one sitting!
 
 ## Game modifications
 
