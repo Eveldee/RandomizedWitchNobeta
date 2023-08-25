@@ -13,7 +13,8 @@ public static class MagicUpgradePatches
         "Boss_Level02", // Tania
         "Boss_Level03_Big", // Monica
         "Boss_Level04", // Vanessa
-        "Boss_Level05" // Vanessa 2
+        "Boss_Level05", // Vanessa 2
+        "Boss_Act01_Plus" // Armor in Secret Passage
     };
 
     // Update magic level on magic unlocked
