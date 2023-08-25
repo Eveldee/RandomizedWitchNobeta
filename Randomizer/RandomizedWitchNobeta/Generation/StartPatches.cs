@@ -18,6 +18,8 @@ public static class StartPatches
 {
     public const int GameSaveIndex = 9;
 
+    public static Text CopyrightText { get; private set; }
+
     [HarmonyPatch(typeof(UIOpeningMenu), nameof(UIOpeningMenu.Init))]
     [HarmonyPostfix]
     private static void OpeningMenuInitPostfix(UIOpeningMenu __instance)
@@ -50,6 +52,12 @@ public static class StartPatches
                 newGameUIHandler.selectDown = optionsUIHandler;
                 optionsUIHandler.selectUp = newGameUIHandler;
             }
+
+            // Replace copyright text to add seed hash
+            var copyrightGameObject = __instance.transform.Find("Foreground/Copyright").gameObject;
+            copyrightGameObject.transform.Translate(0, 5, 0);
+
+            CopyrightText = copyrightGameObject.GetComponent<Text>();
         }
         else
         {

@@ -113,6 +113,19 @@ public partial class NobetaRandomizerOverlay
                     ImGui.SliderInt("Holy", ref settings.ItemWeightHoly, 0, 10);
                     ImGui.SliderInt("Arcane", ref settings.ItemWeightArcane, 0, 10);
                 }
+
+                // Update seed hash display
+                Singletons.Dispatcher.Enqueue(() =>
+                {
+                    if (StartPatches.CopyrightText is { } copyrightText)
+                    {
+                        copyrightText.text =
+                        $"""
+                        Seed Hash: {settings.Hash()}
+                        © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
+                        """;
+                    }
+                });
             });
 
             TabItem("Timers", ShowTimersConfigWindow);

@@ -86,7 +86,7 @@ To organize a race where all players are playing with the same settings and the 
 - Other players can copy the generated text and then click on 'Import from Clipboard'
 - Settings should be updated to match the exported ones on import.
 
-At the end of a run, the 'hash' of the seed is displayed: this number is unique to each seed, this means that if all players that are playing on the same seed should see the same hash displayed. If this is not the case, it means that the settings were not imported correctly or that players are using different versions of the randomizer.
+At the end of a run, the 'hash' of the seed is displayed: this number is unique to each seed, this means that if all players that are playing on the same seed should see the same hash displayed. If this is not the case, it means that the settings were not imported correctly or that players are using different versions of the randomizer. It is also possible to see the seed hash before starting a run, just above the copyright text on the bottom center of the title screen.
 
 > The settings window is only visible on the title screen, it automatically hides when starting/resuming a run.
 
