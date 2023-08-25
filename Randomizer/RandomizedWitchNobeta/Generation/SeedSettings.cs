@@ -21,13 +21,13 @@ public class SeedSettings
     [JsonInclude]
     public bool ShuffleExits = true;
     [JsonInclude]
-    public bool TrialKeys = true;
+    public bool TrialKeys = false;
     [JsonInclude]
     public int TrialKeysAmount = 5;
     [JsonInclude]
-    public bool NoArcane = true;
+    public bool NoArcane = false;
     [JsonInclude]
-    public MagicUpgradeMode MagicUpgrade = MagicUpgradeMode.BossKill;
+    public MagicUpgradeMode MagicUpgrade = MagicUpgradeMode.Vanilla;
 
     [JsonInclude]
     public int ChestSoulCount = 250;
