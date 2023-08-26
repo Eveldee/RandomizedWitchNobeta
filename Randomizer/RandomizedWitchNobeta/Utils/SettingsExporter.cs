@@ -9,7 +9,7 @@ namespace RandomizedWitchNobeta.Utils;
 
 public static class SettingsExporter
 {
-    private static JsonSerializerOptions _serializerOptions = new JsonSerializerOptions
+    private static readonly JsonSerializerOptions _serializerOptions = new()
     {
         IncludeFields = true
     };

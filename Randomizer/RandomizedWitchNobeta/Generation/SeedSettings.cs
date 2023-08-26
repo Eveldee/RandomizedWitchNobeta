@@ -1,6 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO.Hashing;
+using System.Linq;
+using System.Text;
 using System.Text.Json.Serialization;
+using System.Text.Unicode;
+using RandomizedWitchNobeta.Config.Serialization;
 
 namespace RandomizedWitchNobeta.Generation;
 
@@ -99,37 +104,7 @@ public class SeedSettings
 
     public int Hash()
     {
-        var hashCode = new HashCode();
-
-        // Add version to make sure a seed is valid only for a specific version of the same randomizer
-        hashCode.Add(MyPluginInfo.PLUGIN_VERSION);
-
-        hashCode.Add(Seed);
-        hashCode.Add(Difficulty);
-
-        hashCode.Add(RandomStartLevel);
-        hashCode.Add(ShuffleExits);
-
-        hashCode.Add(NoArcane);
-        hashCode.Add((int) MagicUpgrade);
-
-        hashCode.Add(BossHunt);
-        hashCode.Add(MagicMaster);
-
-        hashCode.Add(TrialKeys);
-        hashCode.Add(TrialKeysAmount);
-
-        hashCode.Add(ChestSoulCount);
-        hashCode.Add(StartSoulsModifier);
-        hashCode.Add(StartSouls);
-
-        hashCode.Add(ItemWeightSouls);
-        hashCode.Add(ItemWeightHP);
-        hashCode.Add(ItemWeightMP);
-        hashCode.Add(ItemWeightDefense);
-        hashCode.Add(ItemWeightHoly);
-        hashCode.Add(ItemWeightArcane);
-
-        return hashCode.ToHashCode();
+        // This is not ideal but it gives consistent results
+        return BitConverter.ToInt32(Crc32.Hash(Encoding.UTF8.GetBytes(SerializeUtils.SerializeIndented(this))));
     }
 }

@@ -140,7 +140,7 @@ public partial class NobetaRandomizerOverlay
                     {
                         copyrightText.text =
                         $"""
-                        Seed Hash: {settings.Hash()}
+                        Seed Hash: {settings.Hash():X8}
                         © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
                         """;
                     }

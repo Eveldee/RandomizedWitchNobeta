@@ -41,7 +41,7 @@ public static class RunCompletePatches
                        Real Time: {runtimeVariables.ElapsedRealTime.ToString(FormatUtils.TimeSpanMillisFormat)}
             Load Removed: {runtimeVariables.ElapsedLoadRemoved.ToString(FormatUtils.TimeSpanMillisFormat)}
 
-            Seed Hash: {runtimeVariables.Settings.Hash()}
+            Seed Hash: {runtimeVariables.Settings.Hash():X8}
             """;
 
             beatingGameMessageBox.config.titleText = text;
