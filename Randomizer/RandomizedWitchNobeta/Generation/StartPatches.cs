@@ -66,6 +66,20 @@ public static class StartPatches
         }
     }
 
+    [HarmonyPatch(typeof(UIOpeningMenu), nameof(UIOpeningMenu.Appear))]
+    [HarmonyPostfix]
+    private static void OpeningMenuAppearPostfix(UIOpeningMenu __instance)
+    {
+        __instance.navigator.DeselectHandler(__instance.handlers[1]);
+        __instance.OnHandlerDeselected(__instance.handlers[1]);
+
+        __instance.navigator.currentHandler = null;
+
+        __instance.navigator.lastSelectedHandler = Singletons.RuntimeVariables is null
+            ? __instance.handlers[2]
+            : __instance.handlers[1];
+    }
+
     [HarmonyPatch(typeof(UIGameSave), nameof(UIGameSave.Appear))]
     [HarmonyPrefix]
     private static bool UIGameSaveAppearPrefix(UIGameSave __instance, Action completeHandler)
