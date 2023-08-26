@@ -23,14 +23,21 @@ public class SeedSettings
     public bool RandomStartLevel = true;
     [JsonInclude]
     public bool ShuffleExits = true;
-    [JsonInclude]
-    public bool TrialKeys = false;
-    [JsonInclude]
-    public int TrialKeysAmount = 5;
+
     [JsonInclude]
     public bool NoArcane = false;
     [JsonInclude]
     public MagicUpgradeMode MagicUpgrade = MagicUpgradeMode.Vanilla;
+
+    [JsonInclude]
+    public bool BossHunt = false;
+    [JsonInclude]
+    public bool MagicMaster = false;
+
+    [JsonInclude]
+    public bool TrialKeys = false;
+    [JsonInclude]
+    public int TrialKeysAmount = 5;
 
     [JsonInclude]
     public int ChestSoulCount = 250;
@@ -69,11 +76,14 @@ public class SeedSettings
         RandomStartLevel = other.RandomStartLevel;
         ShuffleExits = other.ShuffleExits;
 
-        TrialKeys = other.TrialKeys;
-        TrialKeysAmount = other.TrialKeysAmount;
-
         NoArcane = other.NoArcane;
         MagicUpgrade = other.MagicUpgrade;
+
+        BossHunt = other.BossHunt;
+        MagicMaster = other.MagicMaster;
+
+        TrialKeys = other.TrialKeys;
+        TrialKeysAmount = other.TrialKeysAmount;
 
         ChestSoulCount = other.ChestSoulCount;
         StartSoulsModifier = other.StartSoulsModifier;
@@ -96,15 +106,23 @@ public class SeedSettings
 
         hashCode.Add(Seed);
         hashCode.Add(Difficulty);
+
         hashCode.Add(RandomStartLevel);
         hashCode.Add(ShuffleExits);
-        hashCode.Add(TrialKeys);
-        hashCode.Add(TrialKeysAmount);
+
         hashCode.Add(NoArcane);
         hashCode.Add((int) MagicUpgrade);
+
+        hashCode.Add(BossHunt);
+        hashCode.Add(MagicMaster);
+
+        hashCode.Add(TrialKeys);
+        hashCode.Add(TrialKeysAmount);
+
         hashCode.Add(ChestSoulCount);
         hashCode.Add(StartSoulsModifier);
         hashCode.Add(StartSouls);
+
         hashCode.Add(ItemWeightSouls);
         hashCode.Add(ItemWeightHP);
         hashCode.Add(ItemWeightMP);

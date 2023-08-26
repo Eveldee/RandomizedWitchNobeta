@@ -97,6 +97,14 @@ public partial class NobetaRandomizerOverlay
                     HelpMarker("When this setting is enabled, Arcane magic will not be usable until it is found like any other magic.");
 
                     ImGui.NewLine();
+                    ImGui.SeparatorText("Extra End Conditions");
+
+                    ImGui.Checkbox("Magic Master", ref settings.MagicMaster);
+                    HelpMarker("When enabled, it's needed to get all magics to Lvl. Max (5) before being able to reach Nonota");
+                    ImGui.Checkbox("Boss Hunt", ref settings.BossHunt);
+                    HelpMarker("When enabled, it's needed to kill all bosses (including the one in Secret Passage) before being able to reach Nonota");
+
+                    ImGui.NewLine();
                     ImGui.SeparatorText("Trial Keys");
 
                     ImGui.Checkbox("Enable Trial Keys", ref settings.TrialKeys);

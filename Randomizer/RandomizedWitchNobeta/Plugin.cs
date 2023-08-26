@@ -118,6 +118,7 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(MagicUpgradePatches));
         Harmony.CreateAndPatchAll(typeof(ItemPoolSizePatches));
         Harmony.CreateAndPatchAll(typeof(TrialKeysPatches));
+        Harmony.CreateAndPatchAll(typeof(EndConditionsPatches));
 
         // Randomizer patches
         Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));

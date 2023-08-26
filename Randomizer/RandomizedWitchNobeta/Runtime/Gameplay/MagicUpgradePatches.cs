@@ -7,16 +7,6 @@ namespace RandomizedWitchNobeta.Runtime.Gameplay;
 
 public static class MagicUpgradePatches
 {
-    private static readonly HashSet<string> ValidBosses = new()
-    {
-        "Boss_Act01", // Armor
-        "Boss_Level02", // Tania
-        "Boss_Level03_Big", // Monica
-        "Boss_Level04", // Vanessa
-        "Boss_Level05", // Vanessa 2
-        "Boss_Act01_Plus" // Armor in Secret Passage
-    };
-
     // Update magic level on magic unlocked
     [HarmonyPatch(typeof(WizardGirlManage), nameof(WizardGirlManage.GetMagicLevelSuffix))]
     [HarmonyPostfix]
@@ -44,22 +34,19 @@ public static class MagicUpgradePatches
             return;
         }
 
-        // Skip if magic upgrade mode is not Boss Kill
-        if (runtimeVariables.Settings.MagicUpgrade != SeedSettings.MagicUpgradeMode.BossKill)
-        {
-            return;
-        }
+        // Do not skip directly since we need it for end conditions too
+        // if (runtimeVariables.Settings.MagicUpgrade != SeedSettings.MagicUpgradeMode.BossKill)
+        // {
+        //     return;
+        // }
 
-        // A boss has been killed, increase global magic level if it's the first time it got killed
-        if (ValidBosses.Contains(__instance.name) && __instance.GetIsDeath())
+        // Track boss death
+        if (NpcUtils.ValidBosses.Contains(__instance.name) && __instance.GetIsDeath())
         {
-            var killedBosses = runtimeVariables.KilledBosses;
-
-            if (!killedBosses.ContainsKey(__instance.name))
+            if (runtimeVariables.KilledBosses.Add(__instance.name))
             {
-                killedBosses[__instance.name] = true;
-
-                if (runtimeVariables.GlobalMagicLevel < 5)
+                // A boss has been killed, increase global magic level since it's the first time it got killed
+                if (runtimeVariables.Settings.MagicUpgrade == SeedSettings.MagicUpgradeMode.BossKill && runtimeVariables.GlobalMagicLevel < 5)
                 {
                     runtimeVariables.GlobalMagicLevel++;
 
