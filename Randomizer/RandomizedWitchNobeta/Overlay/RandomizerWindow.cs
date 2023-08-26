@@ -11,7 +11,7 @@ namespace RandomizedWitchNobeta.Overlay;
 
 public partial class NobetaRandomizerOverlay
 {
-    private int _upgradeModeIndex = (int)SeedSettings.MagicUpgradeMode.BossKill;
+    private int _upgradeModeIndex = (int)SeedSettings.MagicUpgradeMode.Vanilla;
     private readonly string[] _availableUpgradeModes = Enums.GetNames<SeedSettings.MagicUpgradeMode>().Select(name => name.Humanize(LetterCasing.Title)).ToArray();
 
     private int _difficultyIndex = (int) GameDifficulty.Advanced;
@@ -86,6 +86,23 @@ public partial class NobetaRandomizerOverlay
                     ImGui.Checkbox("Shuffle Exits", ref settings.ShuffleExits);
 
                     ImGui.NewLine();
+                    ImGui.SeparatorText("Extra End Conditions");
+
+                    ImGui.Checkbox("Magic Master", ref settings.MagicMaster);
+                    HelpMarker("When enabled, it's needed to get all magics to Lvl. Max (5) before being able to reach Nonota");
+                    ImGui.Checkbox("Boss Hunt", ref settings.BossHunt);
+                    HelpMarker("When enabled, it's needed to kill all bosses (including the one in Secret Passage) before being able to reach Nonota");
+
+                    ImGui.NewLine();
+                    ImGui.Checkbox("Trial Keys", ref settings.TrialKeys);
+                    HelpMarker("Enabling this setting will add trial keys in the item pool. Each trial needs one key to be activated, so to reach Nonota it is needed to find at least 3 keys.");
+
+                    WithDisabled(!settings.TrialKeys, () =>
+                    {
+                        ImGui.SliderInt("Trial Keys Amount", ref settings.TrialKeysAmount, 3, 7);
+                    });
+
+                    ImGui.NewLine();
                     ImGui.SeparatorText("Magic");
                     if (ImGui.Combo("Upgrade Mode", ref _upgradeModeIndex, _availableUpgradeModes,
                             _availableUpgradeModes.Length))
@@ -95,25 +112,6 @@ public partial class NobetaRandomizerOverlay
 
                     ImGui.Checkbox("No Arcane", ref settings.NoArcane);
                     HelpMarker("When this setting is enabled, Arcane magic will not be usable until it is found like any other magic.");
-
-                    ImGui.NewLine();
-                    ImGui.SeparatorText("Extra End Conditions");
-
-                    ImGui.Checkbox("Magic Master", ref settings.MagicMaster);
-                    HelpMarker("When enabled, it's needed to get all magics to Lvl. Max (5) before being able to reach Nonota");
-                    ImGui.Checkbox("Boss Hunt", ref settings.BossHunt);
-                    HelpMarker("When enabled, it's needed to kill all bosses (including the one in Secret Passage) before being able to reach Nonota");
-
-                    ImGui.NewLine();
-                    ImGui.SeparatorText("Trial Keys");
-
-                    ImGui.Checkbox("Enable Trial Keys", ref settings.TrialKeys);
-                    HelpMarker("Enabling this setting will add trial keys in the item pool. Each trial needs one key to be activated, so to reach Nonota it is needed to find at least 3 keys.");
-
-                    WithDisabled(!settings.TrialKeys, () =>
-                    {
-                        ImGui.SliderInt("Trial Keys Amount", ref settings.TrialKeysAmount, 3, 7);
-                    });
 
                     ImGui.NewLine();
                     ImGui.SeparatorText("Balance");
