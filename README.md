@@ -22,6 +22,7 @@
   - [Extra loots](#extra-loots)
   - [Bonus](#bonus)
 - [ImGui tips](#imgui-tips)
+- [OBS Capture](#obs-capture)
 - [Bug report and help](#bug-report-and-help)
 - [Contributing](#contributing)
 - [Used libraries](#used-libraries)
@@ -172,6 +173,10 @@ This Randomizer use [ImGui](https://github.com/ocornut/imgui) for the graphic pa
 - Ctrl + click on a slider/drag will allow you to set a custom value, even one outside the standard range _(using this to alter the settings can have unexpected consequences)_
 - Shift/Alt + drag on a slider/drag will change the increment steps _(slower or faster)_
 - Click on a color preview to open a complete color picker
+
+## OBS Capture
+
+There is an issue with old capture modes and topmost windows created by the overlay. The only known way to capture the game at the moment is to either do a screen capture, or do a window capture and set the capture mode to `Windows 10 (...)` _(note that this type of window capture will draw a yellow border around the window, the only way to hide it is to use Windows 11)_
 
 ## Bug report and help
 
