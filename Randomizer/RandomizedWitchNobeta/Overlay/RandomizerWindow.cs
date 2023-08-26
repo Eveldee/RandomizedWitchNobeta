@@ -89,9 +89,9 @@ public partial class NobetaRandomizerOverlay
                     ImGui.SeparatorText("Extra End Conditions");
 
                     ImGui.Checkbox("Magic Master", ref settings.MagicMaster);
-                    HelpMarker("When enabled, it's needed to get all magics to Lvl. Max (5) before being able to reach Nonota");
+                    HelpMarker("When enabled, it's needed to get all attack magics (arcane, ice, fire and thunder) to Lvl. Max (Lvl. 5) before being able to reach Nonota");
                     ImGui.Checkbox("Boss Hunt", ref settings.BossHunt);
-                    HelpMarker("When enabled, it's needed to kill all bosses (including the one in Secret Passage) before being able to reach Nonota");
+                    HelpMarker("When enabled, it's needed to kill all bosses (including the one in Secret Passage, but not elites like the Seal) before being able to reach Nonota");
 
                     ImGui.NewLine();
                     ImGui.Checkbox("Trial Keys", ref settings.TrialKeys);

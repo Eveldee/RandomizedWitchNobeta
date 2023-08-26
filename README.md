@@ -128,7 +128,7 @@ It is possible for those who wants it to show the timer during the run and not o
 ### Boss Hunt and Magic Master
 
 Those two settings add new conditions before being able to unlock the teleport to Nonota and end the game:
-- **Magic Master:** All magics must to to Lvl. Max _(Lvl. 5)_
+- **Magic Master:** All attack magics _(arcane, ice, fire and thunder)_ must be Lvl. Max _(Lvl. 5)_
 - **Boss Hunt:** All bosses need to be killed _(this does not include "elite" enemies like the Seal, but don't forget the one in Secret Passage that **is** a boss)_
 
 ### Trial Keys
