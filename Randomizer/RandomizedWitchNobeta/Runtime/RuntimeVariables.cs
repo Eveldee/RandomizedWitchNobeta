@@ -112,13 +112,23 @@ public class RuntimeVariables
 
     public static bool TryLoad(out RuntimeVariables runtimeVariables)
     {
-        if (!File.Exists(SavePath))
+        try
         {
+            if (!File.Exists(SavePath))
+            {
+                runtimeVariables = null;
+                return false;
+            }
+
+            runtimeVariables = new RuntimeVariables(SerializeUtils.Deserialize<SerializableRuntimeVariables>(File.ReadAllText(SavePath)));
+        }
+        catch (Exception e)
+        {
+            // File is not recoverable, maybe after an update
             runtimeVariables = null;
             return false;
         }
 
-        runtimeVariables = new RuntimeVariables(SerializeUtils.Deserialize<SerializableRuntimeVariables>(File.ReadAllText(SavePath)));
         return true;
     }
 }
