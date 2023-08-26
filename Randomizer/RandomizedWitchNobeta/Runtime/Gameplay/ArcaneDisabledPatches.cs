@@ -14,7 +14,7 @@ public static class ArcaneDisabledPatches
         {
             if (onHolding)
             {
-                Game.AppearEventPrompt("You need at least Arcane level 1 to perform this action.");
+                Game.AppearEventPrompt("You have yet to learn Arcane magic.");
             }
 
             return false;
@@ -31,7 +31,7 @@ public static class ArcaneDisabledPatches
 
         if (wizardGirl.GetMagicType() == PlayerEffectPlay.Magic.Null && wizardGirl.GameSave.stats.secretMagicLevel < 1)
         {
-            Game.AppearEventPrompt("You need at least Arcane level 1 to perform this action.");
+            Game.AppearEventPrompt("You have yet to learn Arcane magic.");
 
             return false;
         }

@@ -127,7 +127,7 @@ public static class TrialKeysPatches
     {
         if (Type == ItemSystem.ItemType.SPMaxAdd)
         {
-            __result = "Drop on a trial path to unlock it";
+            __result = "Cannot be used.\nDrop on a trial path to unlock it.";
 
             return false;
         }
