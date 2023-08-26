@@ -15,6 +15,7 @@
   - [Chest Content Randomization](#chest-content-randomization)
   - [End Screen](#end-screen)
   - [Timer](#timer)
+  - [Boss Hunt and Magic Master](#boss-hunt-and-magic-master)
   - [Trial Keys](#trial-keys)
   - [No Arcane](#no-arcane)
   - [Magic Upgrades](#magic-upgrades)
@@ -122,6 +123,12 @@ It is possible for those who wants it to show the timer during the run and not o
 ![Timer Settings](Screenshots/Timer_Settings.png)
 
 > Available timer settings
+
+### Boss Hunt and Magic Master
+
+Those two settings add new conditions before being able to unlock the teleport to Nonota and end the game:
+- **Magic Master:** All magics must to to Lvl. Max _(Lvl. 5)_
+- **Boss Hunt:** All bosses need to be killed _(this does not include "elite" enemies like the Seal, but don't forget the one in Secret Passage that **is** a boss)_
 
 ### Trial Keys
 
