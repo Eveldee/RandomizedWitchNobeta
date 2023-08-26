@@ -11,4 +11,6 @@ public class Region
     public required RegionTransition NextRegion { get; init; }
 
     public bool FinalRegion { get; init; } = false;
+
+    public bool ContainsBoss { get; set; } = false;
 }

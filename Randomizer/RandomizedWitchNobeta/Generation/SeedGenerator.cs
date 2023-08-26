@@ -131,6 +131,8 @@ public class SeedGenerator
 
         var inventory = new InventoryState(_settings);
 
+        bool nonotaReachable = false;
+
         // One loop of the verification algorithm consist of:
         // - Explore a new region, take items while updating inventory, add exits as new regions (if not already visited)
         // - Recheck all transition requirements and add region if requirement is padded + not already visited
@@ -164,6 +166,12 @@ public class SeedGenerator
                 }
             }
 
+            // Update boss killed
+            if (region.ContainsBoss)
+            {
+                inventory.BossKilled++;
+            }
+
             // New regions
             var newRegions = new HashSet<Region>();
 
@@ -174,10 +182,10 @@ public class SeedGenerator
                 {
                     var destination = WorldGraph.Regions[_exitsOverrides[regionExit]];
 
-                    // End here if this is the end game region
+                    // Mark that we reached nonota if it's the final region
                     if (destination.FinalRegion)
                     {
-                        return true;
+                        nonotaReachable = true;
                     }
 
                     newRegions.Add(destination);
@@ -196,7 +204,7 @@ public class SeedGenerator
                     // End here if this is the end game region
                     if (destination.FinalRegion)
                     {
-                        return true;
+                        nonotaReachable = true;
                     }
 
                     newRegions.Add(destination);
@@ -212,6 +220,44 @@ public class SeedGenerator
                     regionsToExplore.Enqueue(newRegion);
                 }
             }
+        }
+
+        // Once everything has been explored, we check if nonota is reachable and the other end conditions
+        if (nonotaReachable)
+        {
+            // Magic master
+            if (_settings.MagicMaster)
+            {
+                return _settings.MagicUpgrade switch
+                {
+                    SeedSettings.MagicUpgradeMode.Vanilla => inventory is
+                        {
+                            ArcaneLevel: >= 5,
+                            IceLevel: >= 5,
+                            FireLevel: >= 5,
+                            ThunderLevel: >= 5
+                        },
+
+                    SeedSettings.MagicUpgradeMode.BossKill => inventory is
+                        {
+                            ArcaneLevel: >= 1,
+                            IceLevel: >= 1,
+                            FireLevel: >= 1,
+                            ThunderLevel: >= 1,
+                            BossKilled: >= 4
+                        },
+
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+            }
+
+            // Boss hunt
+            if (_settings.BossHunt)
+            {
+                return inventory.BossKilled >= NpcUtils.ValidBosses.Count;
+            }
+
+            return true;
         }
 
         return false;

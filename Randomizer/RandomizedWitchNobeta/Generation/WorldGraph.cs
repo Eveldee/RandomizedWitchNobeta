@@ -37,6 +37,7 @@ public static class WorldGraph
                     Destination = new Region
                     {
                         FriendlyName = "Shrine - Armor Hall",
+                        ContainsBoss = true,
 
                         Exits = new []
                         {
@@ -59,6 +60,7 @@ public static class WorldGraph
                             Destination = new Region
                             {
                                 FriendlyName = "Shrine - Secret Passage",
+                                ContainsBoss = true,
 
                                 Exits = new []
                                 {
@@ -104,6 +106,7 @@ public static class WorldGraph
                     Destination = new Region
                     {
                         FriendlyName = "Underground - Tania",
+                        ContainsBoss = true,
 
                         Exits = new []
                         {
@@ -149,6 +152,7 @@ public static class WorldGraph
                     Destination = new Region
                     {
                         FriendlyName = "Lava Ruins - After Fire Barrier",
+                        ContainsBoss = true,
 
                         Exits = new []
                         {
@@ -191,6 +195,7 @@ public static class WorldGraph
                     Destination = new Region
                     {
                         FriendlyName = "Dark Tunnel - After Thunder",
+                        ContainsBoss = true,
 
                         Exits = new []
                         {
@@ -252,6 +257,7 @@ public static class WorldGraph
                             Destination = new Region
                             {
                                 FriendlyName = "Spirit Realm - After Teleport",
+                                ContainsBoss = true,
 
                                 Exits = new []
                                 {
@@ -295,6 +301,7 @@ public static class WorldGraph
                     Destination = new Region
                     {
                         FriendlyName = "Trials",
+                        FinalRegion = true,
 
                         Exits = null,
 
@@ -305,9 +312,7 @@ public static class WorldGraph
                             ChestItem("Act03TreasureBox_Room05_02", 7)
                         },
 
-                        NextRegion = null,
-
-                        FinalRegion = true
+                        NextRegion = null
                     }
                 }
             }
