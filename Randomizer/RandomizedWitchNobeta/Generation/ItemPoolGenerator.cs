@@ -32,10 +32,12 @@ public class ItemPoolGenerator
 
         if (settings.MagicUpgrade == SeedSettings.MagicUpgradeMode.Vanilla)
         {
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicNull, 4));
             _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicIce, 4));
             _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicFire, 4));
             _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicLightning, 4));
-            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicNull, 4));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.Absorb, 4));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.SkyJump, 4));
         }
 
         // Trial keys
