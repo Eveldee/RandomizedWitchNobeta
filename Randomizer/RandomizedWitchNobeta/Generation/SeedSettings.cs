@@ -17,6 +17,9 @@ public class SeedSettings
     public int Seed = Random.Shared.Next();
 
     [JsonInclude]
+    public GameDifficulty Difficulty = GameDifficulty.Advanced;
+
+    [JsonInclude]
     public bool RandomStartLevel = true;
     [JsonInclude]
     public bool ShuffleExits = true;
@@ -61,6 +64,8 @@ public class SeedSettings
     {
         Seed = other.Seed;
 
+        Difficulty = other.Difficulty;
+
         RandomStartLevel = other.RandomStartLevel;
         ShuffleExits = other.ShuffleExits;
 
@@ -90,6 +95,7 @@ public class SeedSettings
         hashCode.Add(MyPluginInfo.PLUGIN_VERSION);
 
         hashCode.Add(Seed);
+        hashCode.Add(Difficulty);
         hashCode.Add(RandomStartLevel);
         hashCode.Add(ShuffleExits);
         hashCode.Add(TrialKeys);
@@ -98,13 +104,13 @@ public class SeedSettings
         hashCode.Add((int) MagicUpgrade);
         hashCode.Add(ChestSoulCount);
         hashCode.Add(StartSoulsModifier);
+        hashCode.Add(StartSouls);
         hashCode.Add(ItemWeightSouls);
         hashCode.Add(ItemWeightHP);
         hashCode.Add(ItemWeightMP);
         hashCode.Add(ItemWeightDefense);
         hashCode.Add(ItemWeightHoly);
         hashCode.Add(ItemWeightArcane);
-        hashCode.Add(StartSouls);
 
         return hashCode.ToHashCode();
     }

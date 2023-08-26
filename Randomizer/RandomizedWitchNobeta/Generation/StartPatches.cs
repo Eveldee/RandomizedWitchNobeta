@@ -119,7 +119,7 @@ public static class StartPatches
         Plugin.Log.LogMessage("Creating save...");
 
         // Generate the save and apply flag modifications
-        var gameSave = new GameSave(GameSaveIndex, GameDifficulty.Advanced)
+        var gameSave = new GameSave(GameSaveIndex, settings.Difficulty)
         {
             basic =
             {

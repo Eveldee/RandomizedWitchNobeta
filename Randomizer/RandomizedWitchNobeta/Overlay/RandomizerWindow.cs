@@ -14,6 +14,9 @@ public partial class NobetaRandomizerOverlay
     private int _upgradeModeIndex = (int)SeedSettings.MagicUpgradeMode.BossKill;
     private readonly string[] _availableUpgradeModes = Enums.GetNames<SeedSettings.MagicUpgradeMode>().Select(name => name.Humanize(LetterCasing.Title)).ToArray();
 
+    private int _difficultyIndex = (int) GameDifficulty.Advanced;
+    private readonly string[] _availableDifficulties = Enums.GetNames<GameDifficulty>().Select(name => name.Humanize(LetterCasing.Title)).ToArray();
+
     private void ShowRandomizerWindow()
     {
         ImGui.Begin("Randomized Witch Nobeta");
@@ -45,6 +48,7 @@ public partial class NobetaRandomizerOverlay
 
                             // Also reflect changes to ui
                             _upgradeModeIndex = (int) settings.MagicUpgrade;
+                            _difficultyIndex = (int) settings.Difficulty;
                         }
                     }
 
@@ -66,6 +70,15 @@ public partial class NobetaRandomizerOverlay
                     }
                     ImGui.SameLine();
                     ImGui.InputInt("Seed", ref settings.Seed);
+
+                    ImGui.NewLine();
+
+                    if (ImGui.Combo("Difficulty", ref _difficultyIndex, _availableDifficulties,
+                        _availableDifficulties.Length))
+                    {
+                        settings.Difficulty = (GameDifficulty) _difficultyIndex;
+                    }
+                    HelpMarker("Choose the game difficulty, for some reasons there is a 'Hard' difficulty in the game but it seems to be the exact same as 'Advanced'");
 
                     ImGui.NewLine();
 
