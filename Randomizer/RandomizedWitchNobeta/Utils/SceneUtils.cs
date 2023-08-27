@@ -104,4 +104,14 @@ public static class SceneUtils
         7 => "Abyss - Sky Walk",
         _ => throw new ArgumentOutOfRangeException(nameof(sceneNumber), sceneNumber, null)
     };
+
+    public static int SceneStartSouls(int sceneNumber) => sceneNumber switch
+    {
+        2 => 0,
+        3 => 60,
+        4 => 500,
+        5 => 900,
+        6 => 1300,
+        _ => throw new ArgumentOutOfRangeException(nameof(sceneNumber), sceneNumber, null)
+    };
 }

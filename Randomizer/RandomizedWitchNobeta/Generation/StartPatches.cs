@@ -155,7 +155,7 @@ public static class StartPatches
                 windMagicLevel = 1,
                 manaAbsorbLevel = 1,
                 // Give souls scaling on start level
-                currentMoney = settings.StartSouls[runtimeVariables.StartScene] * settings.StartSoulsModifier
+                currentMoney = SceneUtils.SceneStartSouls(runtimeVariables.StartScene) * settings.StartSoulsModifier
             }
         };
 

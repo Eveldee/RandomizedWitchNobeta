@@ -122,7 +122,7 @@ public class RuntimeVariables
 
             runtimeVariables = new RuntimeVariables(SerializeUtils.Deserialize<SerializableRuntimeVariables>(File.ReadAllText(SavePath)));
         }
-        catch (Exception e)
+        catch (Exception)
         {
             // File is not recoverable, maybe after an update
             runtimeVariables = null;

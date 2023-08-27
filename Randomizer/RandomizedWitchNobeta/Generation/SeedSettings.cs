@@ -5,11 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
+using MessagePack;
 using RandomizedWitchNobeta.Config.Serialization;
 
 namespace RandomizedWitchNobeta.Generation;
 
-// Need to use fields here for ImGui]
+// Need to use fields here for ImGui
+[MessagePackObject]
 public class SeedSettings
 {
     public enum MagicUpgradeMode
@@ -18,65 +20,57 @@ public class SeedSettings
         BossKill
     }
 
-    [JsonInclude]
+    [JsonInclude, Key(0)]
     public int Seed = Random.Shared.Next();
 
-    [JsonInclude]
+    [JsonInclude, Key(1)]
     public GameDifficulty Difficulty = GameDifficulty.Advanced;
 
-    [JsonInclude]
+    [JsonInclude, Key(2)]
     public bool RandomStartLevel = true;
-    [JsonInclude]
+    [JsonInclude, Key(3)]
     public bool ShuffleExits = true;
 
-    [JsonInclude]
+    [JsonInclude, Key(4)]
     public bool NoArcane = false;
-    [JsonInclude]
+    [JsonInclude, Key(5)]
     public MagicUpgradeMode MagicUpgrade = MagicUpgradeMode.Vanilla;
 
-    [JsonInclude]
+    [JsonInclude, Key(6)]
     public bool BossHunt = false;
-    [JsonInclude]
+    [JsonInclude, Key(7)]
     public bool MagicMaster = false;
 
-    [JsonInclude]
+    [JsonInclude, Key(8)]
     public bool TrialKeys = false;
-    [JsonInclude]
+    [JsonInclude, Key(9)]
     public int TrialKeysAmount = 5;
 
-    [JsonInclude]
+    [JsonInclude, Key(10)]
     public bool OneHitKO = false;
-    [JsonInclude]
+    [JsonInclude, Key(11)]
     public bool DoubleDamage = false;
-    [JsonInclude]
+    [JsonInclude, Key(12)]
     public bool HalfDamage = false;
 
-    [JsonInclude]
+    [JsonInclude, Key(13)]
     public int ChestSoulCount = 250;
 
-    [JsonInclude]
+    [JsonInclude, Key(14)]
     public float StartSoulsModifier = 1f;
-    public Dictionary<int, int> StartSouls { get; set; } = new()
-    {
-        { 2, 0 },
-        { 3, 60 },
-        { 4, 500 },
-        { 5, 900 },
-        { 6, 1300 }
-    };
 
     // Weights
-    [JsonInclude]
+    [JsonInclude, Key(15)]
     public int ItemWeightSouls = 3;
-    [JsonInclude]
+    [JsonInclude, Key(16)]
     public int ItemWeightHP = 1;
-    [JsonInclude]
+    [JsonInclude, Key(17)]
     public int ItemWeightMP = 1;
-    [JsonInclude]
+    [JsonInclude, Key(18)]
     public int ItemWeightDefense = 1;
-    [JsonInclude]
+    [JsonInclude, Key(19)]
     public int ItemWeightHoly = 1;
-    [JsonInclude]
+    [JsonInclude, Key(20)]
     public int ItemWeightArcane = 2;
 
     public void Apply(SeedSettings other)
@@ -103,7 +97,6 @@ public class SeedSettings
 
         ChestSoulCount = other.ChestSoulCount;
         StartSoulsModifier = other.StartSoulsModifier;
-        StartSouls = other.StartSouls;
 
         ItemWeightSouls = other.ItemWeightSouls;
         ItemWeightHP = other.ItemWeightHP;

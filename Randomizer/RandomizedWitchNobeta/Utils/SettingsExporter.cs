@@ -2,6 +2,7 @@
 using System.Buffers.Text;
 using System.Text;
 using System.Text.Json;
+using MessagePack;
 using RandomizedWitchNobeta.Generation;
 using TextCopy;
 
@@ -9,15 +10,10 @@ namespace RandomizedWitchNobeta.Utils;
 
 public static class SettingsExporter
 {
-    private static readonly JsonSerializerOptions _serializerOptions = new()
-    {
-        IncludeFields = true
-    };
-
     public static void ExportSettings(SeedSettings seedSettings)
     {
-        var json = JsonSerializer.Serialize(seedSettings, _serializerOptions);
-        var base64 = Convert.ToBase64String(Encoding.UTF8.GetBytes(json));
+        var data = MessagePackSerializer.Serialize(seedSettings);
+        var base64 = Convert.ToBase64String(data);
 
         ClipboardService.SetText(base64);
     }
@@ -28,9 +24,9 @@ public static class SettingsExporter
 
         try
         {
-            var json = Convert.FromBase64String(base64!);
+            var data = Convert.FromBase64String(base64!);
 
-            seedSettings = JsonSerializer.Deserialize<SeedSettings>(json, _serializerOptions);
+            seedSettings = MessagePackSerializer.Deserialize<SeedSettings>(data);
 
             return true;
         }
