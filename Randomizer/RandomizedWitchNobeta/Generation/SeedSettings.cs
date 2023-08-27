@@ -45,6 +45,13 @@ public class SeedSettings
     public int TrialKeysAmount = 5;
 
     [JsonInclude]
+    public bool OneHitKO = false;
+    [JsonInclude]
+    public bool DoubleDamage = false;
+    [JsonInclude]
+    public bool HalfDamage = false;
+
+    [JsonInclude]
     public int ChestSoulCount = 250;
 
     [JsonInclude]
@@ -89,6 +96,10 @@ public class SeedSettings
 
         TrialKeys = other.TrialKeys;
         TrialKeysAmount = other.TrialKeysAmount;
+
+        OneHitKO = other.OneHitKO;
+        DoubleDamage = other.DoubleDamage;
+        HalfDamage = other.HalfDamage;
 
         ChestSoulCount = other.ChestSoulCount;
         StartSoulsModifier = other.StartSoulsModifier;
