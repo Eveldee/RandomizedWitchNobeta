@@ -45,6 +45,8 @@ public class SeedSettings
     public bool NoArcane = false;
     [JsonInclude, Key(5)]
     public MagicUpgradeMode MagicUpgrade = MagicUpgradeMode.Vanilla;
+    [JsonInclude, Key(21)]
+    public int BookAmount = 1;
 
     [JsonInclude, Key(6)]
     public bool BossHunt = false;
@@ -94,6 +96,7 @@ public class SeedSettings
 
         NoArcane = other.NoArcane;
         MagicUpgrade = other.MagicUpgrade;
+        BookAmount = other.BookAmount;
 
         BossHunt = other.BossHunt;
         MagicMaster = other.MagicMaster;

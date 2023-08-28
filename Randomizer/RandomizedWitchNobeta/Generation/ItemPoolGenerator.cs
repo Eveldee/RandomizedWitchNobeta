@@ -40,6 +40,18 @@ public class ItemPoolGenerator
             _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.SkyJump, 4));
         }
 
+        if (settings.MagicUpgrade == SeedSettings.MagicUpgradeMode.BossKill && settings.BookAmount > 1)
+        {
+            var toAdd = settings.BookAmount - 1;
+
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicNull, toAdd));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicIce, toAdd));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicFire, toAdd));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.MagicLightning, toAdd));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.Absorb, toAdd));
+            _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.SkyJump, toAdd));
+        }
+
         // Trial keys
         if (settings.TrialKeys)
         {
@@ -50,7 +62,7 @@ public class ItemPoolGenerator
         _pool.AddRange(Enumerable.Repeat(ItemSystem.ItemType.BagMaxAdd, 4));
 
         // Fill
-        var filler = new DynamicWeightedRandomizer<int>
+        var filler = new DynamicWeightedRandomizer<int>(random.Next())
         {
             { (int)ItemSystem.ItemType.Null, settings.ItemWeightSouls },
             { (int)ItemSystem.ItemType.HPCureBig, settings.ItemWeightHP },

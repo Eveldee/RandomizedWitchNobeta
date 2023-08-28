@@ -124,6 +124,13 @@ public partial class NobetaRandomizerOverlay
                     HelpMarker("When this setting is enabled, Arcane magic will not be usable until it is found like any other magic.");
 
                     ImGui.NewLine();
+                    WithDisabled(settings.MagicUpgrade != SeedSettings.MagicUpgradeMode.BossKill, () =>
+                    {
+                        ImGui.SliderInt("Book Amount", ref settings.BookAmount, 1, 5);
+                    });
+                    HelpMarker("Sets the number of books of each magic type in the item pool when using Boss Kill magic upgrade mode. Getting duplicates of the same book won't upgrade them but it will make them easier to find.");
+
+                    ImGui.NewLine();
                     ImGui.SeparatorText("Combat");
 
                     WithDisabled(settings.DoubleDamage || settings.HalfDamage, () =>
