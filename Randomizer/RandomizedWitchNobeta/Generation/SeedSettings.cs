@@ -20,6 +20,16 @@ public class SeedSettings
         BossKill
     }
 
+    public enum StartLevelSetting
+    {
+        Random,
+        OkunShrine,
+        UndergroundCave,
+        LavaRuins,
+        DarkTunnel,
+        SpiritRealm
+    }
+
     [JsonInclude, Key(0)]
     public int Seed = Random.Shared.Next();
 
@@ -27,7 +37,7 @@ public class SeedSettings
     public GameDifficulty Difficulty = GameDifficulty.Advanced;
 
     [JsonInclude, Key(2)]
-    public bool RandomStartLevel = true;
+    public StartLevelSetting StartLevel = StartLevelSetting.Random;
     [JsonInclude, Key(3)]
     public bool ShuffleExits = true;
 
@@ -79,7 +89,7 @@ public class SeedSettings
 
         Difficulty = other.Difficulty;
 
-        RandomStartLevel = other.RandomStartLevel;
+        StartLevel = other.StartLevel;
         ShuffleExits = other.ShuffleExits;
 
         NoArcane = other.NoArcane;

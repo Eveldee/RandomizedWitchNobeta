@@ -17,6 +17,10 @@ public partial class NobetaRandomizerOverlay
     private int _difficultyIndex = (int) GameDifficulty.Advanced;
     private readonly string[] _availableDifficulties = Enums.GetNames<GameDifficulty>().Select(name => name.Humanize(LetterCasing.Title)).ToArray();
 
+
+    private int _startLevelIndex = (int) SeedSettings.StartLevelSetting.Random;
+    private readonly string[] _availableStartLevels = Enums.GetNames<SeedSettings.StartLevelSetting>().Select(name => name.Humanize(LetterCasing.Title)).ToArray();
+
     private void ShowRandomizerWindow()
     {
         ImGui.Begin("Randomized Witch Nobeta");
@@ -49,6 +53,7 @@ public partial class NobetaRandomizerOverlay
                             // Also reflect changes to ui
                             _upgradeModeIndex = (int) settings.MagicUpgrade;
                             _difficultyIndex = (int) settings.Difficulty;
+                            _startLevelIndex = (int) settings.StartLevel;
                         }
                     }
 
@@ -82,8 +87,13 @@ public partial class NobetaRandomizerOverlay
 
                     ImGui.NewLine();
 
-                    ImGui.Checkbox("Random Start Level", ref settings.RandomStartLevel);
                     ImGui.Checkbox("Shuffle Exits", ref settings.ShuffleExits);
+                    if (ImGui.Combo("Start Level", ref _startLevelIndex, _availableStartLevels,
+                        _availableStartLevels.Length))
+                    {
+                        settings.StartLevel = (SeedSettings.StartLevelSetting) _startLevelIndex;
+
+                    }
 
                     ImGui.NewLine();
                     ImGui.SeparatorText("Extra End Conditions");

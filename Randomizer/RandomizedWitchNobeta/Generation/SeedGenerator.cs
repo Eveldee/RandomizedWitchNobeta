@@ -79,9 +79,9 @@ public class SeedGenerator
         }
 
         // Generate start region
-        _startRegion = _settings.RandomStartLevel
+        _startRegion = _settings.StartLevel == SeedSettings.StartLevelSetting.Random
             ? random.Next(WorldGraph.LowestRegionNumber, WorldGraph.HighestRegionNumber)
-            : 2;
+            : (int)_settings.StartLevel + 1;
     }
 
     private void RandomFillItems(Random random, ItemPoolGenerator itemPoolGenerator)
