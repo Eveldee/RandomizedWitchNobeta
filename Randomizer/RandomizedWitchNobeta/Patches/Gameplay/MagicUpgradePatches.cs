@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using HarmonyLib;
+﻿using HarmonyLib;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime.Gameplay;
+namespace RandomizedWitchNobeta.Patches.Gameplay;
 
 public static class MagicUpgradePatches
 {

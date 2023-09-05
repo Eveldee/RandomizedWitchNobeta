@@ -13,9 +13,9 @@ using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
-using RandomizedWitchNobeta.Runtime;
-using RandomizedWitchNobeta.Runtime.Gameplay;
-using RandomizedWitchNobeta.Runtime.Shuffle;
+using RandomizedWitchNobeta.Patches.Gameplay;
+using RandomizedWitchNobeta.Patches.Shuffle;
+using RandomizedWitchNobeta.Patches.UI;
 using RandomizedWitchNobeta.Timer;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
@@ -112,7 +112,6 @@ public class Plugin : BasePlugin
 
         // Gameplay patches
         Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));
-        Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
         Harmony.CreateAndPatchAll(typeof(LockedDoorPatches));
         Harmony.CreateAndPatchAll(typeof(ArcaneDisabledPatches));
         Harmony.CreateAndPatchAll(typeof(MagicUpgradePatches));
@@ -120,6 +119,10 @@ public class Plugin : BasePlugin
         Harmony.CreateAndPatchAll(typeof(TrialKeysPatches));
         Harmony.CreateAndPatchAll(typeof(EndConditionsPatches));
         Harmony.CreateAndPatchAll(typeof(CombatPatches));
+
+        // UI Patches
+        Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
+        Harmony.CreateAndPatchAll(typeof(GameTipPatches));
 
         // Randomizer patches
         Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));

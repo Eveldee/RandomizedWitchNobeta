@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using LibCpp2IL;
 using RandomizedWitchNobeta.Generation.Models;
-using RandomizedWitchNobeta.Runtime;
+using RandomizedWitchNobeta.Patches;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Generation;

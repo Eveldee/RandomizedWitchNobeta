@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Generation.Models;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Patches;
 
 public class SerializableRuntimeVariables
 {

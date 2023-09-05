@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime.Shuffle;
+namespace RandomizedWitchNobeta.Patches.Shuffle;
 
 public static class ChestExtraLootPatches
 {

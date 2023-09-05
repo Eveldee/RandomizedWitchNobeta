@@ -3,7 +3,7 @@ using HarmonyLib;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 
-namespace RandomizedWitchNobeta.Runtime.Gameplay;
+namespace RandomizedWitchNobeta.Patches.Gameplay;
 
 public static class EndConditionsPatches
 {

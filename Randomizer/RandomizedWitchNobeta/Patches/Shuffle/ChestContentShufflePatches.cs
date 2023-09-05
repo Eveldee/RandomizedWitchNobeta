@@ -2,7 +2,7 @@
 using RandomizedWitchNobeta.Generation.Models;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime.Shuffle;
+namespace RandomizedWitchNobeta.Patches.Shuffle;
 
 public static class ChestContentShufflePatches
 {

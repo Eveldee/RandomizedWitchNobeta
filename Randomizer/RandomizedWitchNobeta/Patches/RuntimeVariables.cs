@@ -7,7 +7,7 @@ using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Generation.Models;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Patches;
 
 public class RuntimeVariables
 {
@@ -99,6 +99,8 @@ public class RuntimeVariables
             ElapsedLoadRemoved = ElapsedLoadRemoved,
 
             GlobalMagicLevel = GlobalMagicLevel,
+
+            CatLootObtained = CatLootObtained,
 
             KilledBosses = KilledBosses,
             OpenedTrials = OpenedTrials,

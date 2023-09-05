@@ -4,15 +4,15 @@ using HarmonyLib;
 using MarsSDK;
 using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config.Serialization;
+using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Overlay;
-using RandomizedWitchNobeta.Runtime;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 using Object = UnityEngine.Object;
 using Random = System.Random;
 
-namespace RandomizedWitchNobeta.Generation;
+namespace RandomizedWitchNobeta.Patches.UI;
 
 public static class StartPatches
 {

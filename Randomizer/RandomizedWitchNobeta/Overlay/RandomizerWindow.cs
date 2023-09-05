@@ -5,6 +5,7 @@ using Humanizer;
 using ImGuiNET;
 using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Generation;
+using RandomizedWitchNobeta.Patches.UI;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Overlay;
@@ -94,6 +95,10 @@ public partial class NobetaRandomizerOverlay
                         settings.StartLevel = (SeedSettings.StartLevelSetting) _startLevelIndex;
 
                     }
+
+                    ImGui.NewLine();
+                    ImGui.Checkbox("Game Tips", ref settings.GameTips);
+                    HelpMarker("When enabled, in-game tips on the grounds will display tips to help complete the run: regions that are needed to complete the run, content of certain chests, ...");
 
                     ImGui.NewLine();
                     ImGui.SeparatorText("Extra End Conditions");

@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Linq;
-using Cpp2IL.Core;
 using HarmonyLib;
-using Il2CppInterop.Runtime.InteropTypes.Arrays;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace RandomizedWitchNobeta.Runtime.Shuffle;
+namespace RandomizedWitchNobeta.Patches.Shuffle;
 
 public static class SpecialLootPatches
 {

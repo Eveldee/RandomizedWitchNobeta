@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace RandomizedWitchNobeta.Runtime.Gameplay;
+namespace RandomizedWitchNobeta.Patches.Gameplay;
 
 public static class ArcaneDisabledPatches
 {

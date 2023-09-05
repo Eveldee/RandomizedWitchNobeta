@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
-using RandomizedWitchNobeta.Runtime;
+using RandomizedWitchNobeta.Patches;
 using RandomizedWitchNobeta.Timer;
 using UnityEngine;
 

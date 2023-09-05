@@ -1,11 +1,9 @@
 ﻿using System;
 using System.IO;
 using HarmonyLib;
-using Humanizer;
-using Humanizer.Localisation;
 using RandomizedWitchNobeta.Utils;
 
-namespace RandomizedWitchNobeta.Runtime;
+namespace RandomizedWitchNobeta.Patches.UI;
 
 public static class RunCompletePatches
 {

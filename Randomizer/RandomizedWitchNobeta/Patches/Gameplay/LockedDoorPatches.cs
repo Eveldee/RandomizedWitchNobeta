@@ -1,7 +1,7 @@
 ﻿using HarmonyLib;
 using UnityEngine;
 
-namespace RandomizedWitchNobeta.Runtime.Gameplay;
+namespace RandomizedWitchNobeta.Patches.Gameplay;
 
 public static class LockedDoorPatches
 {

@@ -41,6 +41,9 @@ public class SeedSettings
     [JsonInclude, Key(3)]
     public bool ShuffleExits = true;
 
+    [JsonInclude, Key(22)]
+    public bool GameTips = true;
+
     [JsonInclude, Key(4)]
     public bool NoArcane = false;
     [JsonInclude, Key(5)]
@@ -93,6 +96,7 @@ public class SeedSettings
 
         StartLevel = other.StartLevel;
         ShuffleExits = other.ShuffleExits;
+        GameTips = other.GameTips;
 
         NoArcane = other.NoArcane;
         MagicUpgrade = other.MagicUpgrade;

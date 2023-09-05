@@ -3,7 +3,7 @@ using HarmonyLib;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace RandomizedWitchNobeta.Runtime.Gameplay;
+namespace RandomizedWitchNobeta.Patches.UI;
 
 public static class TeleportMenuPatches
 {
