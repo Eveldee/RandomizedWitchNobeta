@@ -438,6 +438,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\..\ClickableTransparentOverlay\ClickableTransparentOverlay\ClickableTransparentOverlay.csproj" />
+      <ProjectReference Include="..\ClickableTransparentOverlay\ClickableTransparentOverlay.csproj" />
     </ItemGroup>
 </Project>
