@@ -1,40 +1,37 @@
-using System.Text.Json.Serialization;
+using System.IO.Pipes;
 
-var builder = WebApplication.CreateSlimBuilder(args);
-
-builder.Services.ConfigureHttpJsonOptions(options =>
+// Create pipe client
+if (args.Length < 1)
 {
-    options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
-});
+    Console.WriteLine("Invalid usage, a pipe handle is required");
+
+    Environment.Exit(1);
+}
+
+using var pipeClient = new AnonymousPipeClientStream(PipeDirection.Out, args[0]);
+
+// Build api app
+var builder = WebApplication.CreateSlimBuilder(args);
 
 var app = builder.Build();
 
 app.UseStaticFiles();
 
-var sampleTodos = new Todo[]
+// Redirect index to settings form
+app.MapGet("/", () => Results.Redirect("/index.html"));
+
+// Handle settings change
+app.MapPost("/settings", async context =>
 {
-    new(1, "Walk the dog"),
-    new(2, "Do the dishes", DateOnly.FromDateTime(DateTime.Now)),
-    new(3, "Do the laundry", DateOnly.FromDateTime(DateTime.Now.AddDays(1))),
-    new(4, "Clean the bathroom"),
-    new(5, "Clean the car", DateOnly.FromDateTime(DateTime.Now.AddDays(2)))
-};
+    // Write settings to pipe, the randomizer will deserialize it itself
+    // this avoids to share the settings model between this api and the randomizer
+    if (context.Request.HasJsonContentType())
+    {
+        // ReSharper disable once AccessToDisposedClosure
+        await context.Request.Body.CopyToAsync(pipeClient);
+    }
 
-app.Map("/", () => Results.Redirect("/todos", true));
-
-var todosApi = app.MapGroup("/todos");
-todosApi.MapGet("/", () => sampleTodos);
-todosApi.MapGet("/{id:int}", (int id) =>
-    sampleTodos.FirstOrDefault(a => a.Id == id) is { } todo
-        ? Results.Ok(todo)
-        : Results.NotFound());
+    context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+});
 
 app.Run();
-
-public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
-
-[JsonSerializable(typeof(Todo[]))]
-internal partial class AppJsonSerializerContext : JsonSerializerContext
-{
-
-}
