@@ -71,6 +71,9 @@ public class Plugin : BasePlugin
         AddComponent<UnityMainThreadDispatcher>();
         Singletons.Timers = AddComponent<Timers>();
 
+        // Load settings web app process
+
+
         Log.LogMessage($"Plugin {MyPluginInfo.PLUGIN_GUID} successfully loaded!");
     }
 
