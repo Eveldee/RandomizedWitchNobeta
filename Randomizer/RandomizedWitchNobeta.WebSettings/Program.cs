@@ -1,17 +1,25 @@
-using System.IO.Pipes;
+using System.Net;
+using RandomizedWitchNobeta.WebSettings;
 
-// Create pipe client
-if (args.Length < 1)
-{
-    Console.WriteLine("Invalid usage, a pipe handle is required");
+// ReSharper disable AccessToDisposedClosure
 
-    Environment.Exit(1);
-}
+Console.WriteLine(string.Join(", ", args));
 
-using var pipeClient = new AnonymousPipeClientStream(PipeDirection.Out, args[0]);
+// Get settings path
+var settingsPath = args is [var path, ..]
+    ? path
+    : "SeedSettings.json";
 
 // Build api app
 var builder = WebApplication.CreateSlimBuilder(args);
+
+// Set port
+builder.WebHost.ConfigureKestrel((_, serverOptions) =>
+{
+    serverOptions.Listen(IPAddress.Loopback, 0);
+});
+
+builder.Services.AddHostedService<BrowserOpenService>();
 
 var app = builder.Build();
 
@@ -27,8 +35,9 @@ app.MapPost("/settings", async context =>
     // this avoids to share the settings model between this api and the randomizer
     if (context.Request.HasJsonContentType())
     {
-        // ReSharper disable once AccessToDisposedClosure
-        await context.Request.Body.CopyToAsync(pipeClient);
+        await using var outputStream = File.Create(settingsPath);
+
+        await context.Request.Body.CopyToAsync(outputStream);
     }
 
     context.Response.StatusCode = StatusCodes.Status406NotAcceptable;

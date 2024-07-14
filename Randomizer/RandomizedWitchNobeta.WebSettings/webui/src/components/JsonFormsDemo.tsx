@@ -92,6 +92,10 @@ export const JsonFormsDemo: FC = () => {
             onChange={async event => { setData(event.data); if (!event.errors || event.errors.length == 0) {
                 await fetch("/settings", {
                 method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json'
+                },
                 body: JSON.stringify(event.data, null, 4)
               })
             }}}

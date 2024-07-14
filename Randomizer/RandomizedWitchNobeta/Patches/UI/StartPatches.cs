@@ -5,7 +5,6 @@ using MarsSDK;
 using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Generation;
-using RandomizedWitchNobeta.Overlay;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,6 +18,26 @@ public static class StartPatches
     public const int GameSaveIndex = 9;
 
     public static Text CopyrightText { get; private set; }
+
+    public static string SettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
+
+    static StartPatches()
+    {
+        if (Singletons.SettingsService is { } settingsService)
+        {
+            settingsService.SettingsUpdated += settings =>
+            {
+                if (CopyrightText is not null)
+                {
+                    CopyrightText.text =
+                        $"""
+                         Seed Hash: {settings.Hash():X8}
+                         © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
+                         """;
+                }
+            };
+        }
+    }
 
     [HarmonyPatch(typeof(UIOpeningMenu), nameof(UIOpeningMenu.Init))]
     [HarmonyPostfix]
@@ -103,28 +122,20 @@ public static class StartPatches
 
     private static void StartRandomizer()
     {
-        // Generate a seed
-        #if NOUI
-
+        // Fetch seed settings
         SeedSettings settings;
-        var settingsPath = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
 
-        if (!File.Exists(settingsPath))
+        if (!File.Exists(SettingsPath))
         {
             settings = new SeedSettings();
-            File.WriteAllText(settingsPath, SerializeUtils.SerializeIndented(settings));
+            File.WriteAllText(SettingsPath, SerializeUtils.SerializeIndented(settings));
         }
         else
         {
-            settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(settingsPath));
+            settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(SettingsPath));
         }
 
-        #else
-
-        var settings = OverlayState.SeedSettings;
-
-        #endif
-
+        // Generate a seed
         var generator = new SeedGenerator(settings);
         generator.Generate();
 

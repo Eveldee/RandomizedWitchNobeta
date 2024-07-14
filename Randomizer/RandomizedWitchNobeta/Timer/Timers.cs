@@ -6,16 +6,8 @@ using UnityEngine;
 
 namespace RandomizedWitchNobeta.Timer;
 
-[Section("Timers")]
 public class Timers : MonoBehaviour
 {
-    [Bind]
-    public static bool ShowTimers = false;
-    [Bind]
-    public static bool ShowRealTime = true;
-    [Bind]
-    public static bool ShowLoadRemovedTimer = true;
-
     private bool _paused = true;
     private bool _ended = false;
 
