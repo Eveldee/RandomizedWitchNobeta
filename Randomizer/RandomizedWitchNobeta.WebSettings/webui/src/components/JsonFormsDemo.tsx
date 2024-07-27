@@ -7,8 +7,14 @@ import {
   materialCells,
   materialRenderers,
 } from '@jsonforms/material-renderers';
+
 import RatingControl from './RatingControl';
 import ratingControlTester from '../ratingControlTester';
+import DividerControl from './DividerControl';
+import dividerControlTester from '../dividerControlTester';
+import ValueSliderControl from './ValueSliderControl';
+import { valueSliderControlTester } from './ValueSliderControl';
+
 import schema from '../schema.json';
 import uischema from '../uischema.json';
 
@@ -39,17 +45,47 @@ const classes = {
 };
 
 const initialData = {
-  name: 'Send email to Adrian',
-  description: 'Confirm if you have passed the subject\nHereby ...',
-  done: true,
-  recurrence: 'Daily',
-  rating: 3,
+  Seed: Math.floor(Math.random() * 2147483647),
+
+  Difficulty: 'Advanced',
+
+  StartLevel: 'Random',
+  ShuffleExits: true,
+
+  GameTips: true,
+
+  NoArcane: false,
+  MagicUpgrade: 'Vanilla',
+  BookAmount: 1,
+
+  BossHunt: false,
+  MagicMaster: false,
+
+  TrialKeys: false,
+  TrialKeysAmount: 5,
+
+  OneHitKO: false,
+  DoubleDamage: false,
+  HalfDamage: false,
+
+  ChestSoulCount: 250,
+
+  StartSoulsModifier: 1.0,
+
+  ItemWeightSouls: 3,
+  ItemWeightHP: 1,
+  ItemWeightMP: 1,
+  ItemWeightDefense: 1,
+  ItemWeightHoly: 1,
+  ItemWeightArcane: 2
 };
 
 const renderers = [
   ...materialRenderers,
   //register custom renderers
   { tester: ratingControlTester, renderer: RatingControl },
+  { tester: dividerControlTester, renderer: DividerControl },
+  { tester: valueSliderControlTester, renderer: ValueSliderControl }
 ];
 
 export const JsonFormsDemo: FC = () => {

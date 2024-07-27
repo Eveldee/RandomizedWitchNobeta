@@ -1,32 +1,180 @@
 {
-  "type": "object",
-  "properties": {
-    "name": {
-      "type": "string",
-      "minLength": 1
+    "type": "object",
+    "properties": {
+        "Seed": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 2147483647
+        },
+
+        "Difficulty": {
+            "type": "string",
+            "enum": [
+                "Standard",
+                "Advanced"
+            ],
+            "default": "Advanced"
+        },
+
+        "StartLevel": {
+            "type": "string",
+            "enum": [
+                "Random",
+                "OkunShrine",
+                "UndergroundCave",
+                "LavaRuins",
+                "DarkTunnel",
+                "SpiritRealm"
+            ],
+            "default": "Random"
+        },
+        "ShuffleExits": {
+            "type": "boolean",
+            "default": true
+        },
+
+        "GameTips": {
+            "type": "boolean",
+            "default": true
+        },
+
+        "NoArcane": {
+            "type": "boolean",
+            "default": false
+        },
+        "MagicUpgrade": {
+            "type": "string",
+            "enum": [
+                "Vanilla",
+                "BossKill"
+            ],
+            "default": "Vanilla"
+        },
+        "BookAmount": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 5,
+            "default": 1
+        },
+
+        "BossHunt": {
+            "type": "boolean",
+            "default": false
+        },
+        "MagicMaster": {
+            "type": "boolean",
+            "default": false
+        },
+
+        "TrialKeys": {
+            "type": "boolean",
+            "default": false
+        },
+        "TrialKeysAmount": {
+            "type": "integer",
+            "minimum": 3,
+            "maximum": 7,
+            "default": 5
+        },
+
+        "OneHitKO": {
+            "type": "boolean",
+            "default": false
+        },
+        "DoubleDamage": {
+            "type": "boolean",
+            "default": false
+        },
+        "HalfDamage": {
+            "type": "boolean",
+            "default": false
+        },
+
+        "ChestSoulCount": {
+            "type": "integer",
+            "minimum": 50,
+            "maximum": 2500,
+            "default": 250
+        },
+
+        "StartSoulsModifier": {
+            "type": "number",
+            "minimum": 0.0,
+            "maximum": 10.0,
+            "default": 1.0
+        },
+
+        "ItemWeightSouls": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 3
+        },
+        "ItemWeightHP": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 1
+        },
+        "ItemWeightMP": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 1
+        },
+        "ItemWeightDefense": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 1
+        },
+        "ItemWeightHoly": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 1
+        },
+        "ItemWeightArcane": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 10,
+            "default": 2
+        }
     },
-    "description": {
-      "title": "Long Description",
-      "type": "string"
-    },
-    "done": {
-      "type": "boolean"
-    },
-    "due_date": {
-      "type": "string",
-      "format": "date"
-    },
-    "rating": {
-      "type": "integer",
-      "maximum": 5
-    },
-    "recurrence": {
-      "type": "string",
-      "enum": ["Never", "Daily", "Weekly", "Monthly"]
-    },
-    "recurrence_interval": {
-      "type": "integer"
-    }
-  },
-  "required": ["name", "due_date"]
+
+    "required": [
+        "Seed",
+
+        "Difficulty",
+
+        "StartLevel",
+        "ShuffleExits",
+
+        "GameTips",
+
+        "NoArcane",
+        "MagicUpgrade",
+        "BookAmount",
+
+        "BossHunt",
+        "MagicMaster",
+
+        "TrialKeys",
+        "TrialKeysAmount",
+
+        "OneHitKO",
+        "DoubleDamage",
+        "HalfDamage",
+
+        "ChestSoulCount",
+
+        "StartSoulsModifier",
+
+        "ItemWeightSouls",
+        "ItemWeightHP",
+        "ItemWeightMP",
+        "ItemWeightDefense",
+        "ItemWeightHoly",
+        "ItemWeightArcane"
+    ]
 }

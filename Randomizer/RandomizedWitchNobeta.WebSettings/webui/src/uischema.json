@@ -1,55 +1,254 @@
 {
-  "type": "VerticalLayout",
-  "elements": [
-    {
-      "type": "Control",
-      "label": "Completed",
-      "scope": "#/properties/done"
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/name"
-    },
-    {
-      "type": "HorizontalLayout",
-      "elements": [
+    "type": "VerticalLayout",
+    "elements": [
         {
-          "type": "Control",
-          "scope": "#/properties/due_date"
+            "type": "Group",
+            "label": "General",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "Seed",
+                    "scope": "#/properties/Seed",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                },
+
+                {
+                    "type": "Divider"
+                },
+
+                {
+                    "type": "Control",
+                    "label": "Difficulty",
+                    "scope": "#/properties/Difficulty",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                },
+
+                {
+                    "type": "Divider"
+                },
+
+                {
+                    "type": "Control",
+                    "label": "Shuffle Exits",
+                    "scope": "#/properties/ShuffleExits"
+                },
+                {
+                    "type": "Control",
+                    "label": "Start Level",
+                    "scope": "#/properties/StartLevel",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                },
+
+                {
+                    "type": "Divider"
+                },
+
+                {
+                    "type": "Control",
+                    "label": "Game Tips",
+                    "scope": "#/properties/GameTips"
+                }
+            ]
         },
+
         {
-          "type": "Control",
-          "scope": "#/properties/rating"
-        }
-      ]
-    },
-    {
-      "type": "HorizontalLayout",
-      "elements": [
-        {
-          "type": "Control",
-          "scope": "#/properties/recurrence"
+            "type": "Group",
+            "label": "Extra End Conditions",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "Magic Master",
+                    "scope": "#/properties/MagicMaster"
+                },
+                {
+                    "type": "Control",
+                    "label": "Boss Hunt",
+                    "scope": "#/properties/BossHunt"
+                },
+
+                {
+                    "type": "Divider"
+                },
+
+                {
+                    "type": "Control",
+                    "label": "Trial Keys",
+                    "scope": "#/properties/TrialKeys"
+                },
+                {
+                    "type": "Control",
+                    "label": "Trial Keys Amount",
+                    "scope": "#/properties/TrialKeysAmount",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    },
+                    "rule": {
+                        "effect": "DISABLE",
+                        "condition": {
+                            "scope": "#/properties/TrialKeys",
+                            "schema": {
+                                "const": false
+                            }
+                        }
+                    }
+                }
+            ]
         },
+
         {
-          "type": "Control",
-          "scope": "#/properties/recurrence_interval",
-          "rule": {
-            "effect": "HIDE",
-            "condition": {
-              "type": "LEAF",
-              "scope": "#/properties/recurrence",
-              "expectedValue": "Never"
-            }
-          }
+            "type": "Group",
+            "label": "Magic",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "Upgrade Mode",
+                    "scope": "#/properties/MagicUpgrade",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "No Arcane",
+                    "scope": "#/properties/NoArcane"
+                },
+
+                {
+                    "type": "Divider"
+                },
+
+                {
+                    "type": "Control",
+                    "label": "Book Amount",
+                    "scope": "#/properties/BookAmount",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    },
+                    "rule": {
+                        "effect": "DISABLE",
+                        "condition": {
+                            "scope": "#/properties/MagicUpgrade",
+                            "schema": {
+                                "const": "Vanilla"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+
+        {
+            "type": "Group",
+            "label": "Combat",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "One Hit KO",
+                    "scope": "#/properties/OneHitKO"
+                },
+                {
+                    "type": "Control",
+                    "label": "Double Damage",
+                    "scope": "#/properties/DoubleDamage"
+                },
+                {
+                    "type": "Control",
+                    "label": "Half Damage",
+                    "scope": "#/properties/HalfDamage"
+                }
+            ]
+        },
+
+        {
+            "type": "Group",
+            "label": "Balance",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "Souls in checks",
+                    "scope": "#/properties/ChestSoulCount",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "Start Souls Modifier",
+                    "scope": "#/properties/StartSoulsModifier",
+                    "options": {
+                        "hideRequiredAsterisk": true
+                    }
+                }
+            ]
+        },
+
+        {
+            "type": "Group",
+            "label": "Item Pool Weights",
+            "elements": [
+                {
+                    "type": "Control",
+                    "label": "Souls",
+                    "scope": "#/properties/ItemWeightSouls",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "HP",
+                    "scope": "#/properties/ItemWeightHP",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "MP",
+                    "scope": "#/properties/ItemWeightMP",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "Defense",
+                    "scope": "#/properties/ItemWeightDefense",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "Holy",
+                    "scope": "#/properties/ItemWeightHoly",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                },
+                {
+                    "type": "Control",
+                    "label": "Arcane",
+                    "scope": "#/properties/ItemWeightArcane",
+                    "options": {
+                        "slider": true,
+                        "hideRequiredAsterisk": true
+                    }
+                }
+            ]
         }
-      ]
-    },
-    {
-      "type": "Control",
-      "scope": "#/properties/description",
-      "options": {
-        "multi": true
-      }
-    }
-  ]
+    ]
 }
