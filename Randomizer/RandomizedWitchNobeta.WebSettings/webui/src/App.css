@@ -34,3 +34,13 @@ html {
     transform: rotate(360deg);
   }
 }
+
+header.MuiAppBar-positionStatic {
+    box-shadow: none !important;
+    border-radius: 12px 12px 0 0 !important;
+    background-color: #080808 !important;
+}
+
+span.MuiTabs-indicator {
+  background-color: dodgerblue !important;
+}

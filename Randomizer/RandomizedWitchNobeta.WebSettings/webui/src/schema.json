@@ -13,18 +13,37 @@
                 "Standard",
                 "Advanced"
             ],
-            "default": "Advanced"
+            "default": "Advanced",
+            "description": "Choose the game difficulty."
         },
 
         "StartLevel": {
             "type": "string",
-            "enum": [
-                "Random",
-                "OkunShrine",
-                "UndergroundCave",
-                "LavaRuins",
-                "DarkTunnel",
-                "SpiritRealm"
+            "oneOf": [
+                {
+                    "const": "Random",
+                    "title": "Random"
+                },
+                {
+                    "const": "OkunShrine",
+                    "title": "Okun Shrine"
+                },
+                {
+                    "const": "UndergroundCave",
+                    "title": "Underground Cave"
+                },
+                {
+                    "const": "LavaRuins",
+                    "title": "Lava Ruins"
+                },
+                {
+                    "const": "DarkTunnel",
+                    "title": "Dark Tunnel"
+                },
+                {
+                    "const": "SpiritRealm",
+                    "title": "Spirit Realm"
+                }
             ],
             "default": "Random"
         },
@@ -35,18 +54,26 @@
 
         "GameTips": {
             "type": "boolean",
-            "default": true
+            "default": true,
+            "description": "When enabled, in-game tips on the grounds will display tips to help complete the run: regions that are needed to complete the run, content of certain chests, ..."
         },
 
         "NoArcane": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "When this setting is enabled, Arcane magic will not be usable until it is found like any other magic."
         },
         "MagicUpgrade": {
             "type": "string",
-            "enum": [
-                "Vanilla",
-                "BossKill"
+            "oneOf": [
+                {
+                    "const": "Vanilla",
+                    "title": "Vanilla"
+                },
+                {
+                    "const": "BossKill",
+                    "title": "Boss Kill"
+                }
             ],
             "default": "Vanilla"
         },
@@ -54,21 +81,25 @@
             "type": "integer",
             "minimum": 1,
             "maximum": 5,
-            "default": 1
+            "default": 1,
+            "description": "Sets the number of books of each magic type in the item pool when using Boss Kill magic upgrade mode. Getting duplicates of the same book won't upgrade them but it will make them easier to find."
         },
 
         "BossHunt": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "When enabled, it's needed to kill all bosses (including the one in Secret Passage, but not elites like the Seal) before being able to reach Nonota."
         },
         "MagicMaster": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "When enabled, it's needed to get all attack magics (arcane, ice, fire and thunder) to Lvl. Max (Lvl. 5) before being able to reach Nonota."
         },
 
         "TrialKeys": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Enabling this setting will add trial keys in the item pool. Each trial needs one key to be activated, so to reach Nonota it is needed to find at least 3 keys."
         },
         "TrialKeysAmount": {
             "type": "integer",
@@ -79,29 +110,34 @@
 
         "OneHitKO": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "Nobeta instantly dies upon taking any damage."
         },
         "DoubleDamage": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "All damage Nobeta receives are doubled."
         },
         "HalfDamage": {
             "type": "boolean",
-            "default": false
+            "default": false,
+            "description": "All damage Nobeta receives are halved."
         },
 
         "ChestSoulCount": {
             "type": "integer",
             "minimum": 50,
             "maximum": 2500,
-            "default": 250
+            "default": 250,
+            "description": "This is the amount of souls given for checks containing souls (chests, cat, ...). The souls in the item pool for checks can be disabled by setting a weight of 0 in 'Item Pool Weights' below for Souls."
         },
 
         "StartSoulsModifier": {
             "type": "number",
             "minimum": 0.0,
             "maximum": 10.0,
-            "default": 1.0
+            "default": 1.0,
+            "description": "The amount of souls given scaling on start level will be multiplied by this modifier. So for example, if you set 0.5, only half of the souls will be given. 0 means no souls at all at the start."
         },
 
         "ItemWeightSouls": {
@@ -139,6 +175,119 @@
             "minimum": 0,
             "maximum": 10,
             "default": 2
+        },
+
+
+        "SelectedSkin": {
+            "type": "string",
+            "oneOf": [
+                {
+                    "const": "Witch",
+                    "title": "Witch"
+                },
+                {
+                    "const": "Necromancer",
+                    "title": "Necromancer"
+                },
+                {
+                    "const": "Vampire",
+                    "title": "Vampire"
+                },
+                {
+                    "const": "Maid",
+                    "title": "Maid"
+                },
+                {
+                    "const": "SailorSuit",
+                    "title": "Sailor Suit"
+                },
+                {
+                    "const": "Swimsuit",
+                    "title": "Swimsuit"
+                },
+                {
+                    "const": "BearMuppet",
+                    "title": "Bear Muppet"
+                },
+                {
+                    "const": "Bunny",
+                    "title": "Bunny"
+                },
+                {
+                    "const": "MidnightKitty",
+                    "title": "Midnight Kitty"
+                },
+                {
+                    "const": "ChineseDress",
+                    "title": "Chinese Dress"
+                },
+                {
+                    "const": "Nurse",
+                    "title": "Nurse"
+                },
+                {
+                    "const": "Tania",
+                    "title": "Tania"
+                },
+                {
+                    "const": "Monica",
+                    "title": "Monica"
+                },
+                {
+                    "const": "Vanessa",
+                    "title": "Vanessa"
+                },
+                {
+                    "const": "BlackCat",
+                    "title": "BlackCat"
+                },
+                {
+                    "const": "DragonPrincess",
+                    "title": "Dragon Princess"
+                },
+                {
+                    "const": "KnittedUniform",
+                    "title": "Knitted Uniform"
+                },
+                {
+                    "const": "LandMineGirl",
+                    "title": "Land Mine Girl"
+                }
+            ],
+            "default": "Witch"
+        },
+
+        "RandomizeSkin": {
+            "type": "string",
+            "oneOf": [
+                {
+                    "const": "Never",
+                    "title": "Never"
+                },
+                {
+                    "const": "Once",
+                    "title": "Once"
+                },
+                {
+                    "const": "Always",
+                    "title": "Always"
+                }
+            ],
+            "default": "No",
+            "description": "'Once' will select a random skin at the start of a new run and keep it until the end of the run.\n'Always' will select a new random skin at each loading screen."
+        },
+
+        "HideBag": {
+            "type": "boolean",
+            "default": false
+        },
+        "HideStaff": {
+            "type": "boolean",
+            "default": false
+        },
+        "HideHat": {
+            "type": "boolean",
+            "default": false
         }
     },
 
@@ -175,6 +324,12 @@
         "ItemWeightMP",
         "ItemWeightDefense",
         "ItemWeightHoly",
-        "ItemWeightArcane"
+        "ItemWeightArcane",
+
+        "SelectedSkin",
+        "RandomizeSkin",
+        "HideBag",
+        "HideStaff",
+        "HideHat"
     ]
 }

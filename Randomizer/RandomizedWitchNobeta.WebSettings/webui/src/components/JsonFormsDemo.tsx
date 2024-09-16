@@ -77,7 +77,13 @@ const initialData = {
   ItemWeightMP: 1,
   ItemWeightDefense: 1,
   ItemWeightHoly: 1,
-  ItemWeightArcane: 2
+  ItemWeightArcane: 2,
+
+  SelectedSkin: 'Witch',
+  RandomizeSkin: 'Never',
+  HideBag: false,
+  HideStaff: false,
+  HideHat: false
 };
 
 const renderers = [
