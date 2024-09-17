@@ -1,4 +1,4 @@
-import { FC, useMemo, useState } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { JsonForms } from '@jsonforms/react';
 import Grid from '@mui/material/Grid';
 import Button from '@mui/material/Button';
@@ -83,7 +83,8 @@ const initialData = {
   RandomizeSkin: 'Never',
   HideBag: false,
   HideStaff: false,
-  HideHat: false
+  HideHat: false,
+  BonusInitialized: false
 };
 
 const renderers = [
@@ -101,6 +102,32 @@ export const JsonFormsDemo: FC = () => {
   const clearData = () => {
     setData({});
   };
+
+  useEffect(() => {
+    async function getBonusSettings() {
+      let response = await fetch("/bonus", {
+        method: 'GET',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+      }})
+
+      let bonusSettings = await response.json();
+
+      console.log(bonusSettings);
+
+      initialData.SelectedSkin = bonusSettings.selectedSkin;
+      initialData.RandomizeSkin = bonusSettings.randomizeSkin;
+      initialData.HideBag = bonusSettings.hideBag;
+      initialData.HideStaff = bonusSettings.hideStaff;
+      initialData.HideHat = bonusSettings.hideHat;
+      initialData.BonusInitialized = true;
+
+      setData(initialData);
+    }
+
+    getBonusSettings();
+  }, []);
 
   return (
     <Grid

@@ -1,14 +1,27 @@
 using System.Net;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using Microsoft.AspNetCore.Mvc;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.WebSettings;
+using RandomizedWitchNobeta.WebSettings.Utils;
 
 // ReSharper disable AccessToDisposedClosure
 
 Console.WriteLine(string.Join(", ", args));
 
-// Get settings path
-var settingsPath = args is [var path, ..]
+// Get seed settings path
+var seedSettingsPath = args is [var path, ..]
     ? path
     : "SeedSettings.json";
+
+var bonusSettingsPath = Path.Combine(Path.GetDirectoryName(seedSettingsPath)!, "BonusSettings.json");
+
+// Ensure bonus settings file exists
+if (!File.Exists(bonusSettingsPath))
+{
+    await File.WriteAllTextAsync(bonusSettingsPath, SerializeUtils.SerializeIndented(new BonusSettings()));
+}
 
 // Build api app
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -17,6 +30,11 @@ var builder = WebApplication.CreateSlimBuilder(args);
 builder.WebHost.ConfigureKestrel((_, serverOptions) =>
 {
     serverOptions.Listen(IPAddress.Loopback, 0);
+});
+
+builder.Services.ConfigureHttpJsonOptions(options =>
+{
+    options.SerializerOptions.TypeInfoResolverChain.Insert(0, JsonSourceGenerationContext.Default);
 });
 
 builder.Services.AddHostedService<BrowserOpenService>();
@@ -29,18 +47,37 @@ app.UseStaticFiles();
 app.MapGet("/", () => Results.Redirect("/index.html"));
 
 // Handle settings change
-app.MapPost("/settings", async context =>
+app.MapPost("/settings", async (HttpRequest request) =>
 {
-    // Write settings to pipe, the randomizer will deserialize it itself
-    // this avoids to share the settings model between this api and the randomizer
-    if (context.Request.HasJsonContentType())
-    {
-        await using var outputStream = File.Create(settingsPath);
+    var json = await new StreamReader(request.Body).ReadToEndAsync();
 
-        await context.Request.Body.CopyToAsync(outputStream);
+    var bonusInitialized = JsonNode.Parse(json)?["BonusInitialized"]?.GetValue<bool>();
+
+    if (SerializeUtils.DeserializeBonusSettings(json) is { } bonusSettings && bonusInitialized is true)
+    {
+        File.WriteAllText(bonusSettingsPath, SerializeUtils.SerializeIndented(bonusSettings));
     }
 
-    context.Response.StatusCode = StatusCodes.Status406NotAcceptable;
+    if (SerializeUtils.DeserializeSeedSettings(json) is { } seedSettings)
+    {
+        File.WriteAllText(seedSettingsPath, SerializeUtils.SerializeIndented(seedSettings));
+
+        return Results.Ok();
+    }
+
+    return Results.UnprocessableEntity();
+});
+
+app.MapGet("/bonus", async () =>
+{
+    if (File.Exists(bonusSettingsPath))
+    {
+        var content = await File.ReadAllTextAsync(bonusSettingsPath);
+
+        return Results.Ok(SerializeUtils.DeserializeBonusSettings(content));
+    }
+
+    return Results.NotFound();
 });
 
 app.Run();

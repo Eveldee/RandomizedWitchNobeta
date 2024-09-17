@@ -5,6 +5,7 @@ using System.Linq;
 using LibCpp2IL;
 using RandomizedWitchNobeta.Generation.Models;
 using RandomizedWitchNobeta.Patches;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Generation;

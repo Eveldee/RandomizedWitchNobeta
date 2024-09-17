@@ -1,12 +1,9 @@
-﻿using System;
-using System.Buffers.Text;
-using System.Text;
-using System.Text.Json;
+﻿using System.Diagnostics.CodeAnalysis;
 using MessagePack;
-using RandomizedWitchNobeta.Generation;
+using RandomizedWitchNobeta.Shared;
 using TextCopy;
 
-namespace RandomizedWitchNobeta.Utils;
+namespace RandomizedWitchNobeta.WebSettings.Utils;
 
 public static class SettingsExporter
 {
@@ -14,11 +11,10 @@ public static class SettingsExporter
     {
         var data = MessagePackSerializer.Serialize(seedSettings);
         var base64 = Convert.ToBase64String(data);
-
         ClipboardService.SetText(base64);
     }
 
-    public static bool TryImportSettings(out SeedSettings seedSettings)
+    public static bool TryImportSettings([NotNullWhen(true)] out SeedSettings? seedSettings)
     {
         var base64 = ClipboardService.GetText();
 

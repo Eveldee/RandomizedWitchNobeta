@@ -11,4 +11,8 @@
         <DefaultItemExcludes>$(DefaultItemExcludes);webui\**</DefaultItemExcludes>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\RandomizedWitchNobeta.Shared\RandomizedWitchNobeta.Shared.csproj" />
+    </ItemGroup>
+
 </Project>

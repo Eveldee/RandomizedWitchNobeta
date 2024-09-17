@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Patches.UI;
+using RandomizedWitchNobeta.Shared;
 using UnityEngine;
 
 namespace RandomizedWitchNobeta.Settings;
@@ -32,7 +33,7 @@ public sealed class SettingsService
         }
 
         // Setup file system watcher
-        _watcher = new FileSystemWatcher(Path.GetDirectoryName(StartPatches.SettingsPath)!, "*.json")
+        _watcher = new FileSystemWatcher(Path.GetDirectoryName(StartPatches.SeedSettingsPath)!, "*.json")
         {
             IncludeSubdirectories = false,
             EnableRaisingEvents = true
@@ -44,7 +45,7 @@ public sealed class SettingsService
         // Create web api process and pass settings path
         var serverProcess = Process.Start(new ProcessStartInfo(ServerExecutablePath)
         {
-            Arguments = StartPatches.SettingsPath,
+            Arguments = StartPatches.SeedSettingsPath,
             WorkingDirectory = Path.GetDirectoryName(ServerExecutablePath)!,
             UseShellExecute = true
         });
@@ -62,12 +63,12 @@ public sealed class SettingsService
     private void WatcherOnChanged(object sender, FileSystemEventArgs e)
     {
         // Ignore changes to other files
-        if (e.ChangeType is not (WatcherChangeTypes.Created or WatcherChangeTypes.Changed) || e.FullPath != StartPatches.SettingsPath)
+        if (e.ChangeType is not (WatcherChangeTypes.Created or WatcherChangeTypes.Changed) || e.FullPath != StartPatches.SeedSettingsPath)
         {
             return;
         }
 
-        var settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(StartPatches.SettingsPath));
+        var settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(StartPatches.SeedSettingsPath));
 
         if (settings is null)
         {

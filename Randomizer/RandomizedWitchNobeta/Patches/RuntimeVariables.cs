@@ -5,6 +5,7 @@ using System.Linq;
 using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Generation.Models;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Patches;

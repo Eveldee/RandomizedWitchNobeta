@@ -5,6 +5,7 @@ using MarsSDK;
 using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config.Serialization;
 using RandomizedWitchNobeta.Generation;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +20,7 @@ public static class StartPatches
 
     public static Text CopyrightText { get; private set; }
 
-    public static string SettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
+    public static string SeedSettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
 
     static StartPatches()
     {
@@ -125,14 +126,14 @@ public static class StartPatches
         // Fetch seed settings
         SeedSettings settings;
 
-        if (!File.Exists(SettingsPath))
+        if (!File.Exists(SeedSettingsPath))
         {
             settings = new SeedSettings();
-            File.WriteAllText(SettingsPath, SerializeUtils.SerializeIndented(settings));
+            File.WriteAllText(SeedSettingsPath, SerializeUtils.SerializeIndented(settings));
         }
         else
         {
-            settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(SettingsPath));
+            settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(SeedSettingsPath));
         }
 
         // Generate a seed
@@ -144,7 +145,7 @@ public static class StartPatches
         Plugin.Log.LogMessage("Creating save...");
 
         // Generate the save and apply flag modifications
-        var gameSave = new GameSave(GameSaveIndex, settings.Difficulty)
+        var gameSave = new GameSave(GameSaveIndex, (GameDifficulty) settings.Difficulty)
         {
             basic =
             {

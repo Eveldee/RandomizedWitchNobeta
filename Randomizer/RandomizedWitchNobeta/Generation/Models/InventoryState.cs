@@ -1,4 +1,6 @@
-﻿namespace RandomizedWitchNobeta.Generation.Models;
+﻿using RandomizedWitchNobeta.Shared;
+
+namespace RandomizedWitchNobeta.Generation.Models;
 
 public class InventoryState
 {

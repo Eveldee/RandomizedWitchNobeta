@@ -288,6 +288,10 @@
         "HideHat": {
             "type": "boolean",
             "default": false
+        },
+        "BonusInitialized": {
+            "type": "boolean",
+            "default": false
         }
     },
 

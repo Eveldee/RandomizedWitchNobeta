@@ -1,5 +1,6 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Generation;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Patches.Gameplay;

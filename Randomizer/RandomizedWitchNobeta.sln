@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomizedWitchNobeta", "Ra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomizedWitchNobeta.WebSettings", "RandomizedWitchNobeta.WebSettings\RandomizedWitchNobeta.WebSettings.csproj", "{61AED428-27F2-4F7E-920D-78A86492CEDD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RandomizedWitchNobeta.Shared", "RandomizedWitchNobeta.Shared\RandomizedWitchNobeta.Shared.csproj", "{1ECB459B-7722-443F-A553-C1A77AF95812}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,11 @@ Global
 		{61AED428-27F2-4F7E-920D-78A86492CEDD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{61AED428-27F2-4F7E-920D-78A86492CEDD}.NOUI|Any CPU.ActiveCfg = Debug|Any CPU
 		{61AED428-27F2-4F7E-920D-78A86492CEDD}.NOUI|Any CPU.Build.0 = Debug|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.NOUI|Any CPU.ActiveCfg = Debug|Any CPU
+		{1ECB459B-7722-443F-A553-C1A77AF95812}.NOUI|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 EndGlobal
