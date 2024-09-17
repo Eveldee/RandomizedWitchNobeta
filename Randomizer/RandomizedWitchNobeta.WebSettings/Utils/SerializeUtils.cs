@@ -4,7 +4,7 @@ using RandomizedWitchNobeta.Shared;
 
 namespace RandomizedWitchNobeta.WebSettings.Utils;
 
-[JsonSourceGenerationOptions(WriteIndented = true, IncludeFields = true, UseStringEnumConverter = true)]
+[JsonSourceGenerationOptions(WriteIndented = true, IncludeFields = true, UseStringEnumConverter = true, PropertyNamingPolicy = JsonKnownNamingPolicy.Unspecified)]
 [JsonSerializable(typeof(SeedSettings))]
 [JsonSerializable(typeof(BonusSettings))]
 internal partial class JsonSourceGenerationContext : JsonSerializerContext;

@@ -8,6 +8,10 @@
 
     <ItemGroup>
         <PackageReference Include="MessagePack" Version="2.5.124" />
+        <PackageReference Include="MessagePack.MSBuild.Tasks" Version="2.5.124">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
         <PackageReference Include="System.IO.Hashing" Version="6.0.0" />
         <PackageReference Include="TextCopy" Version="6.2.1" />
     </ItemGroup>

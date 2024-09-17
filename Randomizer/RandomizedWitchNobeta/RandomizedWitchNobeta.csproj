@@ -438,7 +438,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\ClickableTransparentOverlay\ClickableTransparentOverlay.csproj" />
       <ProjectReference Include="..\RandomizedWitchNobeta.Shared\RandomizedWitchNobeta.Shared.csproj" />
     </ItemGroup>
 </Project>

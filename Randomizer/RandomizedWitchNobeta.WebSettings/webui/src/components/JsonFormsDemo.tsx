@@ -34,10 +34,20 @@ const classes = {
     backgroundColor: '#cecece',
     marginBottom: '1rem',
   },
-  resetButton: {
-    margin: 'auto !important',
+
+  exportButton: {
     display: 'block !important',
+    margin: '1em !important',
+    marginRight: '.5em !important',
+    marginLeft: '1.2em !important',
   },
+  importButton: {
+    display: 'block !important',
+    margin: '1em !important',
+    marginRight: '.5em !important',
+    backgroundColor: '#F9A825',
+  },
+
   demoform: {
     margin: 'auto',
     padding: '1rem',
@@ -103,6 +113,43 @@ export const JsonFormsDemo: FC = () => {
     setData({});
   };
 
+  async function clipboardExport(data: any) {
+    console.log('Data exported to clipboard:');
+    console.log(data);
+
+    await fetch("/clipboard-export", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data, null, 4)
+    })
+  }
+
+  async function clipboardImport(oldData: any) {
+    let response = await fetch("/clipboard-import", {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }})
+
+    let newData = await response.json();
+
+    newData.SelectedSkin = oldData.SelectedSkin;
+    newData.RandomizeSkin = oldData.RandomizeSkin;
+    newData.HideBag = oldData.HideBag;
+    newData.HideStaff = oldData.HideStaff;
+    newData.HideHat = oldData.HideHat;
+    newData.BonusInitialized = oldData.BonusInitialized;
+
+    console.log('Data imported from clipboard:');
+    console.log(newData);
+
+    setData(newData);
+  }
+
   useEffect(() => {
     async function getBonusSettings() {
       let response = await fetch("/bonus", {
@@ -114,13 +161,14 @@ export const JsonFormsDemo: FC = () => {
 
       let bonusSettings = await response.json();
 
+      console.log('Initialization data:');
       console.log(bonusSettings);
 
-      initialData.SelectedSkin = bonusSettings.selectedSkin;
-      initialData.RandomizeSkin = bonusSettings.randomizeSkin;
-      initialData.HideBag = bonusSettings.hideBag;
-      initialData.HideStaff = bonusSettings.hideStaff;
-      initialData.HideHat = bonusSettings.hideHat;
+      initialData.SelectedSkin = bonusSettings.SelectedSkin;
+      initialData.RandomizeSkin = bonusSettings.RandomizeSkin;
+      initialData.HideBag = bonusSettings.HideBag;
+      initialData.HideStaff = bonusSettings.HideStaff;
+      initialData.HideHat = bonusSettings.HideHat;
       initialData.BonusInitialized = true;
 
       setData(initialData);
@@ -135,22 +183,28 @@ export const JsonFormsDemo: FC = () => {
       justifyContent={'center'}
       spacing={1}
       style={classes.container}>
-      {/* <Grid item sm={6}>
-        <Typography variant={'h4'}>Bound data</Typography>
-        <div style={classes.dataContent}>
-          <pre id="boundData">{stringifiedData}</pre>
-        </div>
-        <Button
-          style={classes.resetButton}
-          onClick={clearData}
-          color="primary"
-          variant="contained"
-          data-testid="clear-data">
-          Clear data
-        </Button>
-      </Grid> */}
       <Grid item xs={12} md={10} lg={8} xl={6} >
         <Typography variant={'h4'}>Settings</Typography>
+
+        <Button
+          style={classes.exportButton}
+          onClick={async () => await clipboardExport(data)}
+          color="primary"
+          variant="contained"
+          data-testid="clipboard-export"
+          id='clipboard-export'>
+          Export to Clipboard
+        </Button>
+        <Button
+          style={classes.importButton}
+          onClick={async () => await clipboardImport(data)}
+          color="primary"
+          variant="contained"
+          data-testid="clipboard-import"
+          id='clipboard-import'>
+          Import from Clipboard
+        </Button>
+
         <div style={classes.demoform}>
           <JsonForms
             schema={schema}
@@ -160,13 +214,13 @@ export const JsonFormsDemo: FC = () => {
             cells={materialCells}
             onChange={async event => { setData(event.data); if (!event.errors || event.errors.length == 0) {
                 await fetch("/settings", {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json',
-                  'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(event.data, null, 4)
-              })
+                  method: 'POST',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify(event.data, null, 4)
+                })
             }}}
           />
         </div>

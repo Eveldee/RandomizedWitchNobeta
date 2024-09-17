@@ -44,3 +44,12 @@ header.MuiAppBar-positionStatic {
 span.MuiTabs-indicator {
   background-color: dodgerblue !important;
 }
+
+button.MuiButton-contained {
+  margin: 1em !important;
+  margin-right: .5em !important;
+}
+
+#clipboard-export {
+  margin-left: 1.2em !important;
+}
