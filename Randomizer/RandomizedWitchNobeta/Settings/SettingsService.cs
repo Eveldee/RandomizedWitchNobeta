@@ -3,8 +3,8 @@ using System.Diagnostics;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config.Serialization;
-using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Patches.UI;
 using RandomizedWitchNobeta.Shared;
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace RandomizedWitchNobeta.Settings;
 
 public sealed class SettingsService
 {
-    public event Action<SeedSettings> SettingsUpdated;
+    public event Action<SeedSettings> SeedSettingsUpdated;
 
     private static string ServerExecutablePath { get; } = Path.Combine(Plugin.PluginInstallationDirectory.FullName, "RandomizedWitchNobeta.WebSettings.exe");
 
@@ -45,9 +45,8 @@ public sealed class SettingsService
         // Create web api process and pass settings path
         var serverProcess = Process.Start(new ProcessStartInfo(ServerExecutablePath)
         {
-            Arguments = StartPatches.SeedSettingsPath,
-            WorkingDirectory = Path.GetDirectoryName(ServerExecutablePath)!,
-            UseShellExecute = true
+            Arguments = $"\"{StartPatches.SeedSettingsPath}\"",
+            WorkingDirectory = Path.GetDirectoryName(ServerExecutablePath)!
         });
 
         Plugin.Log.LogInfo("Settings server started, starting read loop...");
@@ -60,26 +59,82 @@ public sealed class SettingsService
         serverProcess?.Close();
     }
 
-    private void WatcherOnChanged(object sender, FileSystemEventArgs e)
+    public void ReloadBonusSettings(BonusSettings bonusSettings = null)
+    {
+        if (bonusSettings is null)
+        {
+            try
+            {
+                bonusSettings =
+                    SerializeUtils.Deserialize<BonusSettings>(File.ReadAllText(StartPatches.BonusSettingsPath));
+            }
+            catch (Exception exception)
+            {
+                Plugin.Log.LogError("Could not read bonus settings!");
+                Plugin.Log.LogError(exception);
+
+                return;
+            }
+        }
+
+        AppearancePatches.SelectedSkin = (GameSkin) bonusSettings.SelectedSkin;
+        AppearancePatches.RandomizeSkin = bonusSettings.RandomizeSkin;
+        AppearancePatches.HideBagEnabled = bonusSettings.HideBag;
+        AppearancePatches.HideStaffEnabled = bonusSettings.HideStaff;
+        AppearancePatches.HideHatEnabled = bonusSettings.HideHat;
+
+        AppearancePatches.UpdateSelectedSkin();
+    }
+
+    private async void WatcherOnChanged(object sender, FileSystemEventArgs e)
     {
         // Ignore changes to other files
-        if (e.ChangeType is not (WatcherChangeTypes.Created or WatcherChangeTypes.Changed) || e.FullPath != StartPatches.SeedSettingsPath)
+        if (e.ChangeType is not (WatcherChangeTypes.Created or WatcherChangeTypes.Changed)
+            || (e.FullPath != StartPatches.SeedSettingsPath && e.FullPath != StartPatches.BonusSettingsPath))
         {
             return;
         }
 
-        var settings = SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(StartPatches.SeedSettingsPath));
+        await Task.Delay(100);
 
-        if (settings is null)
+        // Wait for file to be correctly written
+        string fileContent;
+        while (true)
         {
-            Plugin.Log.LogError($"Incorrect settings detected at: '{e.FullPath}'");
+            try
+            {
+                fileContent = await File.ReadAllTextAsync(e.FullPath);
 
-            return;
+                break;
+            }
+            catch (Exception)
+            {
+                await Task.Delay(100);
+            }
         }
 
-        Plugin.Log.LogDebug("Seed settings changed");
+        // Seed settings
+        if (e.FullPath == StartPatches.SeedSettingsPath)
+        {
+            var settings = SerializeUtils.Deserialize<SeedSettings>(fileContent);
 
-        SettingsUpdated?.Invoke(settings);
+            if (settings is null)
+            {
+                Plugin.Log.LogError($"Incorrect settings detected at: '{e.FullPath}'");
+
+                return;
+            }
+
+            Plugin.Log.LogDebug("Seed settings changed");
+
+            SeedSettingsUpdated?.Invoke(settings);
+        }
+
+        // Bonus Settings
+        if (e.FullPath == StartPatches.BonusSettingsPath && SerializeUtils.Deserialize<BonusSettings>(fileContent) is { } bonusSettings)
+        {
+            ReloadBonusSettings(bonusSettings);
+        }
     }
 
     public void Stop()

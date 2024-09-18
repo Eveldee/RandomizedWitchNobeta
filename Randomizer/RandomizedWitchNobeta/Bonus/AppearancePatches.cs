@@ -1,39 +1,25 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using EnumsNET;
 using HarmonyLib;
-using RandomizedWitchNobeta.Config;
+using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
-using UnityEngine;
 using Random = System.Random;
 
 namespace RandomizedWitchNobeta.Bonus;
 
-[Section("Bonus.Appearance")]
 public static class AppearancePatches
 {
-    [Bind]
-    public static int SelectedSkinIndex;
+    public static GameSkin SelectedSkin;
     public static readonly string[] AvailableSkins = Enum.GetNames<GameSkin>();
 
-    [Bind]
     public static bool HideBagEnabled;
-    [Bind]
     public static bool HideStaffEnabled;
-    [Bind]
     public static bool HideHatEnabled;
 
-    [Bind]
-    public static int RandomizeSkin;
-
-    public const int RandomizeSkin_No = 0;
-    public const int RandomizeSkin_Once = 1;
-    public const int RandomizeSkin_Always = 2;
+    public static BonusSettings.RandomSkin RandomizeSkin;
 
     public static void UpdateSelectedSkin()
     {
-        var gameSkin = (GameSkin) SelectedSkinIndex;
+        var gameSkin = SelectedSkin;
 
         Singletons.Dispatcher.Enqueue(() =>
         {
@@ -91,11 +77,10 @@ public static class AppearancePatches
     [HarmonyPrefix]
     private static void SwitchScenePrefix()
     {
-        if (RandomizeSkin == RandomizeSkin_Always)
+        if (RandomizeSkin == BonusSettings.RandomSkin.Always)
         {
-            var gameSkin = (GameSkin)Random.Shared.Next(0, AvailableSkins.Length);
-
-            Game.Collection.UpdateSkin(gameSkin);
+            SelectedSkin = (GameSkin) Random.Shared.Next(0, AvailableSkins.Length);
+            UpdateSelectedSkin();
         }
     }
 

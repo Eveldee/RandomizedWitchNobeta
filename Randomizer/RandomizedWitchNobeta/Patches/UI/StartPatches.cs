@@ -21,22 +21,25 @@ public static class StartPatches
     public static Text CopyrightText { get; private set; }
 
     public static string SeedSettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
+    public static string BonusSettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "BonusSettings.json");
 
     static StartPatches()
     {
         if (Singletons.SettingsService is { } settingsService)
         {
-            settingsService.SettingsUpdated += settings =>
-            {
-                if (CopyrightText is not null)
-                {
-                    CopyrightText.text =
-                        $"""
-                         Seed Hash: {settings.Hash():X8}
-                         © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
-                         """;
-                }
-            };
+            settingsService.SeedSettingsUpdated += UpdateSeedHash;
+        }
+    }
+
+    private static void UpdateSeedHash(SeedSettings settings)
+    {
+        if (CopyrightText != null)
+        {
+            CopyrightText.text =
+                $"""
+                 Seed Hash: {settings.Hash():X8}
+                 © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
+                 """;
         }
     }
 
@@ -78,6 +81,12 @@ public static class StartPatches
             copyrightGameObject.transform.Translate(0, 5, 0);
 
             CopyrightText = copyrightGameObject.GetComponent<Text>();
+
+            // Already set seed to the current settings
+            if (File.Exists(SeedSettingsPath))
+            {
+                UpdateSeedHash(SerializeUtils.Deserialize<SeedSettings>(File.ReadAllText(SeedSettingsPath)));
+            }
         }
         else
         {
@@ -123,6 +132,9 @@ public static class StartPatches
 
     private static void StartRandomizer()
     {
+        // Make sure bonus settings are loaded correctly
+        Singletons.SettingsService.ReloadBonusSettings();
+
         // Fetch seed settings
         SeedSettings settings;
 
@@ -176,9 +188,10 @@ public static class StartPatches
         Plugin.Log.LogMessage("Save created, loading the game...");
 
         // Load a random skin if activated
-        if (AppearancePatches.RandomizeSkin == AppearancePatches.RandomizeSkin_Once)
+        if (AppearancePatches.RandomizeSkin == BonusSettings.RandomSkin.Once)
         {
-            Game.Collection.UpdateSkin((GameSkin)Random.Shared.Next(0, AppearancePatches.AvailableSkins.Length));
+            AppearancePatches.SelectedSkin = (GameSkin) Random.Shared.Next(0, AppearancePatches.AvailableSkins.Length);
+            AppearancePatches.UpdateSelectedSkin();
         }
 
         // Load save
