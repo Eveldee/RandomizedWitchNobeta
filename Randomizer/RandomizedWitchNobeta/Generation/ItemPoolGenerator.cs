@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using RandomizedWitchNobeta.Shared;
 using Weighted_Randomizer;
 
 namespace RandomizedWitchNobeta.Generation;

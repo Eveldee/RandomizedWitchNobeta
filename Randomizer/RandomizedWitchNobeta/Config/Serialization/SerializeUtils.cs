@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using System.Text.Json.Serialization;
 using TupleAsJsonArray;
 
 namespace RandomizedWitchNobeta.Config.Serialization;
@@ -10,6 +11,7 @@ public static class SerializeUtils
         WriteIndented = true,
         Converters =
         {
+            new JsonStringEnumConverter(),
             new UnityVector3JsonConverter(),
             new UnityQuaternionJsonConverter(),
             new NumericsVector4JsonConverter(),

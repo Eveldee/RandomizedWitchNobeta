@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Generation.Models;
+using RandomizedWitchNobeta.Shared;
 
 namespace RandomizedWitchNobeta.Patches;
 

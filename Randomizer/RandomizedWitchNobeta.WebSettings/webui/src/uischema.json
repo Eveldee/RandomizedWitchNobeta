@@ -1,0 +1,396 @@
+{
+    "type": "Categorization",
+    "elements": [
+        {
+            "type": "Category",
+            "label": "Randomizer",
+            "elements": [
+                {
+                    "type": "VerticalLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "label": "General",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Seed",
+                                    "scope": "#/properties/Seed",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Difficulty",
+                                    "scope": "#/properties/Difficulty",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Shuffle Exits",
+                                    "scope": "#/properties/ShuffleExits",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Start Level",
+                                    "scope": "#/properties/StartLevel",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Game Tips",
+                                    "scope": "#/properties/GameTips",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                }
+                            ]
+                        },
+
+                        {
+                            "type": "Group",
+                            "label": "Extra End Conditions",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Magic Master",
+                                    "scope": "#/properties/MagicMaster",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Boss Hunt",
+                                    "scope": "#/properties/BossHunt",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Trial Keys",
+                                    "scope": "#/properties/TrialKeys",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Trial Keys Amount",
+                                    "scope": "#/properties/TrialKeysAmount",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    },
+                                    "rule": {
+                                        "effect": "DISABLE",
+                                        "condition": {
+                                            "scope": "#/properties/TrialKeys",
+                                            "schema": {
+                                                "const": false
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+
+                        {
+                            "type": "Group",
+                            "label": "Magic",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Upgrade Mode",
+                                    "scope": "#/properties/MagicUpgrade",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "No Arcane",
+                                    "scope": "#/properties/NoArcane",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Book Amount",
+                                    "scope": "#/properties/BookAmount",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    },
+                                    "rule": {
+                                        "effect": "DISABLE",
+                                        "condition": {
+                                            "scope": "#/properties/MagicUpgrade",
+                                            "schema": {
+                                                "const": "Vanilla"
+                                            }
+                                        }
+                                    }
+                                }
+                            ]
+                        },
+
+                        {
+                            "type": "Group",
+                            "label": "Combat",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "One Hit KO",
+                                    "scope": "#/properties/OneHitKO",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Double Damage",
+                                    "scope": "#/properties/DoubleDamage",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Half Damage",
+                                    "scope": "#/properties/HalfDamage",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                }
+                            ]
+                        },
+
+                        {
+                            "type": "Group",
+                            "label": "Balance",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Souls in checks",
+                                    "scope": "#/properties/ChestSoulCount",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Start Souls Modifier",
+                                    "scope": "#/properties/StartSoulsModifier",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                }
+                            ]
+                        },
+
+                        {
+                            "type": "Group",
+                            "label": "Item Pool Weights",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Souls",
+                                    "scope": "#/properties/ItemWeightSouls",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "HP",
+                                    "scope": "#/properties/ItemWeightHP",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "MP",
+                                    "scope": "#/properties/ItemWeightMP",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Defense",
+                                    "scope": "#/properties/ItemWeightDefense",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Holy",
+                                    "scope": "#/properties/ItemWeightHoly",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Arcane",
+                                    "scope": "#/properties/ItemWeightArcane",
+                                    "options": {
+                                        "slider": true,
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Bonus",
+            "elements": [
+                {
+                    "type": "VerticalLayout",
+                    "elements": [
+                        {
+                            "type": "Group",
+                            "label": "Skin",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "label": "Skin",
+                                    "scope": "#/properties/SelectedSkin",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    },
+                                    "rule": {
+                                        "effect": "DISABLE",
+                                        "condition": {
+                                            "scope": "#/properties/RandomizeSkin",
+                                            "schema": {
+                                                "not": { "const": "Never" }
+                                            }
+                                        }
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Randomize skin",
+                                    "scope": "#/properties/RandomizeSkin",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+
+                                {
+                                    "type": "Divider"
+                                },
+
+                                {
+                                    "type": "Control",
+                                    "label": "Hide Bag",
+                                    "scope": "#/properties/HideBag",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Hide Staff",
+                                    "scope": "#/properties/HideStaff",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
+                                {
+                                    "type": "Control",
+                                    "label": "Hide Hat",
+                                    "scope": "#/properties/HideHat",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

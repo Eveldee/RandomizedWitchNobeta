@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <PublishAot>true</PublishAot>
+        <InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.AspNetCore.Http.Generated</InterceptorsPreviewNamespaces>
+
+        <DefaultItemExcludes>$(DefaultItemExcludes);webui\**</DefaultItemExcludes>
+
+        <OutputType>WinExe</OutputType>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RandomizedWitchNobeta.Shared\RandomizedWitchNobeta.Shared.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Content Remove="BonusSettings.json" />
+      <None Include="BonusSettings.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+      <Content Remove="SeedSettings.json" />
+      <None Include="SeedSettings.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+      <Content Remove="appsettings.json" />
+      <None Include="appsettings.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+      <Content Remove="appsettings.Development.json" />
+      <None Include="appsettings.Development.json">
+        <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      </None>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="TextCopy" Version="6.2.1" />
+    </ItemGroup>
+
+</Project>

@@ -12,3 +12,5 @@ InstallFiles
 Randomizer/.idea
 Randomizer/RandomizedWitchNobeta/.idea/.idea.RandomizedWitchNobeta.dir/.idea
 Randomizer/RandomizedWitchNobeta.sln.DotSettings.user
+Randomizer/RandomizedWitchNobeta.WebSettings/SeedSettings.json
+Randomizer/RandomizedWitchNobeta.WebSettings/BonusSettings.json

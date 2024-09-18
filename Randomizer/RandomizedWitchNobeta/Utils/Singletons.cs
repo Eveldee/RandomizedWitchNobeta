@@ -1,6 +1,7 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
 using RandomizedWitchNobeta.Patches;
+using RandomizedWitchNobeta.Settings;
 using RandomizedWitchNobeta.Timer;
 using UnityEngine;
 
@@ -24,6 +25,8 @@ public static class Singletons
     public static Timers Timers { get; set; }
     public static UIPauseMenu UIPauseMenu { get; private set; }
     public static GameUIManager GameUIManager { get; private set; }
+
+    public static SettingsService SettingsService { get; set; }
 
     public static bool SaveLoaded => GameSave is not null;
 
