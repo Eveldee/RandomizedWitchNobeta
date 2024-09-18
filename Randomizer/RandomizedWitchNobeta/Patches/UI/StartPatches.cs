@@ -33,14 +33,17 @@ public static class StartPatches
 
     private static void UpdateSeedHash(SeedSettings settings)
     {
-        if (CopyrightText != null)
+        Singletons.Dispatcher.Enqueue(() =>
         {
-            CopyrightText.text =
-                $"""
-                 Seed Hash: {settings.Hash():X8}
-                 © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
-                 """;
-        }
+            if (CopyrightText != null)
+            {
+                CopyrightText.text =
+                    $"""
+                     Seed Hash: {settings.Hash():X8}
+                     © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
+                     """;
+            }
+        });
     }
 
     [HarmonyPatch(typeof(UIOpeningMenu), nameof(UIOpeningMenu.Init))]
@@ -191,7 +194,6 @@ public static class StartPatches
         if (AppearancePatches.RandomizeSkin == BonusSettings.RandomSkin.Once)
         {
             AppearancePatches.SelectedSkin = (GameSkin) Random.Shared.Next(0, AppearancePatches.AvailableSkins.Length);
-            AppearancePatches.UpdateSelectedSkin();
         }
 
         // Load save

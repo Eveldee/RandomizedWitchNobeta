@@ -82,8 +82,6 @@ public sealed class SettingsService
         AppearancePatches.HideBagEnabled = bonusSettings.HideBag;
         AppearancePatches.HideStaffEnabled = bonusSettings.HideStaff;
         AppearancePatches.HideHatEnabled = bonusSettings.HideHat;
-
-        AppearancePatches.UpdateSelectedSkin();
     }
 
     private async void WatcherOnChanged(object sender, FileSystemEventArgs e)

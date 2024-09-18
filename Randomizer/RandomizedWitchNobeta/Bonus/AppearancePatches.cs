@@ -17,7 +17,7 @@ public static class AppearancePatches
 
     public static BonusSettings.RandomSkin RandomizeSkin;
 
-    public static void UpdateSelectedSkin()
+    private static void UpdateSelectedSkin()
     {
         var gameSkin = SelectedSkin;
 
@@ -80,8 +80,9 @@ public static class AppearancePatches
         if (RandomizeSkin == BonusSettings.RandomSkin.Always)
         {
             SelectedSkin = (GameSkin) Random.Shared.Next(0, AvailableSkins.Length);
-            UpdateSelectedSkin();
         }
+
+        UpdateSelectedSkin();
     }
 
     [HarmonyPatch(typeof(PlayerController), nameof(PlayerController.Update))]

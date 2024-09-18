@@ -329,6 +329,15 @@
                                     "options": {
                                         "hideRequiredAsterisk": true,
                                         "showUnfocusedDescription": true
+                                    },
+                                    "rule": {
+                                        "effect": "DISABLE",
+                                        "condition": {
+                                            "scope": "#/properties/RandomizeSkin",
+                                            "schema": {
+                                                "not": { "const": "Never" }
+                                            }
+                                        }
                                     }
                                 },
 
