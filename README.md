@@ -14,15 +14,12 @@
   - [Locations Randomization](#locations-randomization)
   - [Chest Content Randomization](#chest-content-randomization)
   - [End Screen](#end-screen)
-  - [Timer](#timer)
   - [Boss Hunt and Magic Master](#boss-hunt-and-magic-master)
   - [Trial Keys](#trial-keys)
   - [No Arcane](#no-arcane)
   - [Magic Upgrades](#magic-upgrades)
   - [Extra loots](#extra-loots)
   - [Bonus](#bonus)
-- [ImGui tips](#imgui-tips)
-- [OBS Capture](#obs-capture)
 - [Building](#building)
 - [Bug report and help](#bug-report-and-help)
 - [Contributing](#contributing)
@@ -38,7 +35,7 @@ The game balance was and is heavily considered during the development of this ra
 
 ## Compatibility
 
-This randomizer is only compatible with the **latest version of the game** _(1.0.5 at the time of writing this)_. No support is given for older versions of the game.
+This randomizer is only compatible with the **latest version of the game** _(1.1.0 at the time of writing this)_. No support is given for older versions of the game.
 
 ## Installation
 
@@ -48,7 +45,7 @@ This plugin modifies the game using [BepInEx](https://github.com/BepInEx/BepInEx
 - You should now have at least two folders in the `steamapps/common` directory: `Little Witch Nobeta` *(base game)* and `Little Witch Nobeta - Randomizer` *(will be modded with the Randomizer)*
 - Download the randomizer: [**`RandomizedWitchNobeta.zip`**](/../../releases/latest/download/RandomizedWitchNobeta.zip)
 - Copy all the files from the archive inside the game directory *(Where there is `LittleWitchNobeta.exe`)*
-- Now you should see a file named `imgui.ini` just next to `LittleWitchNobeta.exe`
+- Now you should see a file named `winhttp.dll` just next to `LittleWitchNobeta.exe`
 - Create a shortcut to `LittleWitchNobeta.exe`, name it as you want, run the game and enjoy!
 
 A correct installation directory content should look like this:
@@ -64,7 +61,6 @@ A correct installation directory content should look like this:
 ├── baselib.dll
 ├── changelog.txt
 ├── doorstop_config.ini
-├── imgui.ini
 └── winhttp.dll
 ```
 
@@ -83,8 +79,8 @@ Every feature of this randomizer can be tweaked before starting a run, those set
 Any combination of settings will always generate a completable seed, meaning it's possible to reach Nonota and kill her to get the end credits _(unless the verification algorithm has a bug, please report it if you ever find an uncompletable seed!)_
 
 To organize a race where all players are playing with the same settings and the same seed:
-- Make sure everyone is using the same version of the randomizer! _(The version is displayed on top of the settings window)_
-- Tweak the settings as you want them to be
+- Make sure everyone is using the same version of the randomizer! _(The version is displayed next to the game version in the title screen)_
+- Tweak the settings as you want them to be in the automatically opened browser page
 - Click on 'Export to Clipboard'
 - Paste the generated text where other people can copy it _(discord, messenger, ...)_
 - Other players can copy the generated text and then click on 'Import from Clipboard'
@@ -113,18 +109,6 @@ The end screen message is modified to show the time needed to complete a run and
 ![End Screen](Screenshots/End%20Screen.png)
 
 > Example of an end screen after completing a run
-
-### Timer
-
-It is possible for those who wants it to show the timer during the run and not only at the end. Those settings can be found in the "Timers" tab on the title screen.
-
-![Timers Display](Screenshots/Timers.png)
-
-> Timer display while playing
-
-![Timer Settings](Screenshots/Timer_Settings.png)
-
-> Available timer settings
 
 ### Boss Hunt and Magic Master
 
@@ -160,24 +144,11 @@ In addition to magic crystals, it is possible to find souls in chests and given 
 
 ### Bonus
 
-A **'Bonus'** tab is available in the randomizer settings window, containing small tweaks that does not impact gameplay.
+A **'Bonus'** tab is available in the randomizer settings window, containing small tweaks _(mostly visual)_ that do not impact gameplay.
 
-![Bonus Tab](Screenshots/Bonus.png)
+![Bonus settings](Screenshots/Bonus.png)
 
 > Bonus tab with skin settings
-
-## ImGui tips
-
-This Randomizer use [ImGui](https://github.com/ocornut/imgui) for the graphic part, here are some handy shortcuts/tips that can be used:
-- To resize a window, hold left click on the little blue triangle in bottom-right corner of any window
-- It is possible to "dock" windows by moving a window on top of another one. Likewise, it is possible to "split" docked windows by moving a window outside of it's dock area
-- Ctrl + click on a slider/drag will allow you to set a custom value, even one outside the standard range _(using this to alter the settings can have unexpected consequences)_
-- Shift/Alt + drag on a slider/drag will change the increment steps _(slower or faster)_
-- Click on a color preview to open a complete color picker
-
-## OBS Capture
-
-There is an issue with old capture modes and topmost windows created by the overlay. The only known way to capture the game at the moment is to either do a screen capture, or do a window capture and set the capture mode to `Windows 10 (...)` _(note that this type of window capture will draw a yellow border around the window, the only way to hide it is to use Windows 11)_
 
 ## Building
 
@@ -189,6 +160,8 @@ The easiest way to generate the needed interop files is to install the randomize
 
 Once those two steps are done, the randomizer can be built using either the dotnet CLI or your preferred IDE. The output will be a `.dll` file that needs to be placed in the directory `BepInEx/Plugin/RandomizedWitchNobeta`.
 
+In addition, the web settings ui can be built using the `buildui.fish` script located in the web settings project. The code itself can be updated by running the `publish.fish` script. To update the web settings after a ui and code change, it is required to replace the `RandomizedWitchNobeta.WebSettings.exe` and `wwwroot` files/directories. It is not required to build the web settings manually when modifying the randomizer, it is only required when adding new settings.
+
 ## Bug report and help
 
 If you found a bug, need help with the Randomizer or want to suggest a new feature, you can either [open a new issue](/../../issues) or you can find me on the [Little Witch Nobeta Speedruns Discord](https://discord.gg/3FMeB4m).
@@ -197,14 +170,13 @@ Please send a copy of the log file in `BepInEx\LogOutput.log` in case you found 
 
 ## Contributing
 
-This repository accepts contributions, don't hesite to [open a new issue](/../../issues) before doing a pull request for major changes or new features.
+This repository accepts contributions, don't hesitate to [open a new issue](/../../issues) before doing a pull request for major changes or new features.
 
 ## Used libraries
 
 This Trainer tool couldn't be made without these awesome libraries and tools:
 - [BepInEx](https://github.com/BepInEx/BepInEx) - *licensed under the LGPL-2.1 license*
-- [ImGui](https://github.com/ocornut/imgui) - *licensed under the MIT license*
-- [ClickableTransparentOverlay](https://github.com/zaafar/ClickableTransparentOverlay) - *licensed under the Apache-2.0 license*
+- [Json Forms](https://github.com/eclipsesource/jsonforms) - *licensed under the MIT license*
 - [Humanizer](https://github.com/Humanizr/Humanizer) - *licensed under the MIT license*
 - [Weighted Item Randomizer for C#](https://github.com/BlueRaja/Weighted-Item-Randomizer-for-C-Sharp) - *licensed under the MIT license*
 
