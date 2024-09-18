@@ -52,10 +52,10 @@
             "default": true
         },
 
-        "GameTips": {
+        "GameHints": {
             "type": "boolean",
             "default": true,
-            "description": "When enabled, in-game tips on the grounds will display tips to help complete the run: regions that are needed to complete the run, content of certain chests, ..."
+            "description": "When enabled, in-game tips on the grounds will display hints to help complete the run: regions that are needed to complete the run, content of certain chests, etc"
         },
 
         "NoArcane": {
@@ -116,12 +116,12 @@
         "DoubleDamage": {
             "type": "boolean",
             "default": false,
-            "description": "All damage Nobeta receives are doubled."
+            "description": "All damage Nobeta receives is doubled."
         },
         "HalfDamage": {
             "type": "boolean",
             "default": false,
-            "description": "All damage Nobeta receives are halved."
+            "description": "All damage Nobeta receives is halved."
         },
 
         "ChestSoulCount": {
@@ -129,7 +129,7 @@
             "minimum": 50,
             "maximum": 2500,
             "default": 250,
-            "description": "This is the amount of souls given for checks containing souls (chests, cat, ...). The souls in the item pool for checks can be disabled by setting a weight of 0 in 'Item Pool Weights' below for Souls."
+            "description": "This is the amount of souls given for checks containing souls (chests, cat, etc). The souls in the item pool for checks can be disabled by setting a weight of 0 in 'Item Pool Weights' below for Souls."
         },
 
         "StartSoulsModifier": {
@@ -303,7 +303,7 @@
         "StartLevel",
         "ShuffleExits",
 
-        "GameTips",
+        "GameHints",
 
         "NoArcane",
         "MagicUpgrade",

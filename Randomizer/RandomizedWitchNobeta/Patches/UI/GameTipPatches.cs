@@ -3,14 +3,14 @@ using RandomizedWitchNobeta.Utils;
 
 namespace RandomizedWitchNobeta.Patches.UI;
 
-public static class GameTipPatches
+public static class GameHintsPatches
 {
     [HarmonyPatch(typeof(Game), nameof(Game.AppearGameTip))]
     [HarmonyPrefix]
     // ReSharper disable once RedundantAssignment
     private static void AppearGameTipPrefix(ref GameTipStyle style, ref GameTipStyle __state)
     {
-        if (Singletons.RuntimeVariables is not { Settings.GameTips: true })
+        if (Singletons.RuntimeVariables is not { Settings.GameHints: true })
         {
             return;
         }
@@ -25,7 +25,7 @@ public static class GameTipPatches
     [HarmonyPostfix]
     private static void AppearGameTipPostfix(ref GameTipStyle style, ref GameTipStyle __state)
     {
-        if (Singletons.RuntimeVariables is not { Settings.GameTips: true })
+        if (Singletons.RuntimeVariables is not { Settings.GameHints: true })
         {
             return;
         }

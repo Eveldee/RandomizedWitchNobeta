@@ -124,7 +124,7 @@ public class Plugin : BasePlugin
 
         // UI Patches
         Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
-        Harmony.CreateAndPatchAll(typeof(GameTipPatches));
+        Harmony.CreateAndPatchAll(typeof(GameHintsPatches));
 
         // Randomizer patches
         Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));

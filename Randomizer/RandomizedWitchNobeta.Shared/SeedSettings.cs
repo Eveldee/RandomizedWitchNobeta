@@ -44,7 +44,7 @@ public class SeedSettings
     public bool ShuffleExits { get; set; } = true;
 
     [JsonInclude, Key(22)]
-    public bool GameTips { get; set; } = true;
+    public bool GameHints { get; set; } = true;
 
     [JsonInclude, Key(4)]
     public bool NoArcane { get; set; } = false;

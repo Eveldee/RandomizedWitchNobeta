@@ -65,8 +65,8 @@
 
                                 {
                                     "type": "Control",
-                                    "label": "Game Tips",
-                                    "scope": "#/properties/GameTips",
+                                    "label": "Game Hints (Work in Progress)",
+                                    "scope": "#/properties/GameHints",
                                     "options": {
                                         "hideRequiredAsterisk": true,
                                         "showUnfocusedDescription": true

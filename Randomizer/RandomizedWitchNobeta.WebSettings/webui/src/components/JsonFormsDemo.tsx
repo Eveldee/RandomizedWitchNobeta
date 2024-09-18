@@ -62,7 +62,7 @@ const initialData = {
   StartLevel: 'Random',
   ShuffleExits: true,
 
-  GameTips: true,
+  GameHints: true,
 
   NoArcane: false,
   MagicUpgrade: 'Vanilla',

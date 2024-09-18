@@ -18,11 +18,11 @@ public static class SettingsExporter
     public static bool TryImportSettings(MessagePackSerializerOptions messagePackOptions,
         [NotNullWhen(true)] out SeedSettings? seedSettings)
     {
-        var base64 = ClipboardService.GetText();
+        var base64 = ClipboardService.GetText()!.Trim();
 
         try
         {
-            var data = Convert.FromBase64String(base64!);
+            var data = Convert.FromBase64String(base64);
 
             seedSettings = MessagePackSerializer.Deserialize<SeedSettings>(data, messagePackOptions);
 
