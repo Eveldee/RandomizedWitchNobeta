@@ -25,6 +25,12 @@ var seedSettingsPath = args is [var path, ..]
     ? path
     : "SeedSettings.json";
 
+int? parentProcessId = null;
+if (args.Length >= 2 && int.TryParse(args[1], out var id))
+{
+    parentProcessId = id;
+}
+
 var bonusSettingsPath = Path.Combine(Path.GetDirectoryName(seedSettingsPath)!, "BonusSettings.json");
 
 // Ensure bonus settings file exists
@@ -49,6 +55,9 @@ builder.Services.ConfigureHttpJsonOptions(options =>
 });
 
 builder.Services.AddHostedService<BrowserOpenService>();
+builder.Services.AddHostedService<AutoCloseService>(provider =>
+    new AutoCloseService(provider.GetRequiredService<IHostApplicationLifetime>(), parentProcessId
+));
 
 var app = builder.Build();
 

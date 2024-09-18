@@ -45,7 +45,7 @@ public sealed class SettingsService
         // Create web api process and pass settings path
         var serverProcess = Process.Start(new ProcessStartInfo(ServerExecutablePath)
         {
-            Arguments = $"\"{StartPatches.SeedSettingsPath}\"",
+            Arguments = $"\"{StartPatches.SeedSettingsPath}\" \"{Environment.ProcessId}\"",
             WorkingDirectory = Path.GetDirectoryName(ServerExecutablePath)!
         });
 
