@@ -20,6 +20,8 @@ public static class StartPatches
     public const int GameSaveIndex = 9;
 
     public static Text CopyrightText { get; private set; }
+    public static string GameVersionText { get; private set; }
+    public static string RandomizerVersionText { get; private set; }
 
     public static string SeedSettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "SeedSettings.json");
     public static string BonusSettingsPath { get; } = Path.Combine(Plugin.ConfigDirectory.FullName, "BonusSettings.json");
@@ -40,7 +42,7 @@ public static class StartPatches
             {
                 CopyrightText.text =
                     $"""
-                     Seed Hash: {settings.Hash():X8}
+                     Seed Hash: {settings.Hash(GameVersionText, RandomizerVersionText):X8}
                      © 2022 Pupuya Games / SimonCreative / Justdan  © 2016 COVER Corp.
                      """;
             }
@@ -85,6 +87,21 @@ public static class StartPatches
             copyrightGameObject.transform.Translate(0, 5, 0);
 
             CopyrightText = copyrightGameObject.GetComponent<Text>();
+
+            // Add randomizer plugin version next to game version
+            var versionGameObject = __instance.transform.Find("Foreground/Version").gameObject;
+            versionGameObject.transform.Translate(0, 5, 0);
+
+            var versionText = versionGameObject.GetComponent<Text>();
+
+            GameVersionText = versionText.text;
+            RandomizerVersionText = $"Ver {MyPluginInfo.PLUGIN_VERSION}";
+
+            versionText.text =
+                $"""
+                Game {GameVersionText}
+                Randomizer {RandomizerVersionText}
+                """;
 
             // Already set seed to the current settings
             if (File.Exists(SeedSettingsPath))

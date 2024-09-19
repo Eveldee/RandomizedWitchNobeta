@@ -90,9 +90,11 @@ public class SeedSettings
     [JsonInclude, Key(20)]
     public int ItemWeightArcane { get; set; } = 2;
 
-    public int Hash()
+    public int Hash(string gameVersionText, string randomizerVersionText)
     {
         // This is not ideal but it gives consistent results
-        return BitConverter.ToInt32(Crc32.Hash(Encoding.UTF8.GetBytes(SerializeUtils.SerializeIndented(this))));
+        return BitConverter.ToInt32(
+            Crc32.Hash(Encoding.UTF8.GetBytes(SerializeUtils.SerializeIndented(this) + gameVersionText + randomizerVersionText))
+        );
     }
 }
