@@ -8,7 +8,9 @@ namespace RandomizedWitchNobeta.Features.EndConditions;
 
 public static class TrialKeysPatches
 {
-    private static readonly List<MultipleEventOpen> _openers = new();
+    private static readonly List<MultipleEventOpen> _openers = [];
+
+    private static string _lastOpenerEnteredName = "";
 
     // Disable auto-open of trials
     [HarmonyPatch(typeof(MultipleEventOpen), nameof(MultipleEventOpen.InitData))]
@@ -89,6 +91,32 @@ public static class TrialKeysPatches
                         return;
                     }
                 }
+            }
+        }
+    }
+
+    // Display a help message when near a trial
+    [HarmonyPatch(typeof(WizardGirlManage), nameof(WizardGirlManage.Update))]
+    [HarmonyPostfix]
+    private static void HelpMessageUpdatePostfix(WizardGirlManage __instance)
+    {
+        // Skip if trial keys are not enabled
+        if (Game.sceneManager.stageId != 7 || Singletons.RuntimeVariables is not { Settings.TrialKeys: true } runtimeVariables)
+        {
+            return;
+        }
+
+        foreach (var opener in _openers)
+        {
+            if (opener.name != _lastOpenerEnteredName
+                && opener.g_BC.Contains(__instance.transform.position)
+                && !runtimeVariables.OpenedTrials.Contains(opener.name))
+            {
+                _lastOpenerEnteredName = opener.name;
+
+                Game.AppearEventPrompt("Drop a trial key to open the trial teleporter.");
+
+                return;
             }
         }
     }
