@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
@@ -10,13 +11,9 @@ using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
-using RandomizedWitchNobeta.Bonus;
 using RandomizedWitchNobeta.Config;
-using RandomizedWitchNobeta.Patches.Gameplay;
-using RandomizedWitchNobeta.Patches.Shuffle;
-using RandomizedWitchNobeta.Patches.UI;
-using RandomizedWitchNobeta.Settings;
-using RandomizedWitchNobeta.Timer;
+using RandomizedWitchNobeta.Features;
+using RandomizedWitchNobeta.Features.Timer;
 using RandomizedWitchNobeta.Utils;
 using UnityEngine;
 
@@ -31,6 +28,8 @@ public class Plugin : BasePlugin
     public static DirectoryInfo ConfigDirectory;
     public static DirectoryInfo PluginInstallationDirectory;
     public static ConfigFile ConfigFile;
+
+    private static Harmony _harmony;
 
     private static AutoConfigManager AutoConfigManager;
 
@@ -105,36 +104,16 @@ public class Plugin : BasePlugin
 
     public static void ApplyPatches()
     {
-        Harmony.CreateAndPatchAll(typeof(Singletons));
-        Harmony.CreateAndPatchAll(typeof(SceneUtils));
-        Harmony.CreateAndPatchAll(typeof(ConfigPatches));
+        _harmony = new Harmony(nameof(RandomizedWitchNobeta));
 
-        Harmony.CreateAndPatchAll(typeof(StartPatches));
-        Harmony.CreateAndPatchAll(typeof(RunCompletePatches));
+        foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
+        {
+            var methods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static);
 
-        // Gameplay patches
-        Harmony.CreateAndPatchAll(typeof(TeleportMenuPatches));
-        Harmony.CreateAndPatchAll(typeof(LockedDoorPatches));
-        Harmony.CreateAndPatchAll(typeof(ArcaneDisabledPatches));
-        Harmony.CreateAndPatchAll(typeof(MagicUpgradePatches));
-        Harmony.CreateAndPatchAll(typeof(ItemPoolSizePatches));
-        Harmony.CreateAndPatchAll(typeof(TrialKeysPatches));
-        Harmony.CreateAndPatchAll(typeof(EndConditionsPatches));
-        Harmony.CreateAndPatchAll(typeof(CombatPatches));
-
-        // UI Patches
-        Harmony.CreateAndPatchAll(typeof(StatueUnlockPatches));
-        Harmony.CreateAndPatchAll(typeof(GameHintsPatches));
-
-        // Randomizer patches
-        Harmony.CreateAndPatchAll(typeof(ChestContentShufflePatches));
-        Harmony.CreateAndPatchAll(typeof(ExitShufflePatches));
-        Harmony.CreateAndPatchAll(typeof(ChestExtraLootPatches));
-        Harmony.CreateAndPatchAll(typeof(SpecialLootPatches));
-
-        // Bonus patches
-        Harmony.CreateAndPatchAll(typeof(AppearancePatches));
-
-        Harmony.CreateAndPatchAll(typeof(TimersPatches));
+            if (methods.Any(method => method.GetCustomAttribute<HarmonyPatch>() is not null))
+            {
+                _harmony.PatchAll(type);
+            }
+        }
     }
 }

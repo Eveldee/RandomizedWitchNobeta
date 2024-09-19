@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using LibCpp2IL;
+using RandomizedWitchNobeta.Features;
 using RandomizedWitchNobeta.Generation.Models;
-using RandomizedWitchNobeta.Patches;
 using RandomizedWitchNobeta.Shared;
 using RandomizedWitchNobeta.Utils;
+using RandomizedWitchNobeta.Utils.Nobeta;
 
 namespace RandomizedWitchNobeta.Generation;
 

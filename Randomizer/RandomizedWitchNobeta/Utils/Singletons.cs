@@ -1,8 +1,7 @@
 ﻿using HarmonyLib;
 using RandomizedWitchNobeta.Behaviours;
-using RandomizedWitchNobeta.Patches;
-using RandomizedWitchNobeta.Settings;
-using RandomizedWitchNobeta.Timer;
+using RandomizedWitchNobeta.Features;
+using RandomizedWitchNobeta.Features.Timer;
 using UnityEngine;
 
 namespace RandomizedWitchNobeta.Utils;
