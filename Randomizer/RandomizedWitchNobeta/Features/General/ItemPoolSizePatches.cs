@@ -1,6 +1,6 @@
 ﻿using HarmonyLib;
 
-namespace RandomizedWitchNobeta.Features.ItemChecks;
+namespace RandomizedWitchNobeta.Features.General;
 
 // Increase maximum amount of item of same type present
 public static class ItemPoolSizePatches

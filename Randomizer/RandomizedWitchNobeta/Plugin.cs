@@ -108,7 +108,7 @@ public class Plugin : BasePlugin
 
         foreach (var type in Assembly.GetExecutingAssembly().GetTypes())
         {
-            var methods = type.GetMethods(BindingFlags.NonPublic | BindingFlags.Static);
+            var methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static);
 
             if (methods.Any(method => method.GetCustomAttribute<HarmonyPatch>() is not null))
             {

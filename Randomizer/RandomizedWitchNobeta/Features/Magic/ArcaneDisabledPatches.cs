@@ -6,7 +6,7 @@ public static class ArcaneDisabledPatches
 {
     [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Shoot))]
     [HarmonyPrefix]
-    public static bool InputShootPrefix(PlayerInputController __instance, bool onHolding)
+    private static bool InputShootPrefix(PlayerInputController __instance, bool onHolding)
     {
         var wizardGirl = __instance.controller.wgm;
 
@@ -25,7 +25,7 @@ public static class ArcaneDisabledPatches
 
     [HarmonyPatch(typeof(PlayerInputController), nameof(PlayerInputController.Chant))]
     [HarmonyPrefix]
-    public static bool InputChantPrefix(PlayerInputController __instance)
+    private static bool InputChantPrefix(PlayerInputController __instance)
     {
         var wizardGirl = __instance.controller.wgm;
 

@@ -15,7 +15,8 @@ public static class SerializeUtils
             new UnityVector3JsonConverter(),
             new UnityQuaternionJsonConverter(),
             new NumericsVector4JsonConverter(),
-            new TupleConverterFactory()
+            new TupleConverterFactory(),
+            new DictionaryPairListConverter()
         }
     };
 

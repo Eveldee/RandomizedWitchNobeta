@@ -99,7 +99,7 @@ public class AutoConfigManager
 
                 ConfigEntryBase entryBase;
 
-                // Store a a string if a converter is used
+                // Store a string if a converter is used
                 if (bindConverter is not null)
                 {
                     var bindMethod = _genericBindMethod.MakeGenericMethod(typeof(string));
