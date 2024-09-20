@@ -85,15 +85,20 @@
             "description": "Sets the number of books of each magic type in the item pool when using Boss Kill magic upgrade mode. Getting duplicates of the same book won't upgrade them but it will make them easier to find."
         },
 
+        "MagicMaster": {
+            "type": "boolean",
+            "default": false,
+            "description": "When enabled, it's needed to get all attack magics (arcane, ice, fire and thunder) to Lvl. Max (Lvl. 5) before being able to reach Nonota."
+        },
         "BossHunt": {
             "type": "boolean",
             "default": false,
             "description": "When enabled, it's needed to kill all bosses (including the one in Secret Passage, but not elites like the Seal) before being able to reach Nonota."
         },
-        "MagicMaster": {
+        "AllChestOpened": {
             "type": "boolean",
             "default": false,
-            "description": "When enabled, it's needed to get all attack magics (arcane, ice, fire and thunder) to Lvl. Max (Lvl. 5) before being able to reach Nonota."
+            "description": "When enabled, it's needed to open all chests before being able to reach Nonota."
         },
 
         "TrialKeys": {

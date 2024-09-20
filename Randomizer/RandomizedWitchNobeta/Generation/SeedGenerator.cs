@@ -71,7 +71,7 @@ public class SeedGenerator
             } while (newDestination == regionExit.SourceScene);
         }
 
-        // Make sure that there is a least one exit that leads to the end level
+        // Make sure that there is at least one exit that leads to the end level
         // The chosen region could be itself inaccessible but this still leads to less non-completable seeds
         if (_exitsOverrides.All(regionExit => regionExit.Value != 7))
         {
@@ -137,7 +137,7 @@ public class SeedGenerator
 
         // One loop of the verification algorithm consist of:
         // - Explore a new region, take items while updating inventory, add exits as new regions (if not already visited)
-        // - Recheck all transition requirements and add region if requirement is padded + not already visited
+        // - Recheck all transition requirements and add region if requirement is passed + not already visited
         while (regionsToExplore.Count > 0)
         {
             var region = regionsToExplore.Dequeue();
@@ -164,6 +164,12 @@ public class SeedGenerator
                         case ItemSystem.ItemType.SPMaxAdd: // Token
                             inventory.TokenAmount++;
                             break;
+                    }
+
+                    // Used to count chest opened
+                    if (itemLocation is ChestItemLocation)
+                    {
+                        inventory.ChestOpened++;
                     }
                 }
             }
@@ -216,21 +222,21 @@ public class SeedGenerator
             // Add new regions that were not already visited
             foreach (var newRegion in newRegions)
             {
-                if (!accessibleRegions.Contains(newRegion))
+                if (accessibleRegions.Add(newRegion))
                 {
-                    accessibleRegions.Add(newRegion);
                     regionsToExplore.Enqueue(newRegion);
                 }
             }
         }
 
         // Once everything has been explored, we check if nonota is reachable and the other end conditions
+        bool endConditionsValidated = true;
         if (nonotaReachable)
         {
             // Magic master
             if (_settings.MagicMaster)
             {
-                return _settings.MagicUpgrade switch
+                endConditionsValidated &= _settings.MagicUpgrade switch
                 {
                     SeedSettings.MagicUpgradeMode.Vanilla => inventory is
                         {
@@ -249,17 +255,23 @@ public class SeedGenerator
                             BossKilled: >= 4
                         },
 
-                    _ => throw new ArgumentOutOfRangeException()
+                    _ => throw new ArgumentOutOfRangeException($"Invalid magic upgrade setting: {_settings.MagicUpgrade}")
                 };
             }
 
             // Boss hunt
             if (_settings.BossHunt)
             {
-                return inventory.BossKilled >= NpcUtils.ValidBosses.Count;
+                endConditionsValidated &= inventory.BossKilled >= NpcUtils.ValidBosses.Count;
             }
 
-            return true;
+            // All chests opened
+            if (_settings.AllChestOpened)
+            {
+                endConditionsValidated &= inventory.ChestOpened == WorldGraph.ChestsCount;
+            }
+
+            return endConditionsValidated;
         }
 
         return false;

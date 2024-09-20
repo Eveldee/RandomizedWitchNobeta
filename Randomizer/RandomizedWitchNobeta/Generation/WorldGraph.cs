@@ -9,6 +9,8 @@ public static class WorldGraph
     public const int LowestRegionNumber = 2;
     public const int HighestRegionNumber = 7;
 
+    public const int ChestsCount = 45;
+
     public static readonly List<RegionExit> Exits = new();
 
     public static readonly List<ItemLocation> ItemLocations = new();

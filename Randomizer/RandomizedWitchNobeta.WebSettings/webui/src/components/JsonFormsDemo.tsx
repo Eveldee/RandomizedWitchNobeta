@@ -70,6 +70,7 @@ const initialData = {
 
   BossHunt: false,
   MagicMaster: false,
+  AllChestOpened: false,
 
   TrialKeys: false,
   TrialKeysAmount: 5,

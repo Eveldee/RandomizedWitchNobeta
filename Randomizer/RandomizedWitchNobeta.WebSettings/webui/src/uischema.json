@@ -97,6 +97,15 @@
                                         "showUnfocusedDescription": true
                                     }
                                 },
+                                {
+                                    "type": "Control",
+                                    "label": "All Chest Opened",
+                                    "scope": "#/properties/AllChestOpened",
+                                    "options": {
+                                        "hideRequiredAsterisk": true,
+                                        "showUnfocusedDescription": true
+                                    }
+                                },
 
                                 {
                                     "type": "Divider"

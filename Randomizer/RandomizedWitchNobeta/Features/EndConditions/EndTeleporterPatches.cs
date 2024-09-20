@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using HarmonyLib;
+using RandomizedWitchNobeta.Generation;
 using RandomizedWitchNobeta.Utils;
 using RandomizedWitchNobeta.Utils.Nobeta;
 using UnityEngine;
@@ -18,12 +19,6 @@ public static class EndTeleporterPatches
     {
         // Only check in last stage
         if (Game.sceneManager is not { stageId: 7 } || Singletons.RuntimeVariables is not { } runtimeVariables)
-        {
-            return true;
-        }
-
-        // If no special mode is enabled, just skip
-        if (runtimeVariables.Settings is { BossHunt: false, MagicMaster: false })
         {
             return true;
         }
@@ -66,6 +61,14 @@ public static class EndTeleporterPatches
 
                         allowInteraction = false;
                     }
+                }
+
+                // All chest obtained check
+                if (runtimeVariables.Settings.AllChestOpened && runtimeVariables.OpenedChests.Count < WorldGraph.ChestsCount)
+                {
+                    Game.AppearEventPrompt($"You need to open {WorldGraph.ChestsCount - runtimeVariables.OpenedChests.Count} more chests to pass.");
+
+                    allowInteraction = false;
                 }
             }
         }

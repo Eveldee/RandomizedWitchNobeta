@@ -15,6 +15,8 @@ public class InventoryState
 
     public int BossKilled { get; set; } = 0;
 
+    public int ChestOpened { get; set; } = 0;
+
     public InventoryState(SeedSettings seedSettings)
     {
         SeedSettings = seedSettings;
